@@ -1,0 +1,201 @@
+2025-09-24 14:32:24,430 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 14:32:24,431 - root - INFO - Versión: 1.0.0
+2025-09-24 14:32:24,431 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 14:32:24,431 - root - INFO - ✓ pandas disponible
+2025-09-24 14:32:24,432 - root - ERROR - ✗ openpyxl no encontrado
+2025-09-24 14:32:24,432 - root - ERROR - ✗ mysql.connector no encontrado
+2025-09-24 14:32:24,541 - root - INFO - ✓ pydantic disponible
+2025-09-24 14:32:24,541 - root - ERROR - ✗ python_dateutil no encontrado
+2025-09-24 14:32:24,542 - root - INFO - ✓ colorlog disponible
+2025-09-24 14:32:24,542 - root - ERROR - Módulos faltantes: openpyxl, mysql.connector, python_dateutil
+2025-09-24 14:32:24,543 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
+2025-09-24 14:32:50,233 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 14:32:50,233 - root - INFO - Versión: 1.0.0
+2025-09-24 14:32:50,234 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 14:32:50,234 - root - INFO - ✓ pandas disponible
+2025-09-24 14:32:50,234 - root - ERROR - ✗ openpyxl no encontrado
+2025-09-24 14:32:50,235 - root - ERROR - ✗ mysql.connector no encontrado
+2025-09-24 14:32:50,258 - root - INFO - ✓ pydantic disponible
+2025-09-24 14:32:50,258 - root - ERROR - ✗ python_dateutil no encontrado
+2025-09-24 14:32:50,259 - root - INFO - ✓ colorlog disponible
+2025-09-24 14:32:50,259 - root - ERROR - Módulos faltantes: openpyxl, mysql.connector, python_dateutil
+2025-09-24 14:32:50,259 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
+2025-09-24 14:41:42,243 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 14:41:42,244 - root - INFO - Versión: 1.0.0
+2025-09-24 14:41:42,244 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 14:41:42,244 - root - INFO - ✓ pandas disponible
+2025-09-24 14:41:43,150 - root - INFO - ✓ openpyxl disponible
+2025-09-24 14:41:43,151 - root - ERROR - ✗ mysql.connector no encontrado
+2025-09-24 14:41:43,174 - root - INFO - ✓ pydantic disponible
+2025-09-24 14:41:43,174 - root - ERROR - ✗ python_dateutil no encontrado
+2025-09-24 14:41:43,175 - root - INFO - ✓ colorlog disponible
+2025-09-24 14:41:43,175 - root - ERROR - Módulos faltantes: mysql.connector, python_dateutil
+2025-09-24 14:41:43,175 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
+2025-09-24 20:31:23,944 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 20:31:23,945 - root - INFO - Versión: 1.0.0
+2025-09-24 20:31:23,945 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 20:31:23,946 - root - INFO - ✓ pandas disponible
+2025-09-24 20:31:24,284 - root - INFO - ✓ openpyxl disponible
+2025-09-24 20:31:24,285 - root - ERROR - ✗ mysql.connector no encontrado
+2025-09-24 20:31:24,328 - root - INFO - ✓ pydantic disponible
+2025-09-24 20:31:24,329 - root - ERROR - ✗ python_dateutil no encontrado
+2025-09-24 20:31:24,329 - root - INFO - ✓ colorlog disponible
+2025-09-24 20:31:24,329 - root - ERROR - Módulos faltantes: mysql.connector, python_dateutil
+2025-09-24 20:31:24,329 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
+2025-09-24 20:50:02,423 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 20:50:02,423 - root - INFO - Versión: 1.0.0
+2025-09-24 20:50:02,424 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 20:50:02,424 - root - INFO - ✓ pandas disponible
+2025-09-24 20:50:02,627 - root - INFO - ✓ openpyxl disponible
+2025-09-24 20:50:02,627 - root - ERROR - ✗ mysql-connector no encontrado
+2025-09-24 20:50:02,649 - root - INFO - ✓ pydantic disponible
+2025-09-24 20:50:02,650 - root - ERROR - ✗ python-dateutil no encontrado
+2025-09-24 20:50:02,650 - root - INFO - ✓ colorlog disponible
+2025-09-24 20:50:02,651 - root - ERROR - Módulos faltantes: mysql-connector, python-dateutil
+2025-09-24 20:50:02,651 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
+2025-09-24 20:56:23,883 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 20:56:23,883 - root - INFO - Versión: 1.0.0
+2025-09-24 20:57:54,006 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 20:57:54,006 - root - INFO - Versión: 1.0.0
+2025-09-24 20:57:54,007 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 21:00:10,345 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 21:00:10,345 - root - INFO - Versión: 1.0.0
+2025-09-24 21:00:10,345 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 21:00:10,346 - root - INFO - ✓ pandas disponible
+2025-09-24 21:00:10,546 - root - INFO - ✓ openpyxl disponible
+2025-09-24 21:00:10,547 - root - ERROR - ✗ mysql-connector no encontrado
+2025-09-24 21:00:10,569 - root - INFO - ✓ pydantic disponible
+2025-09-24 21:00:10,570 - root - ERROR - ✗ python-dateutil no encontrado
+2025-09-24 21:00:10,570 - root - INFO - ✓ colorlog disponible
+2025-09-24 21:00:10,570 - root - ERROR - Módulos faltantes: mysql-connector, python-dateutil
+2025-09-24 21:00:10,571 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
+2025-09-24 21:04:39,514 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 21:04:39,514 - root - INFO - Versión: 1.0.0
+2025-09-24 21:04:39,514 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 21:04:39,515 - root - INFO - ✓ pandas disponible
+2025-09-24 21:04:39,713 - root - INFO - ✓ openpyxl disponible
+2025-09-24 21:04:39,714 - root - ERROR - ✗ mysql-connector-python no encontrado
+2025-09-24 21:04:39,737 - root - INFO - ✓ pydantic disponible
+2025-09-24 21:04:39,738 - root - ERROR - ✗ python-dateutil no encontrado
+2025-09-24 21:04:39,738 - root - INFO - ✓ colorlog disponible
+2025-09-24 21:04:39,738 - root - ERROR - Módulos faltantes: mysql-connector-python, python-dateutil
+2025-09-24 21:04:39,739 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
+2025-09-24 21:05:57,427 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 21:05:57,428 - root - INFO - Versión: 1.0.0
+2025-09-24 21:05:57,428 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 21:05:57,429 - root - INFO - ✓ pandas disponible
+2025-09-24 21:05:57,631 - root - INFO - ✓ openpyxl disponible
+2025-09-24 21:05:57,632 - root - ERROR - ✗ mysql-connector-python no encontrado
+2025-09-24 21:05:57,654 - root - INFO - ✓ pydantic disponible
+2025-09-24 21:05:57,655 - root - ERROR - ✗ python-dateutil no encontrado
+2025-09-24 21:05:57,655 - root - INFO - ✓ colorlog disponible
+2025-09-24 21:05:57,655 - root - ERROR - Módulos faltantes: mysql-connector-python, python-dateutil
+2025-09-24 21:05:57,656 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
+2025-09-24 21:07:28,633 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 21:07:28,634 - root - INFO - Versión: 1.0.0
+2025-09-24 21:07:28,634 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 21:07:28,635 - root - INFO - ✓ pandas disponible
+2025-09-24 21:07:28,833 - root - INFO - ✓ openpyxl disponible
+2025-09-24 21:07:28,855 - root - INFO - ✓ pydantic disponible
+2025-09-24 21:07:28,856 - root - INFO - ✓ colorlog disponible
+2025-09-24 21:07:28,856 - root - INFO - Verificando esquema de base de datos...
+2025-09-24 21:07:28,872 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-24 21:07:28,896 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'clientes'
+2025-09-24 21:07:28,897 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'facturas'
+2025-09-24 21:07:28,899 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:07:28,900 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.facturas' doesn't exist
+2025-09-24 21:07:28,900 - database - INFO - Conexión cerrada
+2025-09-24 21:07:28,901 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-24 21:07:29,702 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-24 21:07:29,803 - root - INFO - Aplicación iniciada exitosamente
+2025-09-24 21:07:29,803 - root - INFO - Interfaz de usuario: 800x600
+2025-09-24 21:07:42,473 - database - INFO - Conexión cerrada
+2025-09-24 21:07:47,375 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 21:07:47,375 - root - INFO - Versión: 1.0.0
+2025-09-24 21:07:47,376 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 21:07:47,376 - root - INFO - ✓ pandas disponible
+2025-09-24 21:07:47,569 - root - INFO - ✓ openpyxl disponible
+2025-09-24 21:07:47,592 - root - INFO - ✓ pydantic disponible
+2025-09-24 21:07:47,592 - root - INFO - ✓ colorlog disponible
+2025-09-24 21:07:47,593 - root - INFO - Verificando esquema de base de datos...
+2025-09-24 21:07:47,601 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-24 21:07:47,614 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'clientes'
+2025-09-24 21:07:47,615 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'facturas'
+2025-09-24 21:07:47,616 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:07:47,617 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.facturas' doesn't exist
+2025-09-24 21:07:47,617 - database - INFO - Conexión cerrada
+2025-09-24 21:07:47,618 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-24 21:07:47,985 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-24 21:07:48,078 - root - INFO - Aplicación iniciada exitosamente
+2025-09-24 21:07:48,079 - root - INFO - Interfaz de usuario: 800x600
+2025-09-24 21:08:12,760 - database - INFO - Conexión cerrada
+2025-09-24 21:20:17,914 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 21:20:17,915 - root - INFO - Versión: 1.0.0
+2025-09-24 21:20:17,915 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 21:20:17,916 - root - INFO - ✓ pandas disponible
+2025-09-24 21:20:18,116 - root - INFO - ✓ openpyxl disponible
+2025-09-24 21:20:18,116 - root - INFO - ✓ mysql.connector disponible
+2025-09-24 21:20:18,139 - root - INFO - ✓ pydantic disponible
+2025-09-24 21:20:18,139 - root - INFO - ✓ dateutil disponible
+2025-09-24 21:20:18,140 - root - INFO - ✓ colorlog disponible
+2025-09-24 21:20:18,140 - root - INFO - Verificando esquema de base de datos...
+2025-09-24 21:20:18,149 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-24 21:20:18,156 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'clientes'
+2025-09-24 21:20:18,157 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'facturas'
+2025-09-24 21:20:18,158 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:20:18,159 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.facturas' doesn't exist
+2025-09-24 21:20:18,160 - database - INFO - Conexión cerrada
+2025-09-24 21:20:18,160 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-24 21:20:18,493 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-24 21:20:18,567 - root - INFO - Aplicación iniciada exitosamente
+2025-09-24 21:20:18,568 - root - INFO - Interfaz de usuario: 800x600
+2025-09-24 21:21:10,897 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-24 21:21:27,526 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-24 21:21:27,536 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-24 21:21:27,540 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:21:27,542 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:21:27,543 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:21:27,545 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:21:27,546 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:21:27,547 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:21:27,549 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:21:27,550 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:21:27,551 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:21:27,553 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:21:27,553 - invoice_processor - INFO - Importación completada: 0 exitosas, 5 errores
+2025-09-24 21:22:02,854 - database - INFO - Conexión cerrada
+2025-09-24 21:22:21,583 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-24 21:22:21,583 - root - INFO - Versión: 1.0.0
+2025-09-24 21:22:21,584 - root - INFO - ✓ PyQt5 disponible
+2025-09-24 21:22:21,584 - root - INFO - ✓ pandas disponible
+2025-09-24 21:22:21,785 - root - INFO - ✓ openpyxl disponible
+2025-09-24 21:22:21,786 - root - INFO - ✓ mysql.connector disponible
+2025-09-24 21:22:21,808 - root - INFO - ✓ pydantic disponible
+2025-09-24 21:22:21,809 - root - INFO - ✓ dateutil disponible
+2025-09-24 21:22:21,809 - root - INFO - ✓ colorlog disponible
+2025-09-24 21:22:21,809 - root - INFO - Verificando esquema de base de datos...
+2025-09-24 21:22:21,819 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-24 21:22:21,828 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'clientes'
+2025-09-24 21:22:21,829 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'facturas'
+2025-09-24 21:22:21,830 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:22:21,830 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.facturas' doesn't exist
+2025-09-24 21:22:21,831 - database - INFO - Conexión cerrada
+2025-09-24 21:22:21,832 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-24 21:22:22,159 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-24 21:22:22,232 - root - INFO - Aplicación iniciada exitosamente
+2025-09-24 21:22:22,233 - root - INFO - Interfaz de usuario: 800x600
+2025-09-24 21:23:12,028 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-24 21:23:51,464 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-24 21:23:51,468 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-24 21:23:51,471 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:23:51,472 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:23:51,474 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:23:51,475 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:23:51,476 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:23:51,477 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:23:51,478 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:23:51,480 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:23:51,481 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:23:51,482 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
+2025-09-24 21:23:51,483 - invoice_processor - INFO - Importación completada: 0 exitosas, 5 errores
+2025-09-24 21:25:00,360 - database - INFO - Conexión cerrada

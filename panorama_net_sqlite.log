@@ -1,0 +1,30 @@
+2025-09-24 14:49:23,266 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net (SQLite)
+2025-09-24 14:49:23,267 - root - INFO - Versión: 1.0.0
+2025-09-24 14:49:23,267 - root - INFO - [OK] PyQt5 disponible
+2025-09-24 14:49:23,267 - root - INFO - [OK] pandas disponible
+2025-09-24 14:49:23,504 - root - INFO - [OK] openpyxl disponible
+2025-09-24 14:49:23,612 - root - INFO - [OK] pydantic disponible
+2025-09-24 14:49:23,612 - root - ERROR - [ERROR] python_dateutil no encontrado
+2025-09-24 14:49:23,612 - root - INFO - [OK] colorlog disponible
+2025-09-24 14:49:23,613 - root - ERROR - Módulos faltantes: python_dateutil
+2025-09-24 14:49:23,613 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
+2025-09-24 14:50:09,489 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net (SQLite)
+2025-09-24 14:50:09,489 - root - INFO - Versión: 1.0.0
+2025-09-24 14:50:09,489 - root - INFO - [OK] PyQt5 disponible
+2025-09-24 14:50:09,489 - root - INFO - [OK] pandas disponible
+2025-09-24 14:50:09,705 - root - INFO - [OK] openpyxl disponible
+2025-09-24 14:50:09,726 - root - INFO - [OK] pydantic disponible
+2025-09-24 14:50:09,726 - root - ERROR - [ERROR] python_dateutil no encontrado
+2025-09-24 14:50:09,726 - root - INFO - [OK] colorlog disponible
+2025-09-24 14:50:09,726 - root - ERROR - Módulos faltantes: python_dateutil
+2025-09-24 14:50:09,727 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
+2025-09-24 14:50:30,527 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net (SQLite)
+2025-09-24 14:50:30,527 - root - INFO - Versión: 1.0.0
+2025-09-24 14:50:30,527 - root - INFO - [OK] PyQt5 disponible
+2025-09-24 14:50:30,527 - root - INFO - [OK] pandas disponible
+2025-09-24 14:50:30,737 - root - INFO - [OK] openpyxl disponible
+2025-09-24 14:50:30,758 - root - INFO - [OK] pydantic disponible
+2025-09-24 14:50:30,758 - root - ERROR - [ERROR] python_dateutil no encontrado
+2025-09-24 14:50:30,759 - root - INFO - [OK] colorlog disponible
+2025-09-24 14:50:30,759 - root - ERROR - Módulos faltantes: python_dateutil
+2025-09-24 14:50:30,759 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt

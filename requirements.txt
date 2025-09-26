@@ -1,0 +1,22 @@
+# Dependencias para el sistema de importación de facturas Panorama_net
+
+# Framework para interfaz gráfica de usuario multiplataforma
+PyQt5==5.15.11
+
+# Librería para manipulación de datos y lectura de Excel
+pandas==2.3.2
+
+# Motor para lectura de archivos Excel
+openpyxl==3.1.5
+
+# Conector para base de datos MySQL
+mysql-connector-python==8.2.0
+
+# Librería para validación de datos
+pydantic==1.10.13
+
+# Librería para manejo de fechas
+python-dateutil==2.8.2
+
+# Librería para logging
+colorlog==6.9.0
