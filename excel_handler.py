@@ -56,8 +56,8 @@ class ExcelHandler:
         """Valida que el Excel tenga la estructura requerida"""
         errors = []
         required_columns = [
-            'numero_factura', 'codigo_cliente', 'fecha_emision', 'fecha_vencimiento',
-            'lectura_anterior', 'lectura_actual', 'consumo', 'valor_unitario'
+            'id_carpeta', 'id_servicio', 'id_predio', 'id_tercero_cliente', 'periodo_inicio_cobro',
+            'lectura_anterior', 'lectura_actual', 'valor_unitario'
         ]
 
         # Verificar columnas requeridas
@@ -69,57 +69,37 @@ class ExcelHandler:
         if df.empty:
             errors.append("El archivo Excel está vacío")
 
-        # Verificar tipos de datos
-        if 'fecha_emision' in df.columns:
-            try:
-                pd.to_datetime(df['fecha_emision'])
-            except:
-                errors.append("Formato de fecha inválido en columna 'fecha_emision'")
-
-        if 'fecha_vencimiento' in df.columns:
-            try:
-                pd.to_datetime(df['fecha_vencimiento'])
-            except:
-                errors.append("Formato de fecha inválido en columna 'fecha_vencimiento'")
-
-        return errors
-
+       
     def process_excel_data(self, df: pd.DataFrame) -> List[Dict[str, Any]]:
         """Procesa los datos del Excel y los prepara para insertar en la BD"""
         processed_data = []
 
         try:
-            # Convertir fechas a string
-            if 'fecha_emision' in df.columns:
-                df['fecha_emision'] = pd.to_datetime(df['fecha_emision']).dt.strftime('%Y-%m-%d')
-            if 'fecha_vencimiento' in df.columns:
-                df['fecha_vencimiento'] = pd.to_datetime(df['fecha_vencimiento']).dt.strftime('%Y-%m-%d')
+            # Calcular consumo, saldo y valor_periodo
+            if 'consumo' not in df.columns:
+                df['consumo'] = df['lectura_actual']  - df['lectura_anterior']
+                
+            if 'valor_periodo' not in df.columns:
+                df['valor_periodo'] = df['valor_unitario'] * (df['lectura_actual'] - df['lectura_anterior'])  # Valor Unitario * Consumo
 
-            # Calcular subtotal, IVA y total si no están presentes
-            if 'subtotal' not in df.columns:
-                df['subtotal'] = df['consumo'] * df['valor_unitario']
-
-            if 'iva' not in df.columns:
-                df['iva'] = df['subtotal'] * 0.19  # IVA del 19%
-
-            if 'total' not in df.columns:
-                df['total'] = df['subtotal'] + df['iva']
+            if 'saldo' not in df.columns:
+                df['saldo'] = df['valor_unitario'] * (df['lectura_actual'] - df['lectura_anterior'])  # Valor Unitario * Consumo
 
             # Crear lista de diccionarios para cada fila
             for _, row in df.iterrows():
                 invoice_data = {
-                    'numero_factura': str(row.get('numero_factura', '')),
-                    'codigo_cliente': str(row.get('codigo_cliente', '')),
-                    'fecha_emision': row.get('fecha_emision', ''),
-                    'fecha_vencimiento': row.get('fecha_vencimiento', ''),
+                    'consumo': float(row.get('consumo', 0)),
+                    'id_carpeta': int(row.get('id_carpeta', '')),
+                    'id_servicio': int(row.get('id_servicio', 0)),
+                    'id_predio': str(row.get('id_predio', '')),
+                    'id_tercero_cliente': int(row.get('id_tercero_cliente', 0)),
+                    'periodo_inicio_cobro': str(row.get('periodo_inicio_cobro', '')),
                     'lectura_anterior': float(row.get('lectura_anterior', 0)),
                     'lectura_actual': float(row.get('lectura_actual', 0)),
-                    'consumo': float(row.get('consumo', 0)),
-                    'valor_unitario': float(row.get('valor_unitario', 0)),
-                    'subtotal': float(row.get('subtotal', 0)),
-                    'iva': float(row.get('iva', 0)),
-                    'total': float(row.get('total', 0)),
-                    'estado': 'pendiente'
+                    'saldo': float(row.get('saldo', 0)),
+                    'valor_periodo': float(row.get('valor_periodo', 0)),
+                    'valor_unitario': float(row.get
+                    ('valor_unitario', 0))
                 }
                 processed_data.append(invoice_data)
 

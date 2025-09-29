@@ -14,6 +14,7 @@ from main_window import MainWindow
 from config import Config
 from database import DatabaseConnection
 
+
 def setup_logging():
     """Configura el sistema de logging"""
     # Crear logger
@@ -38,7 +39,7 @@ def setup_logging():
     console_handler.setFormatter(console_format)
     logger.addHandler(console_handler)
 
-    # Handler para archivo (opcional)
+    # Handler para archivo (Archivo de Log)
     try:
         file_handler = logging.FileHandler('panorama_net.log', encoding='utf-8')
         file_format = logging.Formatter(Config.LOG_FORMAT)

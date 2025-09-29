@@ -8,8 +8,8 @@ from excel_handler import ExcelHandler
 
 logger = logging.getLogger(__name__)
 
-class InvoiceProcessor:
-    """Clase principal para procesar la importación de facturas"""
+class InvoiceItemProcessor:
+    """Clase principal para procesar la importación de item de facturas"""
 
     def __init__(self):
         self.db = DatabaseConnection()
@@ -49,66 +49,64 @@ class InvoiceProcessor:
             if not processed_data:
                 result['message'] = 'No se pudieron procesar los datos del Excel'
                 return result
+            
+            # Obtener el último ordinal
+            last_ordinal = self.db.get_last_item_ordinal()
+            if last_ordinal is None:
+                last_ordinal = 0
 
             # Insertar datos en la base de datos
             success_count = 0
             error_count = 0
+            
+            # Eliminar items existentes para el IdCarpeta y el IdServicio
+            delete_items = self.db.delete_items_by_service(processed_data[0]['id_carpeta'], processed_data[0]['id_servicio'])
+            
+            if not delete_items:
+                logger.warning(f"No se pudieron eliminar items existentes para IdCarpeta {processed_data[0]['id_carpeta']} e IdServicio {processed_data[0]['id_servicio']}")
 
             for invoice_data in processed_data:
                 try:
-                    # Verificar si el cliente existe
-                    client = self.db.get_client_by_code(invoice_data['codigo_cliente'])
+                    last_ordinal += 1  # Incrementar el ordinal para cada nuevo item
 
-                    if not client:
-                        # Crear nuevo cliente
-                        client_id = self.db.insert_client(
-                            codigo_cliente=invoice_data['codigo_cliente'],
-                            nombre=f"Cliente {invoice_data['codigo_cliente']}",
-                            telefono=None,
-                            email=None
-                        )
-
-                        if not client_id:
-                            result['errors'].append(f"Error al crear cliente {invoice_data['codigo_cliente']}")
-                            error_count += 1
-                            continue
-                    else:
-                        client_id = client['id']
-
-                    # Insertar factura
-                    invoice_id = self.db.insert_invoice(
-                        numero_factura=invoice_data['numero_factura'],
-                        id_cliente=client_id,
-                        fecha_emision=invoice_data['fecha_emision'],
-                        fecha_vencimiento=invoice_data['fecha_vencimiento'],
-                        lectura_anterior=invoice_data['lectura_anterior'],
-                        lectura_actual=invoice_data['lectura_actual'],
-                        consumo=invoice_data['consumo'],
-                        valor_unitario=invoice_data['valor_unitario'],
-                        subtotal=invoice_data['subtotal'],
-                        iva=invoice_data['iva'],
-                        total=invoice_data['total'],
-                        estado=invoice_data['estado']
+                    # Insertar items de factura
+                    invoice_item_id = self.db.insert_item_program_invoice(
+                        CantidadPeriodos=1,
+                        Consumo=invoice_data['consumo'],
+                        IdAno=0,
+                        IdCarpeta=invoice_data['id_carpeta'],
+                        IdCentroUtil=1,
+                        IdPredio=invoice_data['id_predio'],
+                        IdServicio=invoice_data['id_servicio'],
+                        IdTerceroCliente=invoice_data['id_tercero_cliente'],
+                        LecturaActual=invoice_data['lectura_actual'],
+                        LecturaAnterior=invoice_data['lectura_anterior'],
+                        Ordinal=last_ordinal,
+                        Origen='3',  # Origen 2 = Importación desde Excel
+                        PeriodoInicioFact=invoice_data['periodo_inicio_cobro'],
+                        Saldo=invoice_data['saldo'],
+                        ValorPeriodo= invoice_data['valor_periodo'],
+                        ValorUnitario=invoice_data['valor_unitario']
                     )
 
-                    if invoice_id:
+                    if invoice_item_id:
                         success_count += 1
                     else:
-                        result['errors'].append(f"Error al insertar factura {invoice_data['numero_factura']}")
+                        result['errors'].append(f"Error al insertar item del predio {invoice_data['id_predio']} en la base de datos")
                         error_count += 1
 
                 except Exception as e:
-                    logger.error(f"Error procesando factura {invoice_data.get('numero_factura', 'desconocida')}: {e}")
+                    logger.error(f"Error procesando item de factura {invoice_data.get('id_predio', 'desconocido')}: {e}")
                     error_count += 1
 
             # Preparar resultado final
             result['success'] = success_count > 0
             result['processed'] = success_count
-            result['message'] = f"Procesamiento completado: {success_count} facturas importadas exitosamente"
+            result['message'] = f"Procesamiento completado: {success_count} items de facturas importados exitosamente"
 
             if error_count > 0:
                 result['message'] += f", {error_count} errores"
-                result['warnings'].append(f"{error_count} facturas no pudieron ser procesadas")
+                result['warnings'].append(f"{error_count} items de facturas no pudieron ser procesados")
 
             logger.info(f"Importación completada: {success_count} exitosas, {error_count} errores")
 
@@ -121,12 +119,12 @@ class InvoiceProcessor:
     def get_import_summary(self) -> Dict[str, Any]:
         """Obtiene un resumen de las importaciones realizadas"""
         try:
-            total_invoices = self.db.get_invoices_count()
-            last_invoice = self.db.get_last_invoice_number()
+            total_items = self.db.get_items_count()
+            last_item_ordinal = self.db.get_last_item_ordinal()
 
             return {
-                'total_invoices': total_invoices,
-                'last_invoice_number': last_invoice,
+                'total_items': total_items,
+                'last_item_ordinal': last_item_ordinal,
                 'database_status': 'connected' if self.db.connection and self.db.connection.is_connected() else 'disconnected'
             }
         except Exception as e:

@@ -1,201 +1,607 @@
-2025-09-24 14:32:24,430 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 14:32:24,431 - root - INFO - Versión: 1.0.0
-2025-09-24 14:32:24,431 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 14:32:24,431 - root - INFO - ✓ pandas disponible
-2025-09-24 14:32:24,432 - root - ERROR - ✗ openpyxl no encontrado
-2025-09-24 14:32:24,432 - root - ERROR - ✗ mysql.connector no encontrado
-2025-09-24 14:32:24,541 - root - INFO - ✓ pydantic disponible
-2025-09-24 14:32:24,541 - root - ERROR - ✗ python_dateutil no encontrado
-2025-09-24 14:32:24,542 - root - INFO - ✓ colorlog disponible
-2025-09-24 14:32:24,542 - root - ERROR - Módulos faltantes: openpyxl, mysql.connector, python_dateutil
-2025-09-24 14:32:24,543 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
-2025-09-24 14:32:50,233 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 14:32:50,233 - root - INFO - Versión: 1.0.0
-2025-09-24 14:32:50,234 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 14:32:50,234 - root - INFO - ✓ pandas disponible
-2025-09-24 14:32:50,234 - root - ERROR - ✗ openpyxl no encontrado
-2025-09-24 14:32:50,235 - root - ERROR - ✗ mysql.connector no encontrado
-2025-09-24 14:32:50,258 - root - INFO - ✓ pydantic disponible
-2025-09-24 14:32:50,258 - root - ERROR - ✗ python_dateutil no encontrado
-2025-09-24 14:32:50,259 - root - INFO - ✓ colorlog disponible
-2025-09-24 14:32:50,259 - root - ERROR - Módulos faltantes: openpyxl, mysql.connector, python_dateutil
-2025-09-24 14:32:50,259 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
-2025-09-24 14:41:42,243 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 14:41:42,244 - root - INFO - Versión: 1.0.0
-2025-09-24 14:41:42,244 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 14:41:42,244 - root - INFO - ✓ pandas disponible
-2025-09-24 14:41:43,150 - root - INFO - ✓ openpyxl disponible
-2025-09-24 14:41:43,151 - root - ERROR - ✗ mysql.connector no encontrado
-2025-09-24 14:41:43,174 - root - INFO - ✓ pydantic disponible
-2025-09-24 14:41:43,174 - root - ERROR - ✗ python_dateutil no encontrado
-2025-09-24 14:41:43,175 - root - INFO - ✓ colorlog disponible
-2025-09-24 14:41:43,175 - root - ERROR - Módulos faltantes: mysql.connector, python_dateutil
-2025-09-24 14:41:43,175 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
-2025-09-24 20:31:23,944 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 20:31:23,945 - root - INFO - Versión: 1.0.0
-2025-09-24 20:31:23,945 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 20:31:23,946 - root - INFO - ✓ pandas disponible
-2025-09-24 20:31:24,284 - root - INFO - ✓ openpyxl disponible
-2025-09-24 20:31:24,285 - root - ERROR - ✗ mysql.connector no encontrado
-2025-09-24 20:31:24,328 - root - INFO - ✓ pydantic disponible
-2025-09-24 20:31:24,329 - root - ERROR - ✗ python_dateutil no encontrado
-2025-09-24 20:31:24,329 - root - INFO - ✓ colorlog disponible
-2025-09-24 20:31:24,329 - root - ERROR - Módulos faltantes: mysql.connector, python_dateutil
-2025-09-24 20:31:24,329 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
-2025-09-24 20:50:02,423 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 20:50:02,423 - root - INFO - Versión: 1.0.0
-2025-09-24 20:50:02,424 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 20:50:02,424 - root - INFO - ✓ pandas disponible
-2025-09-24 20:50:02,627 - root - INFO - ✓ openpyxl disponible
-2025-09-24 20:50:02,627 - root - ERROR - ✗ mysql-connector no encontrado
-2025-09-24 20:50:02,649 - root - INFO - ✓ pydantic disponible
-2025-09-24 20:50:02,650 - root - ERROR - ✗ python-dateutil no encontrado
-2025-09-24 20:50:02,650 - root - INFO - ✓ colorlog disponible
-2025-09-24 20:50:02,651 - root - ERROR - Módulos faltantes: mysql-connector, python-dateutil
-2025-09-24 20:50:02,651 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
-2025-09-24 20:56:23,883 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 20:56:23,883 - root - INFO - Versión: 1.0.0
-2025-09-24 20:57:54,006 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 20:57:54,006 - root - INFO - Versión: 1.0.0
-2025-09-24 20:57:54,007 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 21:00:10,345 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 21:00:10,345 - root - INFO - Versión: 1.0.0
-2025-09-24 21:00:10,345 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 21:00:10,346 - root - INFO - ✓ pandas disponible
-2025-09-24 21:00:10,546 - root - INFO - ✓ openpyxl disponible
-2025-09-24 21:00:10,547 - root - ERROR - ✗ mysql-connector no encontrado
-2025-09-24 21:00:10,569 - root - INFO - ✓ pydantic disponible
-2025-09-24 21:00:10,570 - root - ERROR - ✗ python-dateutil no encontrado
-2025-09-24 21:00:10,570 - root - INFO - ✓ colorlog disponible
-2025-09-24 21:00:10,570 - root - ERROR - Módulos faltantes: mysql-connector, python-dateutil
-2025-09-24 21:00:10,571 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
-2025-09-24 21:04:39,514 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 21:04:39,514 - root - INFO - Versión: 1.0.0
-2025-09-24 21:04:39,514 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 21:04:39,515 - root - INFO - ✓ pandas disponible
-2025-09-24 21:04:39,713 - root - INFO - ✓ openpyxl disponible
-2025-09-24 21:04:39,714 - root - ERROR - ✗ mysql-connector-python no encontrado
-2025-09-24 21:04:39,737 - root - INFO - ✓ pydantic disponible
-2025-09-24 21:04:39,738 - root - ERROR - ✗ python-dateutil no encontrado
-2025-09-24 21:04:39,738 - root - INFO - ✓ colorlog disponible
-2025-09-24 21:04:39,738 - root - ERROR - Módulos faltantes: mysql-connector-python, python-dateutil
-2025-09-24 21:04:39,739 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
-2025-09-24 21:05:57,427 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 21:05:57,428 - root - INFO - Versión: 1.0.0
-2025-09-24 21:05:57,428 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 21:05:57,429 - root - INFO - ✓ pandas disponible
-2025-09-24 21:05:57,631 - root - INFO - ✓ openpyxl disponible
-2025-09-24 21:05:57,632 - root - ERROR - ✗ mysql-connector-python no encontrado
-2025-09-24 21:05:57,654 - root - INFO - ✓ pydantic disponible
-2025-09-24 21:05:57,655 - root - ERROR - ✗ python-dateutil no encontrado
-2025-09-24 21:05:57,655 - root - INFO - ✓ colorlog disponible
-2025-09-24 21:05:57,655 - root - ERROR - Módulos faltantes: mysql-connector-python, python-dateutil
-2025-09-24 21:05:57,656 - root - ERROR - Instale las dependencias con: pip install -r requirements.txt
-2025-09-24 21:07:28,633 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 21:07:28,634 - root - INFO - Versión: 1.0.0
-2025-09-24 21:07:28,634 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 21:07:28,635 - root - INFO - ✓ pandas disponible
-2025-09-24 21:07:28,833 - root - INFO - ✓ openpyxl disponible
-2025-09-24 21:07:28,855 - root - INFO - ✓ pydantic disponible
-2025-09-24 21:07:28,856 - root - INFO - ✓ colorlog disponible
-2025-09-24 21:07:28,856 - root - INFO - Verificando esquema de base de datos...
-2025-09-24 21:07:28,872 - database - INFO - Conexión exitosa a la base de datos MySQL
-2025-09-24 21:07:28,896 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'clientes'
-2025-09-24 21:07:28,897 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'facturas'
-2025-09-24 21:07:28,899 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:07:28,900 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.facturas' doesn't exist
-2025-09-24 21:07:28,900 - database - INFO - Conexión cerrada
-2025-09-24 21:07:28,901 - root - INFO - Esquema de base de datos verificado/creado exitosamente
-2025-09-24 21:07:29,702 - database - INFO - Conexión exitosa a la base de datos MySQL
-2025-09-24 21:07:29,803 - root - INFO - Aplicación iniciada exitosamente
-2025-09-24 21:07:29,803 - root - INFO - Interfaz de usuario: 800x600
-2025-09-24 21:07:42,473 - database - INFO - Conexión cerrada
-2025-09-24 21:07:47,375 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 21:07:47,375 - root - INFO - Versión: 1.0.0
-2025-09-24 21:07:47,376 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 21:07:47,376 - root - INFO - ✓ pandas disponible
-2025-09-24 21:07:47,569 - root - INFO - ✓ openpyxl disponible
-2025-09-24 21:07:47,592 - root - INFO - ✓ pydantic disponible
-2025-09-24 21:07:47,592 - root - INFO - ✓ colorlog disponible
-2025-09-24 21:07:47,593 - root - INFO - Verificando esquema de base de datos...
-2025-09-24 21:07:47,601 - database - INFO - Conexión exitosa a la base de datos MySQL
-2025-09-24 21:07:47,614 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'clientes'
-2025-09-24 21:07:47,615 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'facturas'
-2025-09-24 21:07:47,616 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:07:47,617 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.facturas' doesn't exist
-2025-09-24 21:07:47,617 - database - INFO - Conexión cerrada
-2025-09-24 21:07:47,618 - root - INFO - Esquema de base de datos verificado/creado exitosamente
-2025-09-24 21:07:47,985 - database - INFO - Conexión exitosa a la base de datos MySQL
-2025-09-24 21:07:48,078 - root - INFO - Aplicación iniciada exitosamente
-2025-09-24 21:07:48,079 - root - INFO - Interfaz de usuario: 800x600
-2025-09-24 21:08:12,760 - database - INFO - Conexión cerrada
-2025-09-24 21:20:17,914 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 21:20:17,915 - root - INFO - Versión: 1.0.0
-2025-09-24 21:20:17,915 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 21:20:17,916 - root - INFO - ✓ pandas disponible
-2025-09-24 21:20:18,116 - root - INFO - ✓ openpyxl disponible
-2025-09-24 21:20:18,116 - root - INFO - ✓ mysql.connector disponible
-2025-09-24 21:20:18,139 - root - INFO - ✓ pydantic disponible
-2025-09-24 21:20:18,139 - root - INFO - ✓ dateutil disponible
-2025-09-24 21:20:18,140 - root - INFO - ✓ colorlog disponible
-2025-09-24 21:20:18,140 - root - INFO - Verificando esquema de base de datos...
-2025-09-24 21:20:18,149 - database - INFO - Conexión exitosa a la base de datos MySQL
-2025-09-24 21:20:18,156 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'clientes'
-2025-09-24 21:20:18,157 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'facturas'
-2025-09-24 21:20:18,158 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:20:18,159 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.facturas' doesn't exist
-2025-09-24 21:20:18,160 - database - INFO - Conexión cerrada
-2025-09-24 21:20:18,160 - root - INFO - Esquema de base de datos verificado/creado exitosamente
-2025-09-24 21:20:18,493 - database - INFO - Conexión exitosa a la base de datos MySQL
-2025-09-24 21:20:18,567 - root - INFO - Aplicación iniciada exitosamente
-2025-09-24 21:20:18,568 - root - INFO - Interfaz de usuario: 800x600
-2025-09-24 21:21:10,897 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
-2025-09-24 21:21:27,526 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
-2025-09-24 21:21:27,536 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
-2025-09-24 21:21:27,540 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:21:27,542 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:21:27,543 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:21:27,545 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:21:27,546 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:21:27,547 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:21:27,549 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:21:27,550 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:21:27,551 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:21:27,553 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:21:27,553 - invoice_processor - INFO - Importación completada: 0 exitosas, 5 errores
-2025-09-24 21:22:02,854 - database - INFO - Conexión cerrada
-2025-09-24 21:22:21,583 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
-2025-09-24 21:22:21,583 - root - INFO - Versión: 1.0.0
-2025-09-24 21:22:21,584 - root - INFO - ✓ PyQt5 disponible
-2025-09-24 21:22:21,584 - root - INFO - ✓ pandas disponible
-2025-09-24 21:22:21,785 - root - INFO - ✓ openpyxl disponible
-2025-09-24 21:22:21,786 - root - INFO - ✓ mysql.connector disponible
-2025-09-24 21:22:21,808 - root - INFO - ✓ pydantic disponible
-2025-09-24 21:22:21,809 - root - INFO - ✓ dateutil disponible
-2025-09-24 21:22:21,809 - root - INFO - ✓ colorlog disponible
-2025-09-24 21:22:21,809 - root - INFO - Verificando esquema de base de datos...
-2025-09-24 21:22:21,819 - database - INFO - Conexión exitosa a la base de datos MySQL
-2025-09-24 21:22:21,828 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'clientes'
-2025-09-24 21:22:21,829 - root - WARNING - Error ejecutando comando: 1824 (HY000): Failed to open the referenced table 'facturas'
-2025-09-24 21:22:21,830 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:22:21,830 - root - WARNING - Error ejecutando comando: 1146 (42S02): Table 'panorama_net.facturas' doesn't exist
-2025-09-24 21:22:21,831 - database - INFO - Conexión cerrada
-2025-09-24 21:22:21,832 - root - INFO - Esquema de base de datos verificado/creado exitosamente
-2025-09-24 21:22:22,159 - database - INFO - Conexión exitosa a la base de datos MySQL
-2025-09-24 21:22:22,232 - root - INFO - Aplicación iniciada exitosamente
-2025-09-24 21:22:22,233 - root - INFO - Interfaz de usuario: 800x600
-2025-09-24 21:23:12,028 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
-2025-09-24 21:23:51,464 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
-2025-09-24 21:23:51,468 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
-2025-09-24 21:23:51,471 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:23:51,472 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:23:51,474 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:23:51,475 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:23:51,476 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:23:51,477 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:23:51,478 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:23:51,480 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:23:51,481 - database - ERROR - Error ejecutando consulta: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:23:51,482 - database - ERROR - Error ejecutando insert: 1146 (42S02): Table 'panorama_net.clientes' doesn't exist
-2025-09-24 21:23:51,483 - invoice_processor - INFO - Importación completada: 0 exitosas, 5 errores
-2025-09-24 21:25:00,360 - database - INFO - Conexión cerrada
+2025-09-27 10:28:59,008 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-27 10:28:59,009 - root - INFO - Versión: 1.0.0
+2025-09-27 10:28:59,010 - root - INFO - ✓ PyQt5 disponible
+2025-09-27 10:28:59,010 - root - INFO - ✓ pandas disponible
+2025-09-27 10:28:59,300 - root - INFO - ✓ openpyxl disponible
+2025-09-27 10:28:59,301 - root - INFO - ✓ mysql.connector disponible
+2025-09-27 10:28:59,332 - root - INFO - ✓ pydantic disponible
+2025-09-27 10:28:59,333 - root - INFO - ✓ dateutil disponible
+2025-09-27 10:28:59,333 - root - INFO - ✓ colorlog disponible
+2025-09-27 10:28:59,333 - root - INFO - Verificando esquema de base de datos...
+2025-09-27 10:28:59,349 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-27 10:28:59,411 - database - INFO - Conexión cerrada
+2025-09-27 10:28:59,412 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-27 10:28:59,958 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-27 10:29:00,049 - root - INFO - Aplicación iniciada exitosamente
+2025-09-27 10:29:00,052 - root - INFO - Interfaz de usuario: 800x600
+2025-09-27 10:37:48,651 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-27 10:37:57,120 - database - INFO - Conexión cerrada
+2025-09-28 10:38:57,065 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-28 10:38:57,065 - root - INFO - Versión: 1.0.0
+2025-09-28 10:38:57,066 - root - INFO - ✓ PyQt5 disponible
+2025-09-28 10:38:57,066 - root - INFO - ✓ pandas disponible
+2025-09-28 10:38:58,224 - root - INFO - ✓ openpyxl disponible
+2025-09-28 10:38:58,224 - root - INFO - ✓ mysql.connector disponible
+2025-09-28 10:38:58,394 - root - INFO - ✓ pydantic disponible
+2025-09-28 10:38:58,394 - root - INFO - ✓ dateutil disponible
+2025-09-28 10:38:58,394 - root - INFO - ✓ colorlog disponible
+2025-09-28 10:38:58,395 - root - INFO - Verificando esquema de base de datos...
+2025-09-28 10:38:58,418 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-28 10:38:58,474 - database - INFO - Conexión cerrada
+2025-09-28 10:38:58,474 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-28 10:38:59,213 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-28 10:38:59,296 - root - INFO - Aplicación iniciada exitosamente
+2025-09-28 10:38:59,296 - root - INFO - Interfaz de usuario: 800x600
+2025-09-28 10:39:26,012 - database - INFO - Conexión cerrada
+2025-09-28 14:50:27,360 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-28 14:50:27,361 - root - INFO - Versión: 1.0.0
+2025-09-28 14:50:27,361 - root - INFO - ✓ PyQt5 disponible
+2025-09-28 14:50:27,362 - root - INFO - ✓ pandas disponible
+2025-09-28 14:50:28,427 - root - INFO - ✓ openpyxl disponible
+2025-09-28 14:50:28,427 - root - INFO - ✓ mysql.connector disponible
+2025-09-28 14:50:28,583 - root - INFO - ✓ pydantic disponible
+2025-09-28 14:50:28,584 - root - INFO - ✓ dateutil disponible
+2025-09-28 14:50:28,584 - root - INFO - ✓ colorlog disponible
+2025-09-28 14:50:28,584 - root - INFO - Verificando esquema de base de datos...
+2025-09-28 14:50:28,603 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-28 14:50:28,685 - database - INFO - Conexión cerrada
+2025-09-28 14:50:28,685 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-28 14:50:29,398 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-28 14:50:29,532 - root - INFO - Aplicación iniciada exitosamente
+2025-09-28 14:50:29,533 - root - INFO - Interfaz de usuario: 800x600
+2025-09-28 14:50:38,329 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-28 14:50:56,180 - database - INFO - Conexión cerrada
+2025-09-29 10:30:13,789 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 10:30:13,790 - root - INFO - Versión: 1.0.0
+2025-09-29 10:30:13,790 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 10:30:13,791 - root - INFO - ✓ pandas disponible
+2025-09-29 10:30:15,000 - root - INFO - ✓ openpyxl disponible
+2025-09-29 10:30:15,001 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 10:30:15,178 - root - INFO - ✓ pydantic disponible
+2025-09-29 10:30:15,178 - root - INFO - ✓ dateutil disponible
+2025-09-29 10:30:15,178 - root - INFO - ✓ colorlog disponible
+2025-09-29 10:30:15,179 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 10:30:15,200 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 10:30:15,318 - database - INFO - Conexión cerrada
+2025-09-29 10:30:15,318 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 10:30:16,211 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 10:30:16,212 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 10:32:42,149 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 10:32:42,149 - root - INFO - Versión: 1.0.0
+2025-09-29 10:32:42,150 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 10:32:42,150 - root - INFO - ✓ pandas disponible
+2025-09-29 10:32:42,349 - root - INFO - ✓ openpyxl disponible
+2025-09-29 10:32:42,350 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 10:32:42,372 - root - INFO - ✓ pydantic disponible
+2025-09-29 10:32:42,373 - root - INFO - ✓ dateutil disponible
+2025-09-29 10:32:42,373 - root - INFO - ✓ colorlog disponible
+2025-09-29 10:32:42,374 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 10:32:42,382 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 10:32:42,456 - database - INFO - Conexión cerrada
+2025-09-29 10:32:42,456 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 10:32:42,774 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 10:32:42,848 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 10:32:42,848 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 10:32:57,906 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 10:33:02,019 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 10:33:02,021 - excel_handler - ERROR - Error procesando datos del Excel: invalid literal for int() with base 10: ''
+2025-09-29 10:33:55,557 - database - INFO - Conexión cerrada
+2025-09-29 10:49:58,170 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 10:49:58,171 - root - INFO - Versión: 1.0.0
+2025-09-29 10:49:58,171 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 10:49:58,172 - root - INFO - ✓ pandas disponible
+2025-09-29 10:49:58,375 - root - INFO - ✓ openpyxl disponible
+2025-09-29 10:49:58,376 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 10:49:58,398 - root - INFO - ✓ pydantic disponible
+2025-09-29 10:49:58,398 - root - INFO - ✓ dateutil disponible
+2025-09-29 10:49:58,399 - root - INFO - ✓ colorlog disponible
+2025-09-29 10:49:58,399 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 10:49:58,408 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 10:49:58,451 - database - INFO - Conexión cerrada
+2025-09-29 10:49:58,451 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 10:49:58,774 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 10:49:58,851 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 10:49:58,851 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 10:50:07,213 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 10:50:07,215 - excel_handler - ERROR - Error procesando datos del Excel: invalid literal for int() with base 10: 'APTO 0201 A'
+2025-09-29 10:52:18,330 - database - INFO - Conexión cerrada
+2025-09-29 10:52:21,795 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 10:52:21,795 - root - INFO - Versión: 1.0.0
+2025-09-29 10:52:21,796 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 10:52:21,796 - root - INFO - ✓ pandas disponible
+2025-09-29 10:52:21,996 - root - INFO - ✓ openpyxl disponible
+2025-09-29 10:52:21,997 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 10:52:22,020 - root - INFO - ✓ pydantic disponible
+2025-09-29 10:52:22,020 - root - INFO - ✓ dateutil disponible
+2025-09-29 10:52:22,021 - root - INFO - ✓ colorlog disponible
+2025-09-29 10:52:22,021 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 10:52:22,030 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 10:52:22,067 - database - INFO - Conexión cerrada
+2025-09-29 10:52:22,067 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 10:52:22,435 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 10:52:22,532 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 10:52:22,533 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 10:52:30,453 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 10:52:30,455 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 10:52:30,467 - invoice_item_processor - ERROR - Error procesando item de factura APTO 0201 A: 'NoneType' object is not subscriptable
+2025-09-29 10:52:30,471 - invoice_item_processor - ERROR - Error procesando item de factura APTO 0201 B: 'NoneType' object is not subscriptable
+2025-09-29 10:52:30,474 - invoice_item_processor - ERROR - Error procesando item de factura APTO 0202 A: 'NoneType' object is not subscriptable
+2025-09-29 10:52:30,478 - invoice_item_processor - ERROR - Error procesando item de factura APTO 0202 B: 'NoneType' object is not subscriptable
+2025-09-29 10:52:30,481 - invoice_item_processor - ERROR - Error procesando item de factura APTO 0203 B: 'NoneType' object is not subscriptable
+2025-09-29 10:52:30,482 - invoice_item_processor - INFO - Importación completada: 0 exitosas, 5 errores
+2025-09-29 11:02:44,944 - database - INFO - Conexión cerrada
+2025-09-29 11:15:34,928 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 11:15:34,929 - root - INFO - Versión: 1.0.0
+2025-09-29 11:15:34,929 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 11:15:34,929 - root - INFO - ✓ pandas disponible
+2025-09-29 11:15:35,142 - root - INFO - ✓ openpyxl disponible
+2025-09-29 11:15:35,143 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 11:15:35,166 - root - INFO - ✓ pydantic disponible
+2025-09-29 11:15:35,166 - root - INFO - ✓ dateutil disponible
+2025-09-29 11:15:35,166 - root - INFO - ✓ colorlog disponible
+2025-09-29 11:15:35,167 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 11:15:35,176 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 11:15:35,256 - database - INFO - Conexión cerrada
+2025-09-29 11:15:35,257 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 11:15:35,580 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 11:15:35,658 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 11:15:35,659 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 11:15:45,496 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 11:15:58,635 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 11:15:58,637 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 11:15:58,642 - database - ERROR - Error ejecutando insert: Not all parameters were used in the SQL statement
+2025-09-29 11:15:58,646 - database - ERROR - Error ejecutando insert: Not all parameters were used in the SQL statement
+2025-09-29 11:15:58,650 - database - ERROR - Error ejecutando insert: Not all parameters were used in the SQL statement
+2025-09-29 11:15:58,655 - database - ERROR - Error ejecutando insert: Not all parameters were used in the SQL statement
+2025-09-29 11:15:58,659 - database - ERROR - Error ejecutando insert: Not all parameters were used in the SQL statement
+2025-09-29 11:15:58,659 - invoice_item_processor - INFO - Importación completada: 0 exitosas, 5 errores
+2025-09-29 11:21:43,644 - database - INFO - Conexión cerrada
+2025-09-29 11:21:50,543 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 11:21:50,544 - root - INFO - Versión: 1.0.0
+2025-09-29 11:21:50,544 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 11:21:50,545 - root - INFO - ✓ pandas disponible
+2025-09-29 11:21:51,559 - root - INFO - ✓ openpyxl disponible
+2025-09-29 11:21:51,560 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 11:21:51,707 - root - INFO - ✓ pydantic disponible
+2025-09-29 11:21:51,707 - root - INFO - ✓ dateutil disponible
+2025-09-29 11:21:51,708 - root - INFO - ✓ colorlog disponible
+2025-09-29 11:21:51,708 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 11:21:51,725 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 11:21:51,761 - database - INFO - Conexión cerrada
+2025-09-29 11:21:51,762 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 11:21:52,129 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 11:21:52,289 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 11:21:52,290 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 11:22:03,636 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 11:22:03,638 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 11:22:03,649 - database - ERROR - Error ejecutando insert: 1062 (23000): Duplicate entry '1-1-0' for key 'PRIMARY'
+2025-09-29 11:22:03,653 - database - ERROR - Error ejecutando insert: 1062 (23000): Duplicate entry '1-1-0' for key 'PRIMARY'
+2025-09-29 11:22:03,658 - database - ERROR - Error ejecutando insert: 1062 (23000): Duplicate entry '1-1-0' for key 'PRIMARY'
+2025-09-29 11:22:03,662 - database - ERROR - Error ejecutando insert: 1062 (23000): Duplicate entry '1-1-0' for key 'PRIMARY'
+2025-09-29 11:22:03,662 - invoice_item_processor - INFO - Importación completada: 1 exitosas, 4 errores
+2025-09-29 11:28:21,795 - database - INFO - Conexión cerrada
+2025-09-29 11:28:27,599 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 11:28:27,599 - root - INFO - Versión: 1.0.0
+2025-09-29 11:28:27,600 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 11:28:27,600 - root - INFO - ✓ pandas disponible
+2025-09-29 11:28:27,801 - root - INFO - ✓ openpyxl disponible
+2025-09-29 11:28:27,801 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 11:28:27,824 - root - INFO - ✓ pydantic disponible
+2025-09-29 11:28:27,825 - root - INFO - ✓ dateutil disponible
+2025-09-29 11:28:27,825 - root - INFO - ✓ colorlog disponible
+2025-09-29 11:28:27,825 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 11:28:27,834 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 11:28:27,873 - database - INFO - Conexión cerrada
+2025-09-29 11:28:27,873 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 11:28:28,194 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 11:28:28,271 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 11:28:28,271 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 11:28:38,053 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 11:28:38,055 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 11:28:38,060 - database - ERROR - Error ejecutando insert: 1062 (23000): Duplicate entry '1-1-0' for key 'PRIMARY'
+2025-09-29 11:28:38,064 - database - ERROR - Error ejecutando insert: 1062 (23000): Duplicate entry '1-1-0' for key 'PRIMARY'
+2025-09-29 11:28:38,068 - database - ERROR - Error ejecutando insert: 1062 (23000): Duplicate entry '1-1-0' for key 'PRIMARY'
+2025-09-29 11:28:38,073 - database - ERROR - Error ejecutando insert: 1062 (23000): Duplicate entry '1-1-0' for key 'PRIMARY'
+2025-09-29 11:28:38,078 - database - ERROR - Error ejecutando insert: 1062 (23000): Duplicate entry '1-1-0' for key 'PRIMARY'
+2025-09-29 11:28:38,078 - invoice_item_processor - INFO - Importación completada: 0 exitosas, 5 errores
+2025-09-29 11:34:02,026 - database - INFO - Conexión cerrada
+2025-09-29 11:53:02,803 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 11:53:02,803 - root - INFO - Versión: 1.0.0
+2025-09-29 11:53:02,804 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 11:53:02,804 - root - INFO - ✓ pandas disponible
+2025-09-29 11:53:03,010 - root - INFO - ✓ openpyxl disponible
+2025-09-29 11:53:03,011 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 11:53:03,035 - root - INFO - ✓ pydantic disponible
+2025-09-29 11:53:03,035 - root - INFO - ✓ dateutil disponible
+2025-09-29 11:53:03,036 - root - INFO - ✓ colorlog disponible
+2025-09-29 11:53:03,036 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 11:53:03,045 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 11:53:03,090 - database - INFO - Conexión cerrada
+2025-09-29 11:53:03,090 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 11:53:03,416 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 11:53:03,494 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 11:53:03,497 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 11:53:12,837 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 11:53:12,839 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 11:53:12,840 - invoice_item_processor - ERROR - Error general en el procesamiento: cannot access local variable 'last_ordinal' where it is not associated with a value
+2025-09-29 11:54:09,453 - database - INFO - Conexión cerrada
+2025-09-29 11:54:13,025 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 11:54:13,026 - root - INFO - Versión: 1.0.0
+2025-09-29 11:54:13,026 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 11:54:13,027 - root - INFO - ✓ pandas disponible
+2025-09-29 11:54:13,230 - root - INFO - ✓ openpyxl disponible
+2025-09-29 11:54:13,231 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 11:54:13,253 - root - INFO - ✓ pydantic disponible
+2025-09-29 11:54:13,254 - root - INFO - ✓ dateutil disponible
+2025-09-29 11:54:13,254 - root - INFO - ✓ colorlog disponible
+2025-09-29 11:54:13,254 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 11:54:13,264 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 11:54:13,300 - database - INFO - Conexión cerrada
+2025-09-29 11:54:13,300 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 11:54:13,624 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 11:54:13,698 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 11:54:13,699 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 11:54:21,947 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 11:54:21,949 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 11:54:21,949 - invoice_item_processor - ERROR - Error general en el procesamiento: cannot access local variable 'last_ordinal' where it is not associated with a value
+2025-09-29 11:58:23,409 - database - INFO - Conexión cerrada
+2025-09-29 11:58:27,494 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 11:58:27,494 - root - INFO - Versión: 1.0.0
+2025-09-29 11:58:27,495 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 11:58:27,495 - root - INFO - ✓ pandas disponible
+2025-09-29 11:58:27,696 - root - INFO - ✓ openpyxl disponible
+2025-09-29 11:58:27,697 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 11:58:27,722 - root - INFO - ✓ pydantic disponible
+2025-09-29 11:58:27,722 - root - INFO - ✓ dateutil disponible
+2025-09-29 11:58:27,722 - root - INFO - ✓ colorlog disponible
+2025-09-29 11:58:27,723 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 11:58:27,731 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 11:58:27,768 - database - INFO - Conexión cerrada
+2025-09-29 11:58:27,769 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 11:58:28,096 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 11:58:28,175 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 11:58:28,180 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 11:58:34,863 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 11:58:34,865 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 11:58:34,867 - database - ERROR - Error ejecutando consulta: 1054 (42S22): Unknown column 'id' in 'order clause'
+2025-09-29 11:58:34,902 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 12:06:46,104 - database - INFO - Conexión cerrada
+2025-09-29 12:06:51,239 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 12:06:51,240 - root - INFO - Versión: 1.0.0
+2025-09-29 12:06:51,240 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 12:06:51,241 - root - INFO - ✓ pandas disponible
+2025-09-29 12:06:51,443 - root - INFO - ✓ openpyxl disponible
+2025-09-29 12:06:51,444 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 12:06:51,466 - root - INFO - ✓ pydantic disponible
+2025-09-29 12:06:51,467 - root - INFO - ✓ dateutil disponible
+2025-09-29 12:06:51,467 - root - INFO - ✓ colorlog disponible
+2025-09-29 12:06:51,467 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 12:06:51,476 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:06:51,520 - database - INFO - Conexión cerrada
+2025-09-29 12:06:51,521 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 12:06:51,841 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:06:51,915 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 12:06:51,916 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 12:07:00,611 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 12:07:00,613 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 12:07:00,644 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 12:07:56,355 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 12:07:56,356 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 12:07:56,382 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 12:11:09,834 - database - INFO - Conexión cerrada
+2025-09-29 12:11:13,852 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 12:11:13,852 - root - INFO - Versión: 1.0.0
+2025-09-29 12:11:13,853 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 12:11:13,853 - root - INFO - ✓ pandas disponible
+2025-09-29 12:11:14,054 - root - INFO - ✓ openpyxl disponible
+2025-09-29 12:11:14,055 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 12:11:14,077 - root - INFO - ✓ pydantic disponible
+2025-09-29 12:11:14,078 - root - INFO - ✓ dateutil disponible
+2025-09-29 12:11:14,078 - root - INFO - ✓ colorlog disponible
+2025-09-29 12:11:14,078 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 12:11:14,087 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:11:14,186 - database - INFO - Conexión cerrada
+2025-09-29 12:11:14,187 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 12:11:14,506 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:11:14,584 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 12:11:14,585 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 12:11:24,952 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 12:11:24,955 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 12:11:24,983 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 12:15:09,551 - database - INFO - Conexión cerrada
+2025-09-29 12:15:41,695 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 12:15:41,696 - root - INFO - Versión: 1.0.0
+2025-09-29 12:15:41,696 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 12:15:41,696 - root - INFO - ✓ pandas disponible
+2025-09-29 12:15:41,897 - root - INFO - ✓ openpyxl disponible
+2025-09-29 12:15:41,898 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 12:15:41,920 - root - INFO - ✓ pydantic disponible
+2025-09-29 12:15:41,921 - root - INFO - ✓ dateutil disponible
+2025-09-29 12:15:41,921 - root - INFO - ✓ colorlog disponible
+2025-09-29 12:15:41,921 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 12:15:41,930 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:15:42,009 - database - INFO - Conexión cerrada
+2025-09-29 12:15:42,009 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 12:15:42,345 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:15:42,427 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 12:15:42,428 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 12:15:49,194 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 12:15:49,196 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 12:15:49,226 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 12:17:52,546 - database - INFO - Conexión cerrada
+2025-09-29 12:17:57,065 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 12:17:57,065 - root - INFO - Versión: 1.0.0
+2025-09-29 12:17:57,066 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 12:17:57,066 - root - INFO - ✓ pandas disponible
+2025-09-29 12:17:57,268 - root - INFO - ✓ openpyxl disponible
+2025-09-29 12:17:57,269 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 12:17:57,292 - root - INFO - ✓ pydantic disponible
+2025-09-29 12:17:57,293 - root - INFO - ✓ dateutil disponible
+2025-09-29 12:17:57,293 - root - INFO - ✓ colorlog disponible
+2025-09-29 12:17:57,293 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 12:17:57,302 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:17:57,353 - database - INFO - Conexión cerrada
+2025-09-29 12:17:57,354 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 12:17:57,677 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:17:57,753 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 12:17:57,754 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 12:18:12,147 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 12:18:12,150 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 12:18:12,178 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 12:18:29,784 - database - INFO - Conexión cerrada
+2025-09-29 12:20:39,567 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 12:20:39,568 - root - INFO - Versión: 1.0.0
+2025-09-29 12:20:39,568 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 12:20:39,568 - root - INFO - ✓ pandas disponible
+2025-09-29 12:20:39,782 - root - INFO - ✓ openpyxl disponible
+2025-09-29 12:20:39,782 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 12:20:39,804 - root - INFO - ✓ pydantic disponible
+2025-09-29 12:20:39,805 - root - INFO - ✓ dateutil disponible
+2025-09-29 12:20:39,805 - root - INFO - ✓ colorlog disponible
+2025-09-29 12:20:39,806 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 12:20:39,814 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:20:39,846 - database - INFO - Conexión cerrada
+2025-09-29 12:20:39,847 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 12:20:40,171 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:20:40,251 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 12:20:40,251 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 12:21:00,497 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 12:21:00,499 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 12:21:00,528 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 12:24:05,542 - database - INFO - Conexión cerrada
+2025-09-29 12:24:10,040 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 12:24:10,040 - root - INFO - Versión: 1.0.0
+2025-09-29 12:24:10,041 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 12:24:10,041 - root - INFO - ✓ pandas disponible
+2025-09-29 12:24:10,246 - root - INFO - ✓ openpyxl disponible
+2025-09-29 12:24:10,246 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 12:24:10,269 - root - INFO - ✓ pydantic disponible
+2025-09-29 12:24:10,269 - root - INFO - ✓ dateutil disponible
+2025-09-29 12:24:10,270 - root - INFO - ✓ colorlog disponible
+2025-09-29 12:24:10,270 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 12:24:10,278 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:24:10,315 - database - INFO - Conexión cerrada
+2025-09-29 12:24:10,315 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 12:24:10,679 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:24:10,775 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 12:24:10,776 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 12:24:18,438 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 12:24:18,441 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 12:24:18,470 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 12:24:38,990 - database - INFO - Conexión cerrada
+2025-09-29 12:30:10,743 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 12:30:10,744 - root - INFO - Versión: 1.0.0
+2025-09-29 12:30:10,744 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 12:30:10,745 - root - INFO - ✓ pandas disponible
+2025-09-29 12:30:10,945 - root - INFO - ✓ openpyxl disponible
+2025-09-29 12:30:10,946 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 12:30:10,968 - root - INFO - ✓ pydantic disponible
+2025-09-29 12:30:10,968 - root - INFO - ✓ dateutil disponible
+2025-09-29 12:30:10,969 - root - INFO - ✓ colorlog disponible
+2025-09-29 12:30:10,969 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 12:30:10,978 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:30:11,010 - database - INFO - Conexión cerrada
+2025-09-29 12:30:11,011 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 12:30:11,330 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:30:11,404 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 12:30:11,405 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 12:30:18,895 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 12:30:18,897 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 12:30:18,912 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 12:30:35,018 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 12:30:35,020 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 12:30:35,036 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 12:31:10,673 - database - INFO - Conexión cerrada
+2025-09-29 12:43:22,057 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 12:43:22,058 - root - INFO - Versión: 1.0.0
+2025-09-29 12:43:22,058 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 12:43:22,058 - root - INFO - ✓ pandas disponible
+2025-09-29 12:43:22,262 - root - INFO - ✓ openpyxl disponible
+2025-09-29 12:43:22,262 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 12:43:22,285 - root - INFO - ✓ pydantic disponible
+2025-09-29 12:43:22,286 - root - INFO - ✓ dateutil disponible
+2025-09-29 12:43:22,286 - root - INFO - ✓ colorlog disponible
+2025-09-29 12:43:22,286 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 12:43:22,295 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:43:22,343 - database - INFO - Conexión cerrada
+2025-09-29 12:43:22,344 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 12:43:22,673 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 12:43:22,753 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 12:43:22,754 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 12:43:29,819 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 12:43:29,821 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 12:43:29,821 - invoice_item_processor - ERROR - Error general en el procesamiento: list indices must be integers or slices, not str
+2025-09-29 12:43:43,768 - database - INFO - Conexión cerrada
+2025-09-29 13:10:17,521 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 13:10:17,522 - root - INFO - Versión: 1.0.0
+2025-09-29 13:10:17,522 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 13:10:17,522 - root - INFO - ✓ pandas disponible
+2025-09-29 13:10:17,732 - root - INFO - ✓ openpyxl disponible
+2025-09-29 13:10:17,733 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 13:10:17,756 - root - INFO - ✓ pydantic disponible
+2025-09-29 13:10:17,756 - root - INFO - ✓ dateutil disponible
+2025-09-29 13:10:17,757 - root - INFO - ✓ colorlog disponible
+2025-09-29 13:10:17,757 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 13:10:17,766 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 13:10:17,814 - database - INFO - Conexión cerrada
+2025-09-29 13:10:17,814 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 13:10:18,177 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 13:10:18,255 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 13:10:18,255 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 13:10:24,603 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 13:10:24,605 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 13:10:24,605 - invoice_item_processor - ERROR - Error general en el procesamiento: list indices must be integers or slices, not str
+2025-09-29 13:16:28,668 - database - INFO - Conexión cerrada
+2025-09-29 13:16:33,464 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 13:16:33,465 - root - INFO - Versión: 1.0.0
+2025-09-29 13:16:33,465 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 13:16:33,466 - root - INFO - ✓ pandas disponible
+2025-09-29 13:16:33,666 - root - INFO - ✓ openpyxl disponible
+2025-09-29 13:16:33,667 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 13:16:33,689 - root - INFO - ✓ pydantic disponible
+2025-09-29 13:16:33,689 - root - INFO - ✓ dateutil disponible
+2025-09-29 13:16:33,690 - root - INFO - ✓ colorlog disponible
+2025-09-29 13:16:33,690 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 13:16:33,699 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 13:16:33,739 - database - INFO - Conexión cerrada
+2025-09-29 13:16:33,739 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 13:16:34,125 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 13:16:34,253 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 13:16:34,254 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 13:16:41,630 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 13:16:41,632 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 13:16:41,643 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 13:16:45,099 - database - INFO - Conexión cerrada
+2025-09-29 13:19:54,709 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 13:19:54,709 - root - INFO - Versión: 1.0.0
+2025-09-29 13:19:54,710 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 13:19:54,710 - root - INFO - ✓ pandas disponible
+2025-09-29 13:19:54,911 - root - INFO - ✓ openpyxl disponible
+2025-09-29 13:19:54,912 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 13:19:54,935 - root - INFO - ✓ pydantic disponible
+2025-09-29 13:19:54,935 - root - INFO - ✓ dateutil disponible
+2025-09-29 13:19:54,936 - root - INFO - ✓ colorlog disponible
+2025-09-29 13:19:54,936 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 13:19:54,944 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 13:19:54,979 - database - INFO - Conexión cerrada
+2025-09-29 13:19:54,980 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 13:19:55,312 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 13:19:55,390 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 13:19:55,390 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 13:20:03,638 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 13:20:03,640 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 13:20:03,654 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 13:20:07,661 - database - INFO - Conexión cerrada
+2025-09-29 13:24:38,044 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 13:24:38,045 - root - INFO - Versión: 1.0.0
+2025-09-29 13:24:38,045 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 13:24:38,046 - root - INFO - ✓ pandas disponible
+2025-09-29 13:24:38,251 - root - INFO - ✓ openpyxl disponible
+2025-09-29 13:24:38,251 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 13:24:38,274 - root - INFO - ✓ pydantic disponible
+2025-09-29 13:24:38,274 - root - INFO - ✓ dateutil disponible
+2025-09-29 13:24:38,274 - root - INFO - ✓ colorlog disponible
+2025-09-29 13:24:38,275 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 13:24:38,284 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 13:24:38,320 - database - INFO - Conexión cerrada
+2025-09-29 13:24:38,320 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 13:24:38,646 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 13:24:38,722 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 13:24:38,722 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 13:24:47,951 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 13:24:47,953 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 13:24:47,966 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 13:30:50,897 - database - INFO - Conexión cerrada
+2025-09-29 13:30:53,491 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 13:30:53,492 - root - INFO - Versión: 1.0.0
+2025-09-29 13:30:53,492 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 13:30:53,493 - root - INFO - ✓ pandas disponible
+2025-09-29 13:30:53,694 - root - INFO - ✓ openpyxl disponible
+2025-09-29 13:30:53,694 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 13:30:53,717 - root - INFO - ✓ pydantic disponible
+2025-09-29 13:30:53,717 - root - INFO - ✓ dateutil disponible
+2025-09-29 13:30:53,718 - root - INFO - ✓ colorlog disponible
+2025-09-29 13:30:53,718 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 13:30:53,727 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 13:30:53,761 - database - INFO - Conexión cerrada
+2025-09-29 13:30:53,762 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 13:30:54,111 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 13:30:54,213 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 13:30:54,214 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 13:31:02,514 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 13:31:02,516 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 13:31:02,530 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 13:31:27,513 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 13:31:27,515 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 13:31:27,529 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 13:40:14,224 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 13:40:14,226 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 13:40:14,241 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 13:41:05,238 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 13:41:05,240 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 13:41:05,254 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 13:41:09,079 - database - INFO - Conexión cerrada
+2025-09-29 15:01:22,594 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 15:01:22,594 - root - INFO - Versión: 1.0.0
+2025-09-29 15:01:22,595 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 15:01:22,595 - root - INFO - ✓ pandas disponible
+2025-09-29 15:01:22,797 - root - INFO - ✓ openpyxl disponible
+2025-09-29 15:01:22,797 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 15:01:22,820 - root - INFO - ✓ pydantic disponible
+2025-09-29 15:01:22,821 - root - INFO - ✓ dateutil disponible
+2025-09-29 15:01:22,821 - root - INFO - ✓ colorlog disponible
+2025-09-29 15:01:22,821 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 15:01:22,830 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 15:01:22,874 - database - INFO - Conexión cerrada
+2025-09-29 15:01:22,874 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 15:01:23,224 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 15:01:23,653 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 15:01:23,653 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 15:01:30,196 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 15:01:30,198 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 15:01:30,200 - invoice_item_processor - ERROR - Error general en el procesamiento: DatabaseConnection.delete_items_by_service() missing 1 required positional argument: 'service_id'
+2025-09-29 15:01:47,352 - database - INFO - Conexión cerrada
+2025-09-29 15:05:00,653 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 15:05:00,653 - root - INFO - Versión: 1.0.0
+2025-09-29 15:05:00,654 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 15:05:00,654 - root - INFO - ✓ pandas disponible
+2025-09-29 15:05:00,855 - root - INFO - ✓ openpyxl disponible
+2025-09-29 15:05:00,856 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 15:05:00,878 - root - INFO - ✓ pydantic disponible
+2025-09-29 15:05:00,879 - root - INFO - ✓ dateutil disponible
+2025-09-29 15:05:00,879 - root - INFO - ✓ colorlog disponible
+2025-09-29 15:05:00,880 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 15:05:00,888 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 15:05:00,922 - database - INFO - Conexión cerrada
+2025-09-29 15:05:00,923 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 15:05:01,255 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 15:05:01,331 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 15:05:01,332 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 15:05:09,750 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 15:05:09,752 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 15:05:09,768 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 15:05:37,374 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 15:05:37,375 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 15:05:37,393 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 15:10:23,093 - database - INFO - Conexión cerrada
+2025-09-29 15:10:27,908 - root - INFO - Iniciando Sistema de Importación de Facturas Panorama_net
+2025-09-29 15:10:27,908 - root - INFO - Versión: 1.0.0
+2025-09-29 15:10:27,909 - root - INFO - ✓ PyQt5 disponible
+2025-09-29 15:10:27,909 - root - INFO - ✓ pandas disponible
+2025-09-29 15:10:28,116 - root - INFO - ✓ openpyxl disponible
+2025-09-29 15:10:28,116 - root - INFO - ✓ mysql.connector disponible
+2025-09-29 15:10:28,139 - root - INFO - ✓ pydantic disponible
+2025-09-29 15:10:28,139 - root - INFO - ✓ dateutil disponible
+2025-09-29 15:10:28,140 - root - INFO - ✓ colorlog disponible
+2025-09-29 15:10:28,140 - root - INFO - Verificando esquema de base de datos...
+2025-09-29 15:10:28,149 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 15:10:28,195 - database - INFO - Conexión cerrada
+2025-09-29 15:10:28,195 - root - INFO - Esquema de base de datos verificado/creado exitosamente
+2025-09-29 15:10:28,567 - database - INFO - Conexión exitosa a la base de datos MySQL
+2025-09-29 15:10:28,651 - root - INFO - Aplicación iniciada exitosamente
+2025-09-29 15:10:28,652 - root - INFO - Interfaz de usuario: 800x600
+2025-09-29 15:11:58,479 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 15:19:42,985 - excel_handler - INFO - Archivo Excel leído exitosamente: 5 filas
+2025-09-29 15:19:42,994 - excel_handler - INFO - Datos procesados exitosamente: 5 registros
+2025-09-29 15:19:43,013 - invoice_item_processor - INFO - Importación completada: 5 exitosas, 0 errores
+2025-09-29 15:25:38,094 - database - INFO - Conexión cerrada

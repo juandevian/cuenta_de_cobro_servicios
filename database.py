@@ -57,7 +57,7 @@ class DatabaseConnection:
             cursor = self.connection.cursor()
             cursor.execute(query, params or ())
             self.connection.commit()
-            last_id = cursor.lastrowid
+            last_id = cursor.rowcount
             cursor.close()
             return last_id
         except Error as e:
@@ -78,46 +78,61 @@ class DatabaseConnection:
             self.connection.rollback()
             return False
 
-    def get_client_by_code(self, codigo_cliente: str) -> Optional[Dict]:
-        """Obtiene un cliente por su código"""
-        query = "SELECT * FROM clientes WHERE codigo_cliente = %s"
-        result = self.execute_query(query, (codigo_cliente,))
-        return result[0] if result else None
-
-    def insert_client(self, codigo_cliente: str, nombre: str, direccion: str = None,
-                     telefono: str = None, email: str = None) -> Optional[int]:
-        """Inserta un nuevo cliente"""
-        query = """
-            INSERT INTO clientes (codigo_cliente, nombre, direccion, telefono, email)
-            VALUES (%s, %s, %s, %s, %s)
-        """
-        params = (codigo_cliente, nombre, direccion, telefono, email)
-        return self.execute_insert(query, params)
-
-    def insert_invoice(self, numero_factura: str, id_cliente: int, fecha_emision: str,
-                      fecha_vencimiento: str, lectura_anterior: float, lectura_actual: float,
-                      consumo: float, valor_unitario: float, subtotal: float,
-                      iva: float, total: float, estado: str = 'pendiente') -> Optional[int]:
+    def insert_item_program_invoice(
+            self,
+            CantidadPeriodos: int,
+            Consumo: int,
+            IdAno: int,
+            IdCarpeta: int,
+            IdCentroUtil: int,
+            IdPredio: str,
+            IdServicio: int,
+            IdTerceroCliente: float,
+            LecturaActual: float,
+            LecturaAnterior: float,
+            Ordinal: int,
+            Origen: str,
+            PeriodoInicioFact: str,
+            Saldo: float,
+            ValorPeriodo: float,
+            ValorUnitario: float) -> Optional[int]:
         """Inserta una nueva factura"""
         query = """
-            INSERT INTO facturas (numero_factura, id_cliente, fecha_emision, fecha_vencimiento,
-                                lectura_anterior, lectura_actual, consumo, valor_unitario,
-                                subtotal, iva, total, estado)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO oriitemsprogramafact(CantidadPeriodos, Consumo, IdAno, IdCarpeta, IdCentroUtil, IdPredio, IdServicio, IdTerceroCliente, LecturaAnterior, LecturaActual, Ordinal, Origen, PeriodoInicioFact, Saldo, ValorPeriodo, ValorUnitario)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
-        params = (numero_factura, id_cliente, fecha_emision, fecha_vencimiento,
-                 lectura_anterior, lectura_actual, consumo, valor_unitario,
-                 subtotal, iva, total, estado)
+        params = (CantidadPeriodos, Consumo, IdAno, IdCarpeta, IdCentroUtil, IdPredio, IdServicio, IdTerceroCliente, LecturaAnterior, LecturaActual, Ordinal, Origen, PeriodoInicioFact, Saldo, ValorPeriodo,  ValorUnitario)
         return self.execute_insert(query, params)
 
-    def get_invoices_count(self) -> int:
-        """Obtiene el conteo total de facturas"""
-        query = "SELECT COUNT(*) as count FROM facturas"
+    # TODO: Revisar si se usan estos métodos get_invoices_count y get_last_invoice_number
+    def get_items_count(self) -> int:
+        """Obtiene el conteo total de items"""
+        query = "SELECT COUNT(*) as count FROM oriitemsprogramafact WHERE Origen = '3'"
         result = self.execute_query(query)
         return result[0]['count'] if result else 0
 
-    def get_last_invoice_number(self) -> Optional[str]:
-        """Obtiene el último número de factura"""
-        query = "SELECT numero_factura FROM facturas ORDER BY id DESC LIMIT 1"
+    def get_last_item_ordinal(self) -> Optional[str]:
+        """Obtiene el último ordinal de item de factura"""
+        query = "SELECT ordinal FROM oriitemsprogramafact ORDER BY ordinal DESC LIMIT 1"
         result = self.execute_query(query)
-        return result[0]['numero_factura'] if result else None
+        return result[0]['ordinal'] if result else None
+
+    def get_client_by_id(self, client_id: float) -> Optional[Dict[str, Any]]:
+        """Obtiene un cliente por su ID"""
+        query = "SELECT * FROM oriclientes WHERE idTerceroCliente = %s"
+        params = (client_id,)
+        result = self.execute_query(query, params)
+        return result[0] if result else None
+    
+    def get_property_by_id(self, property_id: str) -> Optional[Dict[str, Any]]:
+        """Obtiene un predio por su ID"""
+        query = "SELECT * FROM oripredios WHERE idPredio = %s"
+        params = (property_id,)
+        result = self.execute_query(query, params)
+        return result[0] if result else None
+    
+    def delete_items_by_service(self, folder_id: int, service_id: int) -> bool:
+        """Elimina items de factura por IdServicio"""
+        query = "DELETE FROM oriitemsprogramafact WHERE IdCarpeta = %s AND IdAno = '0' AND IdServicio = %s"
+        params = (folder_id, service_id,)
+        return self.execute_update(query, params)

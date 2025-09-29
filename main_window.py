@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QH
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
 from PyQt5.QtGui import QFont, QIcon
 import logging
-from invoice_processor import InvoiceProcessor
+from invoice_item_processor import InvoiceItemProcessor
 from excel_handler import ExcelHandler
 from config import Config
 
@@ -23,7 +23,7 @@ class ImportWorker(QThread):
     progress_updated = pyqtSignal(int, str)
     import_finished = pyqtSignal(dict)
 
-    def __init__(self, file_path: str, processor: InvoiceProcessor):
+    def __init__(self, file_path: str, processor: InvoiceItemProcessor):
         super().__init__()
         self.file_path = file_path
         self.processor = processor
@@ -212,12 +212,11 @@ class MainWindow(QMainWindow):
         # Información de la aplicación
         info_text = f"""
         <h3>{Config.APP_NAME} v{Config.APP_VERSION}</h3>
-        <p>Sistema para importar facturas desde archivos Excel a base de datos MySQL.</p>
+        <p>Sistema para importar items de facturas de servicio desde archivos Excel a Orión Plus.</p>
 
         <h4>Características:</h4>
         <ul>
             <li>Importación automática desde archivos Excel (.xlsx, .xls)</li>
-            <li>Conexión a base de datos MySQL</li>
             <li>Validación de datos antes de la importación</li>
             <li>Interfaz gráfica intuitiva</li>
             <li>Procesamiento en segundo plano</li>
@@ -226,22 +225,21 @@ class MainWindow(QMainWindow):
 
         <h4>Requisitos:</h4>
         <ul>
-            <li>MySQL Server</li>
+            <li>Plantilla de excel con datos requeridos</li>
             <li>Python 3.7+</li>
-            <li>Dependencias listadas en requirements.txt</li>
         </ul>
 
         <h4>Formato de Excel esperado:</h4>
         <p>El archivo Excel debe contener las siguientes columnas:</p>
         <ul>
-            <li>numero_factura</li>
-            <li>codigo_cliente</li>
-            <li>fecha_emision</li>
-            <li>fecha_vencimiento</li>
+            <li>id_carpeta</li>
+            <li>id_servicio</li>
+            <li>id_predio</li>
+            <li>id_tercero_cliente (Solo se requiere si se factura únicamente al cliente)</li>  
+            <li>periodo_inicio_cobro</li>
             <li>lectura_anterior</li>
             <li>lectura_actual</li>
-            <li>consumo</li>
-            <li>valor_unitario</li>
+            <li>valor_unitario: (Valor por unidad de consumo)</li>
         </ul>
         """
 
@@ -255,7 +253,7 @@ class MainWindow(QMainWindow):
     def connect_to_database(self):
         """Conecta a la base de datos"""
         try:
-            self.processor = InvoiceProcessor()
+            self.processor = InvoiceItemProcessor()
             if self.processor.db.connection and self.processor.db.connection.is_connected():
                 self.log_message("Conexión a base de datos establecida", "INFO")
                 self.status_bar.showMessage("Conectado a base de datos")
