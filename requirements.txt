@@ -20,3 +20,6 @@ python-dateutil==2.8.2
 
 # Librería para logging
 colorlog==6.9.0
+
+# Cargar variables de entorno desde un archivo .env
+python-dotenv==1.1.1

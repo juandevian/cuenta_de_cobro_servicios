@@ -1,8 +1,11 @@
 """
-Configuración de la aplicación panorama_net
+Configuración de la aplicación Panorama_net
 """
 import os
 from typing import Optional
+from dotenv import load_dotenv
+
+load_dotenv()  # Cargar variables de entorno desde un archivo .env
 
 class Config:
     """Configuración de la aplicación"""
@@ -10,12 +13,12 @@ class Config:
     # Configuración de la base de datos
     DB_HOST: str = os.getenv('DB_HOST', 'localhost')
     DB_PORT: int = int(os.getenv('DB_PORT', '3306'))
-    DB_USER: str = os.getenv('DB_USER', 'root')
-    DB_PASSWORD: str = os.getenv('DB_PASSWORD', 'padipa')
+    DB_USER: str = os.getenv('DB_USERNAME', '')
+    DB_PASSWORD: str = os.getenv('DB_PASSWORD', '')
     DB_NAME: str = os.getenv('DB_NAME', 'panorama_net')
 
     # Configuración de la aplicación
-    APP_NAME: str = "Sistema de Importación de Facturas"
+    APP_NAME: str = "Importación de Facturas de Servicios con Consumos"
     APP_VERSION: str = "1.0.0"
     WINDOW_WIDTH: int = 800
     WINDOW_HEIGHT: int = 600

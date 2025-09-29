@@ -57,7 +57,8 @@ def check_requirements():
         'mysql.connector',
         'pydantic',
         'dateutil',
-        'colorlog'
+        'colorlog',
+        'dotenv'
     ]
 
     missing_modules = []
