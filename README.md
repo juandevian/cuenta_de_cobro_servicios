@@ -56,51 +56,43 @@ O manualmente:
 - Crear una base de datos MySQL llamada `Panorama_net`
 - Ejecutar el contenido del archivo `database_schema.sql`
 
-### 4. Configurar conexión (opcional)
-Editar el archivo `config.py` si es necesario cambiar los parámetros de conexión:
-```python
-DB_HOST = 'localhost'
-DB_PORT = 3306
-DB_USER = 'root'
-DB_PASSWORD = 'tu_contraseña'
-DB_NAME = 'Panorama_net'
+### 4. Configurar variables de entorno (opcional pero recomendado)
+Copia el archivo de ejemplo y configura tus credenciales:
+```bash
+cp .env.example .env
+# Edita .env con tus valores reales
 ```
 
-### 5. Ejecutar la aplicación
+### 5. Ejecutar pruebas
+Antes de usar la aplicación, ejecuta las pruebas unitarias:
+```bash
+# Instalar dependencias de desarrollo
+pip install pytest python-dotenv
+
+# Ejecutar todas las pruebas
+pytest test_app.py -v
+
+# O ejecutar con reporte detallado
+pytest test_app.py --tb=short
+```
+
+### 6. Ejecutar la aplicación
 
 **Opción A: Con MySQL (requiere MySQL instalado)**
 ```bash
 python main.py
 ```
 
-**Opción B: Con SQLite (recomendado para desarrollo/pruebas)**
-```bash
-# Configurar base de datos SQLite
-python init_sqlite.py
-
-# Ejecutar aplicación con SQLite (versión completa)
-python main_sqlite.py
-
-# O ejecutar versión simplificada (recomendada)
-python main_sqlite_simple.py
-```
-
 ## Uso de la Aplicación
 
-### 1. Configuración de Base de Datos
-- Ve a la pestaña "Configuración"
-- Modifica los parámetros de conexión si es necesario
-- Haz clic en "Probar Conexión" para verificar
-- Guarda la configuración
-
-### 2. Importación de Facturas
-- Ve a la pestaña "Importar Facturas"
+### 1. Importación de items de facturas de servicios con datos de consumo.
+- Ve a la pestaña "Importar Cobro de Servicios"
 - Haz clic en "Seleccionar Archivo Excel"
 - Elige un archivo Excel con el formato correcto
 - Opcionalmente, haz clic en "Vista Previa" para ver los datos
-- Haz clic en "Importar Facturas" para comenzar la importación
+- Haz clic en "Importar Servicio" para comenzar la importación
 
-### 3. Monitoreo
+### 2. Monitoreo
 - Observa el progreso en la barra de progreso
 - Revisa el log de operaciones para detalles
 - Al finalizar, se mostrará un resumen de la importación
@@ -111,57 +103,38 @@ El archivo Excel debe contener las siguientes columnas obligatorias:
 
 | Columna | Tipo | Descripción |
 |---------|------|-------------|
-| numero_factura | Texto | Número único de la factura |
-| codigo_cliente | Texto | Código del cliente |
-| fecha_emision | Fecha | Fecha de emisión (YYYY-MM-DD) |
-| fecha_vencimiento | Fecha | Fecha de vencimiento (YYYY-MM-DD) |
+| id_carpeta | Número | Número de la carpeta de la copropiedad en Orión |
+| id_servicio | Número | Número de servicio en Servicios Permanentes |
+| id_predio | Texto | Identificación del predio en Orión (Si se va a cobrar a una persona sin predio se deja vacío) |
+| id_tercero_cliente | Número | Si se le va a cobrar a un cliente sin predio, se agrega la identificación |
+| periodo_inicio_cobro | Texto | Año y mes en el que se realizará el cobro, (YYYYMM) Ej. '202603' (Marzo de 2026) |
 | lectura_anterior | Número | Lectura anterior del medidor |
 | lectura_actual | Número | Lectura actual del medidor |
-| consumo | Número | Consumo calculado |
 | valor_unitario | Número | Valor por unidad |
 
 ### Columnas Opcionales
-- subtotal: Se calcula automáticamente si no está presente
-- iva: Se calcula automáticamente (19%) si no está presente
-- total: Se calcula automáticamente si no está presente
+- saldo: Se calcula automáticamente si no está presente
+- consumo: Se calcula automáticamente (lectura_actual - lectura_anterior)
 
 ## Estructura de la Base de Datos
 
-### Tabla: clientes
-- id: Identificador único
-- codigo_cliente: Código del cliente
-- nombre: Nombre del cliente
-- direccion: Dirección
-- telefono: Teléfono
-- email: Correo electrónico
-- fecha_registro: Fecha de registro
-
-### Tabla: facturas
-- id: Identificador único
-- numero_factura: Número de factura
-- id_cliente: Referencia al cliente
-- fecha_emision: Fecha de emisión
-- fecha_vencimiento: Fecha de vencimiento
-- lectura_anterior: Lectura anterior
-- lectura_actual: Lectura actual
-- consumo: Consumo
-- valor_unitario: Valor unitario
-- subtotal: Subtotal
-- iva: IVA (19%)
-- total: Total a pagar
-- estado: Estado de la factura
-- fecha_pago: Fecha de pago
-- metodo_pago: Método de pago
-- observaciones: Observaciones
-
-### Tabla: pagos
-- id: Identificador único
-- id_factura: Referencia a la factura
-- monto_pagado: Monto pagado
-- fecha_pago: Fecha de pago
-- metodo_pago: Método de pago
-- referencia: Referencia del pago
-- observaciones: Observaciones
+### Tabla: itemsprogramafact
+- CantidadPeriodos: Meses de cobro - 1 (automático)
+- Consumo: Consumo calculado
+- IdAno: Servicio permanente - 0 (automático) (KEY)
+- IdTerceroCliente: Identificación del cliente - (Sólo si no se cobra a un predio)
+- IdCarpeta: Número de carpeta de la copropiedad asignado en Orión
+- IdCentroUtil: Centro de utilidad - 1 (automático) (KEY)
+- IdPredio: Nombre del predio al que se va a cobrar - Exactamente como está en Orión
+- IdServicio: Servicio permanente creado para este cobro.
+- LecturaActual: Lectura actual del medidor
+- LecturaAnterior: Lectura anterior del medidor
+- Ordinal: Número consecutivo (KEY)
+- Origen: Generación: 1-Calculado, 2-Usuario, 3-Importado
+- PeriodoInicioFact: Periodo YYYYMM (202602 = Feb/2026).
+- Saldo: Automático (Valor Periodo * Cantidad de Periodos)
+- ValorPeriodo: Automático
+- ValorUnitario: Precio por unidad de consumo
 
 ## Archivos del Proyecto
 
@@ -169,11 +142,44 @@ El archivo Excel debe contener las siguientes columnas obligatorias:
 - `main_window.py`: Ventana principal con interfaz gráfica
 - `database.py`: Conexión y operaciones con MySQL
 - `excel_handler.py`: Manejo de archivos Excel
-- `invoice_processor.py`: Lógica de procesamiento de facturas
+- `invoice_item_processor.py`: Lógica de procesamiento de items de facturas
 - `config.py`: Configuración de la aplicación
 - `database_schema.sql`: Esquema de la base de datos
 - `init_database.py`: Script de inicialización de BD
+- `test_app.py`: Suite completa de pruebas unitarias
+- `create_excels.py`: Scripts para generar archivos Excel de ejemplo
 - `requirements.txt`: Dependencias de Python
+- `.env.example`: Plantilla de variables de entorno
+
+## Pruebas Unitarias
+
+El proyecto incluye una suite completa de pruebas unitarias usando pytest:
+
+### Ejecutar Pruebas
+```bash
+# Todas las pruebas
+pytest test_app.py -v
+
+# Pruebas específicas
+pytest test_app.py::TestDatabaseConnection::test_connect_success -v
+
+# Con cobertura
+pytest test_app.py --cov=. --cov-report=html
+```
+
+### Cobertura de Pruebas
+- **Config**: Validación de configuración y variables de entorno
+- **DatabaseConnection**: Todos los métodos de conexión y consultas
+- **ExcelHandler**: Validación, lectura y procesamiento de Excel
+- **InvoiceItemProcessor**: Procesamiento completo de importaciones
+- **Funciones auxiliares**: Creación de archivos Excel
+
+### Mocks y Fixtures
+Las pruebas usan mocks para:
+- Conexiones de base de datos
+- Archivos del sistema
+- Dependencias externas
+- Evitar efectos secundarios en pruebas
 
 ## Ejemplo de Uso
 
@@ -250,5 +256,6 @@ Este proyecto es desarrollado para uso interno de la organización.
 ---
 
 **Versión**: 1.0.0
-**Fecha**: Septiembre 2024
+**Fecha**: Septiembre 2025
+**Auto**: DevIan (Sebas Villegas)
 **Desarrollado con**: Python 3.7+, PyQt5, MySQL

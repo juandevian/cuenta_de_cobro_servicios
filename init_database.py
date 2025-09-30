@@ -166,7 +166,7 @@ def main():
             cursor.execute("SHOW TABLES")
             tables = cursor.fetchall()
 
-            expected_tables = ['clientes', 'facturas', 'pagos']
+            expected_tables = ['oriclientes', 'oriitemsprogramafact']
             created_tables = [table[0] for table in tables]
 
             logging.info(f"✓ Tablas encontradas: {created_tables}")
@@ -178,13 +178,13 @@ def main():
                     logging.warning(f"⚠ Tabla '{table}' no encontrada")
 
             # Verificar datos de ejemplo
-            cursor.execute("SELECT COUNT(*) FROM clientes")
+            cursor.execute("SELECT COUNT(*) FROM oriclientes")
             clients_count = cursor.fetchone()[0]
             logging.info(f"✓ Clientes en la base de datos: {clients_count}")
 
-            cursor.execute("SELECT COUNT(*) FROM facturas")
+            cursor.execute("SELECT COUNT(*) FROM oriitemsprogramafact")
             invoices_count = cursor.fetchone()[0]
-            logging.info(f"✓ Facturas en la base de datos: {invoices_count}")
+            logging.info(f"✓ Items de factura en la base de datos: {invoices_count}")
 
             cursor.close()
 

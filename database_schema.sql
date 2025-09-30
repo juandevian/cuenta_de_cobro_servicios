@@ -5,10 +5,9 @@ USE Panorama_net;
 
 -- Definition of oriitemsprogramafact table
 -- TODO: Elimina el DROP TABLE en producción 
-DROP TABLE IF EXISTS `oriitemsprogramafact`;
+-- DROP TABLE IF EXISTS `oriitemsprogramafact`;
 CREATE TABLE IF NOT EXISTS `oriitemsprogramafact` (
     `CantidadPeriodos` smallint(6) NOT NULL DEFAULT '0',
-    -- TODO: Consumo deberia ir a la factura
     `Consumo` double NOT NULL DEFAULT '0',
     `IdAno` smallint(6) NOT NULL DEFAULT '0',
     `IdTerceroCliente` decimal(12,2) NOT NULL DEFAULT '0',
@@ -32,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `oriitemsprogramafact` (
 -- 
 -- Dumping data for table oriitemsprogramafact 
 -- Insertar datos de ejemplo
+/*
 INSERT INTO `oriitemsprogramafact`(`CantidadPeriodos`,`Consumo`,`IdAno`,`IdTerceroCliente`,`IdCarpeta`,`IdCentroUtil`,`IdPredio`,`IdServicio`,`LecturaActual`,`LecturaAnterior`,`Ordinal`,`Origen`,`PeriodoInicioFact`,`Saldo`,`ValorPeriodo`,`ValorUnitario`) VALUES
 (1,25,0,0,1,1,'APTO 0501 A',2,120,95,0,3,'202401',0.00,345500.00,7250.00),
 (1,1911,0,0,1,1,'APTO 0402 B',2,25460,23549,1,3,'202401',0.00,479500.00,7250.00),
@@ -45,3 +45,4 @@ INSERT INTO `oriitemsprogramafact`(`CantidadPeriodos`,`Consumo`,`IdAno`,`IdTerce
 (1,185,0,0,1,1,'APTO 0302 B',2,3120,2935,9,3,'202401',0.00,450300.00,7250.00),
 (1,19,0,0,1,1,'APTO 0301 A',2,5910,5895,10,3,'202401',0.00,289700.00,7250.00),
 (1,125,0,0,1,1,'APTO 0302 A',2,3120,2995,11,3,'202401',0.00,375800.00,7250.00);
+*/

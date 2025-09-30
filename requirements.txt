@@ -21,5 +21,11 @@ python-dateutil==2.8.2
 # Librería para logging
 colorlog==6.9.0
 
+# Framework para pruebas unitarias
+pytest==7.4.3
+
+# Librería para variables de entorno
+python-dotenv==1.0.0
+
 # Cargar variables de entorno desde un archivo .env
 python-dotenv==1.1.1

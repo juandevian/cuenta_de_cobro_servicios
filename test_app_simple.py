@@ -35,6 +35,33 @@ def test_imports():
         except ImportError:
             print("[ERROR] mysql.connector no disponible - instale con: pip install mysql-connector-python")
 
+        # Probar pydantic
+        try:
+            from pydantic import BaseModel
+            print("[OK] pydantic importado")
+        except ImportError:
+            print("[ERROR] pydantic no disponible - instale con: pip install pydantic")
+            
+        # Probar dateutil
+        try:
+            from dateutil import parser
+            print("[OK] dateutil importado")
+        except ImportError:
+            print("[ERROR] dateutil no disponible - instale con: pip install python-dateutil")
+        # Probar colorlog
+        try:
+            import colorlog
+            print("[OK] colorlog importado")
+        except ImportError:
+            print("[ERROR] colorlog no disponible - instale con: pip install colorlog")
+
+        # Probar dotenv
+        try:
+            from dotenv import load_dotenv
+            print("[OK] dotenv importado")
+        except ImportError:
+            print("[ERROR] dotenv no disponible - instale con: pip install python-dotenv")
+
         return True
 
     except Exception as e:
@@ -72,13 +99,13 @@ def test_excel_handler():
         print("[OK] ExcelHandler creado")
 
         # Verificar si existe el archivo CSV de ejemplo
-        csv_file = 'ejemplo_facturas.csv'
-        if os.path.exists(csv_file):
-            print(f"[OK] Archivo de ejemplo encontrado: {csv_file}")
+        xlsx_file = 'ejemplo_facturas.xlsx'
+        if os.path.exists(xlsx_file):
+            print(f"[OK] Archivo de ejemplo encontrado: {xlsx_file}")
 
             # Intentar leer como Excel (esto fallará pero es esperado)
             try:
-                df = handler.read_excel_file(csv_file)
+                df = handler.read_excel_file(xlsx_file)
                 if df is not None:
                     print(f"[OK] Datos leídos: {len(df)} filas")
                 else:
@@ -86,7 +113,7 @@ def test_excel_handler():
             except Exception as e:
                 print(f"[INFO] Error esperado al leer CSV como Excel: {e}")
         else:
-            print(f"[WARNING] Archivo de ejemplo no encontrado: {csv_file}")
+            print(f"[WARNING] Archivo de ejemplo no encontrado: {xlsx_file}")
 
         return True
 
@@ -107,11 +134,11 @@ def test_database_connection():
 
             # Probar algunas consultas básicas
             try:
-                result = db.get_invoices_count()
-                print(f"[OK] Facturas en BD: {result}")
+                result = db.get_items_count()
+                print(f"[OK] Items de factura importados en BD: {result}")
 
-                result = db.get_last_invoice_number()
-                print(f"[OK] Última factura: {result or 'Ninguna'}")
+                result = db.get_last_item_ordinal()
+                print(f"[OK] Último ordinal: {result or 'Ninguna'}")
 
             except Exception as e:
                 print(f"[WARNING] Error en consultas: {e}")
