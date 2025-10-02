@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Sistema de Importación de Facturas Panorama_net
-Programa de escritorio multiplataforma para importar facturas desde Excel a MySQL
+Sistema de Importación de Facturas de servicios con consumos
+Programa de escritorio multiplataforma para importar items a cobrar desde Excel a Orión Plus
 """
 import sys
 import logging
@@ -90,7 +90,7 @@ def create_database_schema():
             return False
 
         # Leer archivo SQL
-        with open('database_schema.sql', 'r', encoding='utf-8') as f:
+        with open(' .sql', 'r', encoding='utf-8') as f:
             sql_script = f.read()
 
         # Ejecutar script SQL

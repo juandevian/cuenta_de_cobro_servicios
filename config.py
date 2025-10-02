@@ -18,7 +18,7 @@ class Config:
     DB_NAME: str = os.getenv('DB_NAME', 'panorama_net')
 
     # Configuración de la aplicación
-    APP_NAME: str = "Importación de Facturas de Servicios con Consumos"
+    APP_NAME: str = "Importación de Facturas de servicios con consumos"
     APP_VERSION: str = "1.0.0"
     WINDOW_WIDTH: int = 800
     WINDOW_HEIGHT: int = 600

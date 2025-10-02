@@ -19,7 +19,6 @@ Programa de escritorio multiplataforma para importar facturas desde archivos Exc
 ### Software Requerido
 - Python 3.7 o superior
 - MySQL Server 5.7 o superior
-- Git (opcional)
 
 ### Dependencias de Python
 ```bash

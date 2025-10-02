@@ -5,7 +5,7 @@ USE Panorama_net;
 
 -- Definition of oriitemsprogramafact table
 -- TODO: Elimina el DROP TABLE en producción 
--- DROP TABLE IF EXISTS `oriitemsprogramafact`;
+DROP TABLE IF EXISTS `oriitemsprogramafact`;
 CREATE TABLE IF NOT EXISTS `oriitemsprogramafact` (
     `CantidadPeriodos` smallint(6) NOT NULL DEFAULT '0',
     `Consumo` double NOT NULL DEFAULT '0',
