@@ -13,8 +13,9 @@ import logging
 from invoice_item_processor import InvoiceItemProcessor
 from excel_handler import ExcelHandler
 from config import Config
+from create_excels import create_sample_excel, create_excel_import_template
 
-# Configurar logging
+# Configurar logging de notificaciones.
 logging.basicConfig(level=getattr(logging, Config.LOG_LEVEL))
 logger = logging.getLogger(__name__)
 
@@ -97,7 +98,7 @@ class MainWindow(QMainWindow):
         file_layout = QVBoxLayout(file_group)
 
         # Botón para seleccionar archivo
-        self.select_file_btn = QPushButton("Seleccionar Archivo Excel")
+        self.select_file_btn = QPushButton("Seleccionar Plantilla de Importación")
         self.select_file_btn.clicked.connect(self.select_file)
         file_layout.addWidget(self.select_file_btn)
 
@@ -118,8 +119,28 @@ class MainWindow(QMainWindow):
         action_group = QGroupBox("Acciones")
         action_layout = QVBoxLayout(action_group)
 
-        # Botón de importación
-        self.import_btn = QPushButton("Importar Facturas")
+        # Importar función de creación de plantillas
+        btn_layout = QHBoxLayout()
+
+        create_sample_excel_btn = QPushButton("Generar Plantilla de Ejemplo")
+        create_sample_excel_btn.clicked.connect(create_sample_excel)
+        btn_layout.addWidget(create_sample_excel_btn)
+
+        create_template_btn = QPushButton("Crear Plantilla de Importación")
+        create_template_btn.clicked.connect(create_excel_import_template)
+        create_template_btn.setStyleSheet("""
+            QPushButton:hover {
+                border-radius: 5px;
+                background-color: #4CAF50;
+                color: white;
+                font-weight: bold;
+            }
+        """)
+        btn_layout.addWidget(create_template_btn)
+
+        action_layout.addLayout(btn_layout)
+
+        self.import_btn = QPushButton("Importar Servicio a Cobrar")
         self.import_btn.clicked.connect(self.start_import)
         self.import_btn.setEnabled(False)
         self.import_btn.setStyleSheet("""
@@ -129,13 +150,16 @@ class MainWindow(QMainWindow):
                 font-weight: bold;
                 padding: 10px;
                 font-size: 14px;
+                border-radius: 10px;
             }
             QPushButton:hover {
                 background-color: #45a049;
+                border-radius: 10px;
             }
             QPushButton:disabled {
                 background-color: #cccccc;
                 color: #666666;
+                border-radius: 10px;
             }
         """)
         action_layout.addWidget(self.import_btn)
@@ -147,9 +171,10 @@ class MainWindow(QMainWindow):
 
         layout.addWidget(action_group)
 
-        # Área de log
-        log_group = QGroupBox("Log de Operaciones")
+        # Área de resumen / log 
+        log_group = QGroupBox("Resumen de Operaciones")
         log_layout = QVBoxLayout(log_group)
+        
 
         self.log_text = QTextEdit()
         self.log_text.setMaximumHeight(200)
@@ -157,7 +182,7 @@ class MainWindow(QMainWindow):
         log_layout.addWidget(self.log_text)
 
         # Botón para limpiar log
-        clear_log_btn = QPushButton("Limpiar Log")
+        clear_log_btn = QPushButton("Limpiar Resumen")
         clear_log_btn.clicked.connect(self.clear_log)
         log_layout.addWidget(clear_log_btn)
 
@@ -243,10 +268,10 @@ class MainWindow(QMainWindow):
         </ul>
         """
 
-        info_label = QLabel(info_text)
-        info_label.setWordWrap(True)
-        info_label.setOpenExternalLinks(True)
-        layout.addWidget(info_label)
+        self.info_label = QLabel(info_text)
+        self.info_label.setWordWrap(True)
+        self.info_label.setOpenExternalLinks(True)
+        layout.addWidget(self.info_label)
 
         return tab
 
