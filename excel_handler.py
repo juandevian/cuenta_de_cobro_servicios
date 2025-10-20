@@ -68,7 +68,6 @@ class ExcelHandler:
         # Verificar que haya datos
         if df.empty:
             errors.append("El archivo Excel está vacío")
-
        
     def process_excel_data(self, df: pd.DataFrame) -> List[Dict[str, Any]]:
         """Procesa los datos del Excel y los prepara para insertar en la BD"""

@@ -94,7 +94,7 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout(tab)
 
         # Grupo de selección de archivo
-        file_group = QGroupBox("Seleccionar Archivo Excel")
+        file_group = QGroupBox("Seleccionar Archivo")
         file_layout = QVBoxLayout(file_group)
 
         # Botón para seleccionar archivo
@@ -198,34 +198,36 @@ class MainWindow(QMainWindow):
         # Información de la aplicación
         info_text = f"""
         <h3>{Config.APP_NAME} v{Config.APP_VERSION}</h3>
-        <p>Sistema para importar items de facturas de servicio desde archivos Excel a Orión Plus.</p>
+        <p>Sistema para importar servicios cobrados por consumo desde archivos Excel a <strong>Orión Plus</strong>.</p>
+        <p><em>Copyright © 2026 - OptimuSoft SAS - Todos los derechos reservados.</em></p>
 
-        <h4>Características:</h4>
+        <h4>Descripción General:</h4>
+        <p>Módulo diseñado para importar servicios que basan su cobro en consumo (diferencia entre lectura actual y anterior), 
+        calculando automáticamente el valor a facturar según el valor unitario definido.</p>
+
+        <h4>Guía Rápida:</h4>
+        <ol>
+            <li>Use el botón "Crear Plantilla de Importación" para generar un archivo Excel en blanco</li>
+            <li>Diligencie la plantilla con los datos de consumo (lecturas) y valores unitarios</li>
+            <li>Importe el archivo usando "Seleccionar Plantilla de Importación"</li>
+            <li>Verifique los datos en "Vista Previa" antes de importar</li>
+            <li>Ejecute la importación con "Importar Servicio a Cobrar"</li>
+        </ol>
+
+        <h4>Datos Requeridos:</h4>
         <ul>
-            <li>Importación automática desde archivos Excel (.xlsx, .xls)</li>
-            <li>Validación de datos antes de la importación</li>
-            <li>Interfaz gráfica intuitiva</li>
-            <li>Procesamiento en segundo plano</li>
-            <li>Log detallado de operaciones</li>
+            <li>Identificadores (carpeta, servicio, predio o cliente)</li>
+            <li>Periodo de cobro (AAAAMM)</li>
+            <li>Lecturas (anterior y actual)</li>
+            <li>Valor unitario del servicio</li>
         </ul>
 
-        <h4>Requisitos:</h4>
+        <p><strong>¿Necesita más información?</strong></p>
+        <p>Consulte la <a href="https://www.notion.so/optimusoft/Gu-a-de-Importaci-n-de-Servicios-por-Consumo-292df310252780458c5ecbf6b2490ab4?source=copy_link">guía detallada de usuario</a> 
+        para instrucciones completas sobre:</p>
         <ul>
-            <li>Plantilla de excel con datos requeridos</li>
-            <li>Python 3.7+</li>
-        </ul>
-
-        <h4>Formato de Excel esperado:</h4>
-        <p>El archivo Excel debe contener las siguientes columnas:</p>
-        <ul>
-            <li>id_carpeta</li>
-            <li>id_servicio</li>
-            <li>id_predio</li>
-            <li>id_tercero_cliente (Solo se requiere si se factura únicamente al cliente)</li>  
-            <li>periodo_inicio_cobro</li>
-            <li>lectura_anterior</li>
-            <li>lectura_actual</li>
-            <li>valor_unitario: (Valor por unidad de consumo)</li>
+            <li>Formato y validación detallada de datos</li>
+            <li>Solución de problemas comunes</li>
         </ul>
         """
 
@@ -249,6 +251,32 @@ class MainWindow(QMainWindow):
         except Exception as e:
             self.log_message(f"Error de conexión: {e}", "ERROR")
             self.status_bar.showMessage("Error de conexión")
+
+    def generate_sample_excel(self):
+        """Genera Excel de ejemplo con selección de ruta"""
+        file_dialog = QFileDialog()
+        output_path = file_dialog.getExistingDirectory(self, "Seleccionar carpeta para guardar Excel de ejemplo")
+        if output_path:
+            try:
+                file_path = create_sample_excel(output_path)
+                QMessageBox.information(self, "Éxito", f"Excel de ejemplo creado en: {file_path}")
+                self.log_message(f"Excel de ejemplo creado: {file_path}", "INFO")
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Error al crear Excel: {e}")
+                self.log_message(f"Error al crear Excel de ejemplo: {e}", "ERROR")
+
+    def generate_template(self):
+        """Genera plantilla de importación con selección de ruta"""
+        file_dialog = QFileDialog()
+        output_path = file_dialog.getExistingDirectory(self, "Seleccionar carpeta para guardar plantilla de importación")
+        if output_path:
+            try:
+                file_path = create_excel_import_template(output_path)
+                QMessageBox.information(self, "Éxito", f"Plantilla de importación creada en: {file_path}")
+                self.log_message(f"Plantilla de importación creada: {file_path}", "INFO")
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Error al crear plantilla: {e}")
+                self.log_message(f"Error al crear plantilla de importación: {e}", "ERROR")
 
     def select_file(self):
         """Abre diálogo para seleccionar archivo Excel"""
@@ -427,29 +455,3 @@ class MainWindow(QMainWindow):
         if self.processor:
             self.processor.close()
         event.accept()
-
-    def generate_sample_excel(self):
-        """Genera Excel de ejemplo con selección de ruta"""
-        file_dialog = QFileDialog()
-        output_path = file_dialog.getExistingDirectory(self, "Seleccionar carpeta para guardar Excel de ejemplo")
-        if output_path:
-            try:
-                file_path = create_sample_excel(output_path)
-                QMessageBox.information(self, "Éxito", f"Excel de ejemplo creado en: {file_path}")
-                self.log_message(f"Excel de ejemplo creado: {file_path}", "INFO")
-            except Exception as e:
-                QMessageBox.critical(self, "Error", f"Error al crear Excel: {e}")
-                self.log_message(f"Error al crear Excel de ejemplo: {e}", "ERROR")
-
-    def generate_template(self):
-        """Genera plantilla de importación con selección de ruta"""
-        file_dialog = QFileDialog()
-        output_path = file_dialog.getExistingDirectory(self, "Seleccionar carpeta para guardar plantilla de importación")
-        if output_path:
-            try:
-                file_path = create_excel_import_template(output_path)
-                QMessageBox.information(self, "Éxito", f"Plantilla de importación creada en: {file_path}")
-                self.log_message(f"Plantilla de importación creada: {file_path}", "INFO")
-            except Exception as e:
-                QMessageBox.critical(self, "Error", f"Error al crear plantilla: {e}")
-                self.log_message(f"Error al crear plantilla de importación: {e}", "ERROR")

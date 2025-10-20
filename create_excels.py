@@ -7,7 +7,6 @@ import os
 from openpyxl import load_workbook  # Para formato y tabla
 from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
 
-
 def create_sample_excel(output_path=None):
     """Crea un archivo Excel de ejemplo con datos de items de facturas"""
     filename = 'ejemplo_facturas.xlsx'
