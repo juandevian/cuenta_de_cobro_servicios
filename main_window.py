@@ -3,16 +3,19 @@ Ventana principal de la aplicación de importación de facturas
 """
 import sys
 import os
+import pathlib
+import logging
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
                              QPushButton, QFileDialog, QLabel, QTextEdit, QProgressBar,
                              QMessageBox, QGroupBox, QFormLayout, QLineEdit, QTabWidget,
                              QTableWidget, QTableWidgetItem, QHeaderView, QSplitter)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
 from PyQt5.QtGui import QFont, QIcon
-import logging
 from invoice_item_processor import InvoiceItemProcessor
 from excel_handler import ExcelHandler
+from typing import Any
 from config import Config
+
 from create_excels import create_sample_excel, create_excel_import_template
 
 # Configurar logging de notificaciones.
@@ -24,7 +27,7 @@ class ImportWorker(QThread):
     progress_updated = pyqtSignal(int, str)
     import_finished = pyqtSignal(dict)
 
-    def __init__(self, file_path: str, processor: InvoiceItemProcessor):
+    def __init__(self, file_path: str | pathlib.Path, processor: InvoiceItemProcessor):
         super().__init__()
         self.file_path = file_path
         self.processor = processor
@@ -32,7 +35,8 @@ class ImportWorker(QThread):
     def run(self):
         """Ejecuta la importación en un hilo separado"""
         try:
-            result = self.processor.process_excel_import(self.file_path)
+            file_path_str = str(self.file_path)
+            result = self.processor.process_excel_import(file_path_str)
             self.import_finished.emit(result)
         except Exception as e:
             logger.error(f"Error en el worker de importación: {e}")
@@ -47,11 +51,11 @@ class ImportWorker(QThread):
 class MainWindow(QMainWindow):
     """Ventana principal de la aplicación"""
 
-    def __init__(self):
+    def __init__(self, excel_handler: ExcelHandler | None = None) -> None:
         super().__init__()
-        self.processor = None
-        self.excel_handler = ExcelHandler()
-        self.current_file_path = None
+        self.processor: Any | None = None
+        self.excel_handler: ExcelHandler = excel_handler or ExcelHandler()
+        self.current_file_path: pathlib.Path | None = None
         self.init_ui()
         self.connect_to_database()
 
@@ -74,11 +78,7 @@ class MainWindow(QMainWindow):
         import_tab = self.create_import_tab()
         self.tab_widget.addTab(import_tab, "Importar Facturas")
 
-        # Pestaña de configuración
-        config_tab = self.create_config_tab()
-        self.tab_widget.addTab(config_tab, "Configuración")
-
-        # Pestaña de información
+         # Pestaña de información
         info_tab = self.create_info_tab()
         self.tab_widget.addTab(info_tab, "Información")
 
@@ -123,11 +123,11 @@ class MainWindow(QMainWindow):
         btn_layout = QHBoxLayout()
 
         create_sample_excel_btn = QPushButton("Generar Plantilla de Ejemplo")
-        create_sample_excel_btn.clicked.connect(create_sample_excel)
+        create_sample_excel_btn.clicked.connect(lambda: self.generate_sample_excel())
         btn_layout.addWidget(create_sample_excel_btn)
 
         create_template_btn = QPushButton("Crear Plantilla de Importación")
-        create_template_btn.clicked.connect(create_excel_import_template)
+        create_template_btn.clicked.connect(lambda: self.generate_template())
         create_template_btn.setStyleSheet("""
             QPushButton:hover {
                 border-radius: 5px;
@@ -171,8 +171,8 @@ class MainWindow(QMainWindow):
 
         layout.addWidget(action_group)
 
-        # Área de resumen / log 
-        log_group = QGroupBox("Resumen de Operaciones")
+        # Registro de eventos/ log
+        log_group = QGroupBox("Registro de Eventos")
         log_layout = QVBoxLayout(log_group)
         
 
@@ -182,50 +182,11 @@ class MainWindow(QMainWindow):
         log_layout.addWidget(self.log_text)
 
         # Botón para limpiar log
-        clear_log_btn = QPushButton("Limpiar Resumen")
+        clear_log_btn = QPushButton("Limpiar Registro")
         clear_log_btn.clicked.connect(self.clear_log)
         log_layout.addWidget(clear_log_btn)
 
         layout.addWidget(log_group)
-
-        return tab
-
-    def create_config_tab(self):
-        """Crea la pestaña de configuración"""
-        tab = QWidget()
-        layout = QVBoxLayout(tab)
-
-        # Configuración de base de datos
-        db_group = QGroupBox("Configuración de Base de Datos")
-        db_layout = QFormLayout(db_group)
-
-        self.db_host_input = QLineEdit(Config.DB_HOST)
-        self.db_port_input = QLineEdit(str(Config.DB_PORT))
-        self.db_user_input = QLineEdit(Config.DB_USER)
-        self.db_password_input = QLineEdit(Config.DB_PASSWORD)
-        self.db_password_input.setEchoMode(QLineEdit.Password)
-        self.db_name_input = QLineEdit(Config.DB_NAME)
-
-        db_layout.addRow("Host:", self.db_host_input)
-        db_layout.addRow("Puerto:", self.db_port_input)
-        db_layout.addRow("Usuario:", self.db_user_input)
-        db_layout.addRow("Contraseña:", self.db_password_input)
-        db_layout.addRow("Base de Datos:", self.db_name_input)
-
-        layout.addWidget(db_group)
-
-        # Botones de configuración
-        btn_layout = QHBoxLayout()
-
-        save_config_btn = QPushButton("Guardar Configuración")
-        save_config_btn.clicked.connect(self.save_config)
-        btn_layout.addWidget(save_config_btn)
-
-        test_connection_btn = QPushButton("Probar Conexión")
-        test_connection_btn.clicked.connect(self.test_connection)
-        btn_layout.addWidget(test_connection_btn)
-
-        layout.addLayout(btn_layout)
 
         return tab
 
@@ -434,13 +395,7 @@ class MainWindow(QMainWindow):
 
         self.status_bar.showMessage("Listo")
 
-    def save_config(self):
-        """Guarda la configuración"""
-        # Aquí se implementaría el guardado de configuración
-        # Por simplicidad, solo mostramos un mensaje
-        QMessageBox.information(self, "Configuración", "Configuración guardada (funcionalidad básica)")
-
-    def test_connection(self):
+   
         """Prueba la conexión a la base de datos"""
         try:
             if self.processor and self.processor.db.connection and self.processor.db.connection.is_connected():
@@ -472,3 +427,29 @@ class MainWindow(QMainWindow):
         if self.processor:
             self.processor.close()
         event.accept()
+
+    def generate_sample_excel(self):
+        """Genera Excel de ejemplo con selección de ruta"""
+        file_dialog = QFileDialog()
+        output_path = file_dialog.getExistingDirectory(self, "Seleccionar carpeta para guardar Excel de ejemplo")
+        if output_path:
+            try:
+                file_path = create_sample_excel(output_path)
+                QMessageBox.information(self, "Éxito", f"Excel de ejemplo creado en: {file_path}")
+                self.log_message(f"Excel de ejemplo creado: {file_path}", "INFO")
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Error al crear Excel: {e}")
+                self.log_message(f"Error al crear Excel de ejemplo: {e}", "ERROR")
+
+    def generate_template(self):
+        """Genera plantilla de importación con selección de ruta"""
+        file_dialog = QFileDialog()
+        output_path = file_dialog.getExistingDirectory(self, "Seleccionar carpeta para guardar plantilla de importación")
+        if output_path:
+            try:
+                file_path = create_excel_import_template(output_path)
+                QMessageBox.information(self, "Éxito", f"Plantilla de importación creada en: {file_path}")
+                self.log_message(f"Plantilla de importación creada: {file_path}", "INFO")
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Error al crear plantilla: {e}")
+                self.log_message(f"Error al crear plantilla de importación: {e}", "ERROR")

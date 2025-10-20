@@ -51,14 +51,15 @@ def setup_logging():
 def check_requirements():
     """Verifica que todas las dependencias estén instaladas"""
     required_modules = [
-        'PyQt5',
-        'pandas',
-        'openpyxl',
-        'mysql.connector',
-        'pydantic',
-        'dateutil',
         'colorlog',
-        'dotenv'
+        'dateutil',
+        'dotenv',
+        'mysql.connector',
+        'openpyxl',
+        'pandas',
+        'pydantic',
+        'PyQt5',
+        'pytest'
     ]
 
     missing_modules = []
@@ -90,7 +91,7 @@ def create_database_schema():
             return False
 
         # Leer archivo SQL
-        with open(' .sql', 'r', encoding='utf-8') as f:
+        with open('database_schema.sql', 'r', encoding='utf-8') as f:
             sql_script = f.read()
 
         # Ejecutar script SQL

@@ -34,6 +34,7 @@ def create_sample_excel(output_path=None):
     # Crear archivo Excel
     df.to_excel(full_path, index=False, engine='openpyxl', sheet_name='Ejemplo Items Factura')
 
+    # Abrir con openpyxl para agregar formato
     wb = load_workbook(full_path)
     ws = wb.active
 
@@ -79,21 +80,26 @@ def create_sample_excel(output_path=None):
         ws.column_dimensions[ws.cell(row=1, column=i).column_letter].width = width
 
     # Guardar el archivo con formato y tabla
-    wb.save(filename)
+    wb.save(full_path)
     
-    print(f"✓ Archivo Excel de ejemplo creado: {filename}")
+    print(f"✓ Archivo Excel de ejemplo creado: {full_path}")
     print(f"✓ Filas: {len(df)}")
     print(f"✓ Columnas: {list(df.columns)}")
+    print("✓ Fuente aplicada: Arial, tamaño 12 a todo el contenido.")
     print("\nDatos de ejemplo incluidos:")
     print(df.to_string(index=False))
 
-    return filename
+    return full_path
 
-def create_excel_import_template():
+def create_excel_import_template(output_path=None):
     """Crea una plantilla en Excel para la importación de cobros de servicios con consumo"""
     filename = 'plantilla_importacion_servicios.xlsx'
-    
-    columns ={
+    if output_path:
+        full_path = os.path.join(output_path, filename)
+    else:
+        full_path = filename  # Ruta por defecto
+
+    columns = {
         'id_carpeta': [],
         'id_servicio': [],
         'id_predio': [],
@@ -110,8 +116,10 @@ def create_excel_import_template():
     wb = load_workbook(filename)
     ws = wb.active
 
+    # Definir fuente para todo el contenido
     content_font = Font(name="Arial", size=12)
 
+    # Aplicar fuente a todas las celdas
     for row in ws.iter_rows():
         for cell in row:
             cell.font = content_font
@@ -152,13 +160,12 @@ def create_excel_import_template():
         ws.column_dimensions[ws.cell(row=1, column=i).column_letter].width = width
 
     # Guardar el archivo con formato y tabla
-    wb.save(filename)
+    wb.save(full_path)
 
-    print(f"✓ Archivo de plantilla Excel creado con formato y tabla: {filename}")
+    print(f"✓ Archivo de plantilla Excel creado con formato y tabla: {full_path}")
     print(f"✓ Columnas: {list(df.columns)}")
-    return filename
-
-
+    print("✓ Formatos aplicados: números enteros para IDs/lecturas, decimales para valores, texto para predios/períodos.")
+    return full_path
 
 if __name__ == "__main__":
     create_sample_excel()
