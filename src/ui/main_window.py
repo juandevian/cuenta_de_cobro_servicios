@@ -1,24 +1,24 @@
 """
 Ventana principal de la aplicación de importación de facturas
 """
-import sys
-import os
 import pathlib
 import logging
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
+from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
                              QPushButton, QFileDialog, QLabel, QTextEdit, QProgressBar,
-                             QMessageBox, QGroupBox, QFormLayout, QLineEdit, QTabWidget,
-                             QTableWidget, QTableWidgetItem, QHeaderView, QSplitter)
-from PyQt5.QtCore import Qt, QThread, pyqtSignal
+                             QMessageBox, QGroupBox, QTabWidget,
+                             QTableWidget, QTableWidgetItem)
+from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtGui import QFont, QIcon
-from invoice_item_processor import InvoiceItemProcessor
-from excel_handler import ExcelHandler
+
+# Imports relativos al paquete
 from typing import Any
-from config import Config
+from ..services.invoice_item_processor import InvoiceItemProcessor
+from ..services.excel_handler import ExcelHandler
+from ..config.config import Config
+from ..utils import resource_path
+from ..services.create_excels import create_sample_excel, create_excel_import_template
 
-from create_excels import create_sample_excel, create_excel_import_template
-
-# Configurar logging de notificaciones.
+# Configurar logging
 logging.basicConfig(level=getattr(logging, Config.LOG_LEVEL))
 logger = logging.getLogger(__name__)
 
@@ -305,7 +305,9 @@ class MainWindow(QMainWindow):
 
             if preview_data:
                 # Crear ventana de vista previa
+                # Guardamos referencia en self para evitar GC que puede provocar cierres inesperados
                 preview_window = QMainWindow(self)
+                self.preview_window = preview_window
                 preview_window.setWindowTitle("Vista Previa del Archivo Excel")
                 preview_window.setGeometry(150, 150, 900, 600)
 

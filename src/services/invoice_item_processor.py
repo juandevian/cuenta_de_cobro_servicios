@@ -3,8 +3,8 @@ Módulo principal para procesar facturas desde Excel a MySQL
 """
 from typing import List, Dict, Any, Optional
 import logging
-from database import DatabaseConnection
-from excel_handler import ExcelHandler
+from services.database import DatabaseConnection
+from services.excel_handler import ExcelHandler
 
 logger = logging.getLogger(__name__)
 
@@ -82,10 +82,10 @@ class InvoiceItemProcessor:
                         LecturaActual=invoice_data['lectura_actual'],
                         LecturaAnterior=invoice_data['lectura_anterior'],
                         Ordinal=last_ordinal,
-                        Origen='3',  # Origen 2 = Importación desde Excel
+                        Origen='3',  # Origen 3 = Importación desde Excel
                         PeriodoInicioFact=invoice_data['periodo_inicio_cobro'],
                         Saldo=invoice_data['saldo'],
-                        ValorPeriodo= invoice_data['valor_periodo'],
+                        ValorPeriodo=invoice_data['valor_periodo'],
                         ValorUnitario=invoice_data['valor_unitario']
                     )
 
@@ -99,38 +99,22 @@ class InvoiceItemProcessor:
                     logger.error(f"Error procesando item de factura {invoice_data.get('id_predio', 'desconocido')}: {e}")
                     error_count += 1
 
-            # Preparar resultado final
+            # Actualizar resultado
             result['success'] = success_count > 0
             result['processed'] = success_count
-            result['message'] = f"Procesamiento completado: {success_count} items de facturas importados exitosamente"
-
+            result['message'] = f"Importación completada. {success_count} registros insertados."
+            
             if error_count > 0:
-                result['message'] += f", {error_count} errores"
-                result['warnings'].append(f"{error_count} items de facturas no pudieron ser procesados")
-
-            logger.info(f"Importación completada: {success_count} exitosas, {error_count} errores")
+                result['message'] += f" {error_count} errores encontrados."
 
         except Exception as e:
-            logger.error(f"Error general en el procesamiento: {e}")
-            result['message'] = f"Error general: {str(e)}"
+            logger.error(f"Error en el proceso de importación: {e}")
+            result['message'] = f"Error en el proceso de importación: {str(e)}"
+            result['errors'].append(str(e))
 
         return result
 
-    def get_import_summary(self) -> Dict[str, Any]:
-        """Obtiene un resumen de las importaciones realizadas"""
-        try:
-            total_items = self.db.get_items_count()
-            last_item_ordinal = self.db.get_last_item_ordinal()
-
-            return {
-                'total_items': total_items,
-                'last_item_ordinal': last_item_ordinal,
-                'database_status': 'connected' if self.db.connection and self.db.connection.is_connected() else 'disconnected'
-            }
-        except Exception as e:
-            logger.error(f"Error obteniendo resumen: {e}")
-            return {'error': str(e)}
-
     def close(self):
-        """Cierra la conexión a la base de datos"""
-        self.db.disconnect()
+        """Cierra las conexiones"""
+        if self.db:
+            self.db.disconnect()

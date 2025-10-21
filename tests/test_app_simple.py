@@ -74,7 +74,7 @@ def test_config():
         print("\nProbando configuración...")
 
         # Importar configuración
-        from config import Config
+        from src.config import Config
         print("[OK] Configuración cargada")
 
         # Mostrar configuración actual

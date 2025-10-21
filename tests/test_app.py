@@ -15,7 +15,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Importar módulos a testear
-from config import Config
+from src.config import Config
 from database import DatabaseConnection
 from excel_handler import ExcelHandler
 from invoice_item_processor import InvoiceItemProcessor
@@ -53,9 +53,9 @@ class TestConfig:
         """Verifica que las variables de entorno se carguen correctamente"""
         # Recargar el módulo para capturar variables de entorno
         import importlib
-        import config
+        import src.config as config
         importlib.reload(config)
-        from config import Config as TestConfig
+        from src.config import Config as TestConfig
 
         assert TestConfig.DB_HOST == 'test_host'
         assert TestConfig.DB_PORT == 3307

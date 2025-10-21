@@ -68,6 +68,8 @@ class ExcelHandler:
         # Verificar que haya datos
         if df.empty:
             errors.append("El archivo Excel está vacío")
+            
+        return errors
        
     def process_excel_data(self, df: pd.DataFrame) -> List[Dict[str, Any]]:
         """Procesa los datos del Excel y los prepara para insertar en la BD"""
@@ -76,19 +78,19 @@ class ExcelHandler:
         try:
             # Calcular consumo, saldo y valor_periodo
             if 'consumo' not in df.columns:
-                df['consumo'] = df['lectura_actual']  - df['lectura_anterior']
+                df['consumo'] = df['lectura_actual'] - df['lectura_anterior']
                 
             if 'valor_periodo' not in df.columns:
-                df['valor_periodo'] = df['valor_unitario'] * (df['lectura_actual'] - df['lectura_anterior'])  # Valor Unitario * Consumo
+                df['valor_periodo'] = df['valor_unitario'] * df['consumo']
 
             if 'saldo' not in df.columns:
-                df['saldo'] = df['valor_unitario'] * (df['lectura_actual'] - df['lectura_anterior'])  # Valor Unitario * Consumo
+                df['saldo'] = df['valor_periodo']
 
             # Crear lista de diccionarios para cada fila
             for _, row in df.iterrows():
                 invoice_data = {
                     'consumo': float(row.get('consumo', 0)),
-                    'id_carpeta': int(row.get('id_carpeta', '')),
+                    'id_carpeta': int(row.get('id_carpeta', 0)),
                     'id_servicio': int(row.get('id_servicio', 0)),
                     'id_predio': str(row.get('id_predio', '')),
                     'id_tercero_cliente': int(row.get('id_tercero_cliente', 0)),
@@ -97,8 +99,7 @@ class ExcelHandler:
                     'lectura_actual': float(row.get('lectura_actual', 0)),
                     'saldo': float(row.get('saldo', 0)),
                     'valor_periodo': float(row.get('valor_periodo', 0)),
-                    'valor_unitario': float(row.get
-                    ('valor_unitario', 0))
+                    'valor_unitario': float(row.get('valor_unitario', 0))
                 }
                 processed_data.append(invoice_data)
 
@@ -106,27 +107,26 @@ class ExcelHandler:
             return processed_data
 
         except Exception as e:
-            logger.error(f"Error procesando datos del Excel: {e}")
+            logger.error(f"Error procesando datos: {e}")
             return []
 
-    def get_excel_preview(self, file_path: str, max_rows: int = 5) -> Optional[Dict[str, Any]]:
+    def get_excel_preview(self, file_path: str) -> Dict[str, Any]:
         """Obtiene una vista previa del archivo Excel"""
         try:
             df = self.read_excel_file(file_path)
             if df is None:
-                return None
+                return {}
 
-            # Obtener información del archivo
-            file_info = {
+            preview = {
                 'filename': os.path.basename(file_path),
+                'file_size': os.path.getsize(file_path),
                 'total_rows': len(df),
                 'columns': list(df.columns),
-                'preview_data': df.head(max_rows).to_dict('records'),
-                'file_size': os.path.getsize(file_path)
+                'preview_data': df.head(5).to_dict('records')
             }
 
-            return file_info
+            return preview
 
         except Exception as e:
             logger.error(f"Error obteniendo vista previa: {e}")
-            return None
+            return {}

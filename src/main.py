@@ -3,17 +3,20 @@
 Sistema de Importación de Facturas de servicios con consumos
 Programa de escritorio multiplataforma para importar items a cobrar desde Excel a Orión Plus
 """
+import os
 import sys
 import logging
+#import faulthandler
+#faulthandler.enable()
 from PyQt5.QtWidgets import QApplication, QMessageBox
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QIcon
 import colorlog
 
-from main_window import MainWindow
-from config import Config
-from database import DatabaseConnection
-
+from src.ui.main_window import MainWindow
+from src.config.config import Config
+from src.services.database import DatabaseConnection
+from src.utils import resource_path
 
 def setup_logging():
     """Configura el sistema de logging"""
@@ -86,12 +89,24 @@ def create_database_schema():
 
         db = DatabaseConnection()
 
-        if not db.connection or not db.connection.is_connected():
-            logging.error("No se pudo conectar a la base de datos para crear el esquema")
+        if not db.connection:
+            logging.warning("No se pudo conectar a la base de datos")
+            logging.warning("La aplicación continuará, pero las funciones de BD no estarán disponibles")
+            return False
+            
+        if not db.connection.is_connected():
+            logging.warning("Conexión a BD no está activa")
             return False
 
-        # Leer archivo SQL
-        with open('database_schema.sql', 'r', encoding='utf-8') as f:
+        # Leer archivo SQL (opcional)
+        schema_file = resource_path('assets/database_schema.sql')
+        
+        if not os.path.exists(schema_file):
+            logging.info("Archivo de esquema SQL no encontrado, omitiendo verificación")
+            db.disconnect()
+            return True
+            
+        with open(schema_file, 'r', encoding='utf-8') as f:
             sql_script = f.read()
 
         # Ejecutar script SQL
@@ -123,7 +138,7 @@ def main():
     """Función principal de la aplicación"""
     # Configurar logging
     setup_logging()
-    logging.info("Iniciando Sistema de Importación de Facturas Panorama_net")
+    logging.info("Iniciando Sistema de Importación de Facturas Orión Plus")
     logging.info(f"Versión: {Config.APP_VERSION}")
 
     # Verificar dependencias

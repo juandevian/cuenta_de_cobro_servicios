@@ -4,7 +4,7 @@ Script para probar la conexión directa a MySQL
 """
 import mysql.connector
 from mysql.connector import Error
-from config import Config
+from src.config import Config
 
 def test_connection():
     """Prueba diferentes formas de conectar a MySQL"""
