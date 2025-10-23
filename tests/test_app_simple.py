@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Script de prueba simplificado para verificar que la aplicación funcione correctamente
+Script de prueba simplificado para verificar que la aplicación funcione correctamente.
+Se enfoca en probar las importaciones, configuración, conexión a base de datos 
 """
 import sys
 import os
