@@ -18,13 +18,39 @@ class DatabaseConnection:
 
     def connect(self) -> bool:
         """Establece conexión con la base de datos"""
+        # Validar configuración mínima antes de intentar conectar
+        if not Config.validate_config():
+            logger.error(
+                "Configuración de base de datos incompleta. Defina DB_HOST, DB_USERNAME y DB_NAME via variables de entorno (.env)."
+            )
+            self.connection = None
+            return False
         try:
+            # Resolver contraseña: ENV primero; si no, intentar keyring
+            password = Config.DB_PASSWORD
+            if not password:
+                try:
+                    import keyring  # type: ignore
+                    password = keyring.get_password(Config.KEYRING_SERVICE, Config.DB_USER) or ''
+                    if not password:
+                        logger.error(
+                            "No se encontró contraseña en keyring (servicio=%s, usuario=%s).",
+                            Config.KEYRING_SERVICE,
+                            Config.DB_USER,
+                        )
+                        self.connection = None
+                        return False
+                except ImportError:
+                    logger.error("El paquete 'keyring' no está instalado y no hay DB_PASSWORD en el entorno.")
+                    self.connection = None
+                    return False
+
             # Usar use_pure=True para evitar extensiones C que pueden causar access violations
             self.connection = mysql.connector.connect(
                 host=Config.DB_HOST,
                 port=Config.DB_PORT,
                 user=Config.DB_USER,
-                password=Config.DB_PASSWORD,
+                password=password,
                 database=Config.DB_NAME,
                 use_pure=True
             )
@@ -48,6 +74,9 @@ class DatabaseConnection:
 
     def execute_query(self, query: str, params: tuple = None) -> Optional[List[Dict]]:
         """Ejecuta una consulta SELECT"""
+        if not self.connection or not self.connection.is_connected():
+            logger.error("No hay conexión a la base de datos. Imposible ejecutar consulta.")
+            return None
         try:
             cursor = self.connection.cursor(dictionary=True)
             cursor.execute(query, params or ())
@@ -60,6 +89,9 @@ class DatabaseConnection:
 
     def execute_insert(self, query: str, params: tuple = None) -> Optional[int]:
         """Ejecuta una consulta INSERT y retorna el ID insertado"""
+        if not self.connection or not self.connection.is_connected():
+            logger.error("No hay conexión a la base de datos. Imposible ejecutar insert.")
+            return None
         try:
             cursor = self.connection.cursor()
             cursor.execute(query, params or ())
@@ -74,6 +106,9 @@ class DatabaseConnection:
 
     def execute_update(self, query: str, params: tuple = None) -> bool:
         """Ejecuta una consulta UPDATE"""
+        if not self.connection or not self.connection.is_connected():
+            logger.error("No hay conexión a la base de datos. Imposible ejecutar update.")
+            return False
         try:
             cursor = self.connection.cursor()
             cursor.execute(query, params or ())

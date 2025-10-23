@@ -1,0 +1,6 @@
+{
+  "host": "localhost",
+  "port": 3306,
+  "username": "mi_usuario",
+  "database": "panorama_net"
+}

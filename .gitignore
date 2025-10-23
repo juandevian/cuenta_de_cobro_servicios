@@ -8,6 +8,8 @@ env/
 .env
 .env.*
 *.env
+config.json
+setup_mysql_user.sql
 
 # Archivos de desarrollo local
 *.log
@@ -31,11 +33,14 @@ build/
 .eggs/
 
 # Archivos generados por PyInstaller
-*.spec
+# (Los .spec en packaging/ sí se versionan)
 
 # Archivos de sistema operativo
 .DS_Store
-Thumbs.db
+Thumbs.db 
 
 # Archivos de documentación generados
 docs/_build/
+
+# carpeta de instaladores
+installer/

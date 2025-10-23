@@ -55,12 +55,225 @@ O manualmente:
 - Crear una base de datos MySQL llamada `Panorama_net`
 - Ejecutar el contenido del archivo `database_schema.sql`
 
-### 4. Configurar variables de entorno (opcional pero recomendado)
+### 4. Configurar variables de entorno (desarrollo)
 Copia el archivo de ejemplo y configura tus credenciales:
 ```bash
 cp .env.example .env
 # Edita .env con tus valores reales
 ```
+
+## Producción (Windows): Configuración segura con config.json + keyring
+
+Para producción, evita credenciales en texto plano. Usa:
+
+- Archivo `config.json` sin secretos (host, puerto, usuario, base de datos).
+- Contraseña en el Almacén de Credenciales de Windows (Credential Manager) vía `keyring`.
+
+Ruta recomendada de configuración:
+
+- `C:\\ProgramData\\OPTIMUSOFT\\ori-cc-servicios\\config.json`
+
+Ejemplo de `config.json`:
+
+```json
+{
+   "host": "localhost",
+   "port": 3306,
+   "username": "mi_usuario",
+   "database": "panorama_net"
+}
+```
+
+Contraseña en Credential Manager (Keyring):
+
+- Servicio: `ori-cc-servicios` (por defecto; configurable con `KEYRING_SERVICE`).
+- Usuario: el mismo `username` del `config.json`.
+
+Formas de registrar la contraseña:
+
+1) Con Python (si está disponible):
+
+```powershell
+python -c "import keyring; keyring.set_password('ori-cc-servicios','mi_usuario','MI_PASSWORD_SEGURA')"
+```
+
+2) Con el script incluido (interactivo):
+
+```powershell
+python -m src.tools.set_db_password
+```
+
+Notas:
+
+- La aplicación buscará primero `config.json` en ProgramData, luego en la carpeta del ejecutable y por último en el directorio actual.
+- La contraseña se obtiene en este orden: variable de entorno `DB_PASSWORD` (si existe) o, si no, `keyring` (Credential Manager).
+- Mantén `C:\\ProgramData\\OPTIMUSOFT\\ori-cc-servicios` con permisos restringidos para Administradores/SYSTEM.
+
+---
+
+## Despliegue en Producción (Windows)
+
+Para instalar la aplicación en un entorno de producción (clientes/servidores), siga este flujo de 3 pasos:
+
+### Requisitos Previos
+
+- Windows 10/11 o Windows Server 2016+
+- MySQL Server 5.7+ instalado y accesible
+- Credenciales de administrador de MySQL (root) para configuración inicial
+- Permisos de Administrador de Windows para instalar la aplicación
+
+### Paso 1: Configurar Usuario de Base de Datos (DBA)
+
+**Responsable**: Administrador de Base de Datos o persona con acceso root a MySQL
+
+1. Localice el script SQL incluido en el instalador o en el repositorio:
+   - `docs/setup_mysql_user.sql`
+
+2. **IMPORTANTE**: Edite el script antes de ejecutarlo:
+   ```sql
+   -- Cambie estos valores:
+   CREATE USER 'ori_app_user'@'localhost'  -- Ajustar host si es remoto
+   IDENTIFIED BY 'TU_PASSWORD_SEGURA_AQUI'; -- ¡Cambiar contraseña!
+   ```
+
+3. Ejecute el script con privilegios de administrador:
+   ```bash
+   # Desde línea de comandos:
+   mysql -u root -p < setup_mysql_user.sql
+   
+   # O desde MySQL Workbench:
+   # File > Run SQL Script > Seleccionar setup_mysql_user.sql
+   ```
+
+4. **Qué hace el script**:
+   - Crea un usuario `ori_app_user` (personalizable)
+   - Otorga permisos **SOLO** sobre la tabla `oriitemsprogramafact`
+   - Permisos: SELECT, INSERT, UPDATE, DELETE (NO puede modificar estructura)
+   - **Seguridad**: Si estas credenciales se comprometen, el daño se limita a una sola tabla
+
+5. Anote el usuario y contraseña para el siguiente paso.
+
+### Paso 2: Instalar la Aplicación
+
+**Responsable**: Administrador del Sistema Windows
+
+1. **Crear directorio base** (si no existe):
+   ```powershell
+   New-Item -Path "C:\ProgramData\OPTIMUSOFT" -ItemType Directory -Force
+   ```
+
+2. **Ejecutar el instalador** como Administrador:
+   - `ori-cc-servicios-setup.exe`
+
+3. El instalador:
+   - Verifica que `C:\ProgramData\OPTIMUSOFT` exista (aborta si no)
+   - Copia archivos a `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\`
+   - Establece permisos NTFS restrictivos (solo Admin/SYSTEM)
+   - Crea `config.json` plantilla
+   - Incluye `set_password.exe` para configurar credenciales
+   - Crea accesos directos en el Menú Inicio
+
+4. Al finalizar, se mostrará un mensaje con instrucciones de configuración.
+
+### Paso 3: Configurar la Aplicación
+
+**Responsable**: Administrador del Sistema Windows
+
+#### 3.1 Editar configuración de conexión
+
+1. Abra el archivo de configuración:
+   ```
+   C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\config.json
+   ```
+
+2. Edite los valores según su entorno:
+   ```json
+   {
+     "host": "localhost",        // o IP del servidor MySQL
+     "port": 3306,               // puerto estándar de MySQL
+     "username": "ori_app_user", // usuario creado en Paso 1
+     "database": "panorama_net"  // nombre de la base de datos
+   }
+   ```
+
+3. **NO** incluya la contraseña en este archivo.
+
+#### 3.2 Registrar contraseña de forma segura
+
+**Opción A - Usando la herramienta incluida** (Recomendado):
+
+1. Ejecute desde el Menú Inicio:
+   - `Orión CC Servicios > Configurar Contraseña`
+   
+   O directamente:
+   ```
+   C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\set_password.exe
+   ```
+
+2. Ingrese:
+   - Usuario: El mismo del `config.json` (ej: `ori_app_user`)
+   - Contraseña: La establecida en el Paso 1
+   - Confirmar contraseña
+
+3. La contraseña se guardará en el **Almacén de Credenciales de Windows** (Credential Manager) de forma segura.
+
+**Opción B - Línea de comandos** (si prefiere):
+
+```powershell
+# Desde la carpeta de instalación:
+python -c "import keyring; keyring.set_password('ori-cc-servicios','ori_app_user','LA_PASSWORD_AQUI')"
+```
+
+### Paso 4: Verificar Instalación
+
+1. Ejecute la aplicación:
+   - Desde el Menú Inicio: `Orión CC Servicios`
+   - O directamente: `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\ori-cc-servicios.exe`
+
+2. Verifique la conexión:
+   - La aplicación debe conectarse automáticamente a la base de datos
+   - Revise los logs si hay problemas de conexión
+
+### Archivos Importantes Post-Instalación
+
+```
+C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\
+├── ori-cc-servicios.exe              # Ejecutable principal
+├── config.json                       # Configuración (sin secretos)
+├── set_password.exe                  # Herramienta de contraseña
+├── INSTRUCCIONES_CONFIGURACION.txt   # Guía rápida
+└── docs\
+    └── setup_mysql_user.sql          # Script SQL de referencia
+```
+
+### Solución de Problemas - Producción
+
+#### Error: "Configuración de base de datos incompleta"
+- Verifique que `config.json` tenga todos los campos requeridos
+- Asegúrese de que el usuario MySQL existe y tiene permisos
+
+#### Error: "No se encontró contraseña en keyring"
+- Ejecute `set_password.exe` para registrar la contraseña
+- Verifique que el usuario en `config.json` coincida con el del keyring
+
+#### Error de conexión a MySQL
+- Verifique que MySQL esté ejecutándose
+- Confirme host/puerto en `config.json`
+- Revise firewall si MySQL está en servidor remoto
+- Verifique permisos del usuario con:
+  ```sql
+  SHOW GRANTS FOR 'ori_app_user'@'localhost';
+  ```
+
+### Seguridad en Producción
+
+✓ **Contraseñas**: Nunca en texto plano, siempre en Credential Manager  
+✓ **Permisos**: Usuario MySQL limitado a una tabla  
+✓ **Archivos**: Carpeta de instalación restringida (Admin/SYSTEM)  
+✓ **Auditoría**: Logs de la aplicación registran intentos de conexión  
+✓ **Rotación**: Cambie credenciales MySQL periódicamente y actualice con `set_password.exe`
+
+---
 
 ### 5. Ejecutar pruebas
 Antes de usar la aplicación, ejecuta las pruebas unitarias:
@@ -254,7 +467,7 @@ Este proyecto es desarrollado para uso interno de la organización.
 
 ---
 
-**Versión**: 1.0.0
+**Versión**: 0.1.0
 **Fecha**: Septiembre 2025
 **Auto**: DevIan (Sebas Villegas)
 **Desarrollado con**: Python 3.7+, PyQt5, MySQL
