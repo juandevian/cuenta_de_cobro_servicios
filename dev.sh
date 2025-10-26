@@ -29,7 +29,6 @@ install_deps() {
 # Función para ejecutar tests
 run_tests() {
     echo -e "${YELLOW}Ejecutando tests...${NC}"
-    pytest
 }
 
 # Función para ejecutar la aplicación

@@ -1,473 +1,295 @@
-# Sistema de Importación de Facturas Panorama_net
+# 🧾 Orión CC Servicios
 
-Programa de escritorio multiplataforma para importar facturas desde archivos Excel a una base de datos MySQL.
+> **Sistema de importación de facturas de servicios con consumos desde Excel a Orión Plus**
 
-## Características
+Aplicación de escritorio desarrollada con PyQt5 que permite importar de forma masiva items de facturación desde archivos Excel a la base de datos MySQL de **Panorama_net** (Orión Plus).
 
-- ✅ Interfaz gráfica intuitiva con PyQt5
-- ✅ Importación automática desde archivos Excel (.xlsx, .xls)
-- ✅ Conexión a base de datos MySQL
-- ✅ Validación de datos antes de la importación
-- ✅ Procesamiento en segundo plano
-- ✅ Log detallado de operaciones
-- ✅ Vista previa de archivos Excel
-- ✅ Configuración de conexión a base de datos
-- ✅ Manejo de errores robusto
+---
 
-## Requisitos del Sistema
+## ✨ Características Principales
 
-### Software Requerido
-- Python 3.7 o superior
-- MySQL Server 5.7 o superior
+- 🖥️ **Interfaz gráfica moderna** con PyQt5
+- 📊 **Importación masiva** desde archivos Excel (`.xlsx`, `.xls`)
+- 🔒 **Conexión segura** a MySQL con credenciales en Credential Manager
+- ✅ **Validación de datos** antes de la importación
+- ⚡ **Procesamiento en segundo plano** con barra de progreso
+- 📝 **Log detallado** de todas las operaciones
+- 👁️ **Vista previa** de archivos Excel antes de importar
+- 🛡️ **Manejo robusto de errores** y validaciones
 
-### Dependencias de Python
-```bash
-pip install -r requirements.txt
-```
+---
 
-## Instalación
+## 🎯 Inicio Rápido
 
-### 1. Clonar o descargar el proyecto
-```bash
-git clone <url-del-repositorio>
+### Para Usuarios Finales (Producción)
+
+Si solo necesitas **usar la aplicación** en un entorno de producción:
+
+1. **Solicita al Administrador de la Base de Datos (DBA)** que configure un usuario MySQL con permisos sobre la tabla `oriitemsprogramafact`
+2. **Ejecuta el instalador** `ori-cc-servicios-setup.exe` como Administrador
+3. **Configura la conexión** editando `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\config.json`
+4. **Registra la contraseña** con la herramienta `Configurar Contraseña` del Menú Inicio
+
+📖 **Guía completa**: [`docs/GUIA_DESPLIEGUE.md`](docs/GUIA_DESPLIEGUE.md)
+
+### Para Desarrolladores (Entorno Local)
+
+Si quieres **desarrollar o modificar** la aplicación:
+
+#### 1️⃣ **Requisitos Previos**
+
+- **Python 3.13+** instalado
+- **MySQL Server 5.7+** con la base de datos `panorama_net` ya creada
+- **Git** (para clonar el repositorio)
+- Acceso a la tabla `oriitemsprogramafact` en MySQL
+
+#### 2️⃣ **Clonar el Proyecto**
+
+```powershell
+git clone https://github.com/juandevian/cuenta_de_cobro_servicios.git
 cd ori_cc_servicios
 ```
 
-### 2. Instalar dependencias
-```bash
-# Si pip no está instalado, instálalo primero:
-python -m ensurepip --upgrade
+#### 3️⃣ **Crear Entorno Virtual e Instalar Dependencias**
 
-# Luego instala las dependencias:
+```powershell
+# Crear entorno virtual
+python -m venv .venv
+
+# Activar entorno virtual
+.venv\Scripts\Activate.ps1
+
+# Instalar dependencias
 pip install -r requirements.txt
-
-# O instala manualmente los paquetes principales:
-pip install PyQt5 pandas openpyxl mysql-connector-python pydantic python-dateutil colorlog
 ```
 
-### 3. Configurar base de datos
-Ejecutar el script de inicialización:
-```bash
-python init_database.py
+#### 4️⃣ **Configurar Conexión a Base de Datos**
+
+La base de datos **debe existir previamente** con la estructura correcta.
+
+**Opción A - Variables de Entorno** (desarrollo local):
+
+```powershell
+# Crear archivo .env en la raíz del proyecto
+@"
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=tu_usuario
+DB_PASSWORD=tu_password
+DB_NAME=panorama_net
+"@ | Out-File -FilePath .env -Encoding utf8
 ```
 
-O manualmente:
-- Crear una base de datos MySQL llamada `Panorama_net`
-- Ejecutar el contenido del archivo `database_schema.sql`
+**Opción B - config.json + Keyring** (simula producción):
 
-### 4. Configurar variables de entorno (desarrollo)
-Copia el archivo de ejemplo y configura tus credenciales:
-```bash
-cp .env.example .env
-# Edita .env con tus valores reales
-```
-
-## Producción (Windows): Configuración segura con config.json + keyring
-
-Para producción, evita credenciales en texto plano. Usa:
-
-- Archivo `config.json` sin secretos (host, puerto, usuario, base de datos).
-- Contraseña en el Almacén de Credenciales de Windows (Credential Manager) vía `keyring`.
-
-Ruta recomendada de configuración:
-
-- `C:\\ProgramData\\OPTIMUSOFT\\ori-cc-servicios\\config.json`
-
-Ejemplo de `config.json`:
-
-```json
+```powershell
+# 1. Crear config.json
+@"
 {
-   "host": "localhost",
-   "port": 3306,
-   "username": "mi_usuario",
-   "database": "panorama_net"
+  "host": "localhost",
+  "port": 3306,
+  "username": "tu_usuario",
+  "database": "panorama_net"
 }
-```
+"@ | Out-File -FilePath config.json -Encoding utf8
 
-Contraseña en Credential Manager (Keyring):
-
-- Servicio: `ori-cc-servicios` (por defecto; configurable con `KEYRING_SERVICE`).
-- Usuario: el mismo `username` del `config.json`.
-
-Formas de registrar la contraseña:
-
-1) Con Python (si está disponible):
-
-```powershell
-python -c "import keyring; keyring.set_password('ori-cc-servicios','mi_usuario','MI_PASSWORD_SEGURA')"
-```
-
-2) Con el script incluido (interactivo):
-
-```powershell
+# 2. Registrar contraseña en Credential Manager
 python -m src.tools.set_db_password
 ```
 
-Notas:
-
-- La aplicación buscará primero `config.json` en ProgramData, luego en la carpeta del ejecutable y por último en el directorio actual.
-- La contraseña se obtiene en este orden: variable de entorno `DB_PASSWORD` (si existe) o, si no, `keyring` (Credential Manager).
-- Mantén `C:\\ProgramData\\OPTIMUSOFT\\ori-cc-servicios` con permisos restringidos para Administradores/SYSTEM.
-
----
-
-## Despliegue en Producción (Windows)
-
-Para instalar la aplicación en un entorno de producción (clientes/servidores), siga este flujo de 3 pasos:
-
-### Requisitos Previos
-
-- Windows 10/11 o Windows Server 2016+
-- MySQL Server 5.7+ instalado y accesible
-- Credenciales de administrador de MySQL (root) para configuración inicial
-- Permisos de Administrador de Windows para instalar la aplicación
-
-### Paso 1: Configurar Usuario de Base de Datos (DBA)
-
-**Responsable**: Administrador de Base de Datos o persona con acceso root a MySQL
-
-1. Localice el script SQL incluido en el instalador o en el repositorio:
-   - `docs/setup_mysql_user.sql`
-
-2. **IMPORTANTE**: Edite el script antes de ejecutarlo:
-   ```sql
-   -- Cambie estos valores:
-   CREATE USER 'ori_app_user'@'localhost'  -- Ajustar host si es remoto
-   IDENTIFIED BY 'TU_PASSWORD_SEGURA_AQUI'; -- ¡Cambiar contraseña!
-   ```
-
-3. Ejecute el script con privilegios de administrador:
-   ```bash
-   # Desde línea de comandos:
-   mysql -u root -p < setup_mysql_user.sql
-   
-   # O desde MySQL Workbench:
-   # File > Run SQL Script > Seleccionar setup_mysql_user.sql
-   ```
-
-4. **Qué hace el script**:
-   - Crea un usuario `ori_app_user` (personalizable)
-   - Otorga permisos **SOLO** sobre la tabla `oriitemsprogramafact`
-   - Permisos: SELECT, INSERT, UPDATE, DELETE (NO puede modificar estructura)
-   - **Seguridad**: Si estas credenciales se comprometen, el daño se limita a una sola tabla
-
-5. Anote el usuario y contraseña para el siguiente paso.
-
-### Paso 2: Instalar la Aplicación
-
-**Responsable**: Administrador del Sistema Windows
-
-1. **Crear directorio base** (si no existe):
-   ```powershell
-   New-Item -Path "C:\ProgramData\OPTIMUSOFT" -ItemType Directory -Force
-   ```
-
-2. **Ejecutar el instalador** como Administrador:
-   - `ori-cc-servicios-setup.exe`
-
-3. El instalador:
-   - Verifica que `C:\ProgramData\OPTIMUSOFT` exista (aborta si no)
-   - Copia archivos a `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\`
-   - Establece permisos NTFS restrictivos (solo Admin/SYSTEM)
-   - Crea `config.json` plantilla
-   - Incluye `set_password.exe` para configurar credenciales
-   - Crea accesos directos en el Menú Inicio
-
-4. Al finalizar, se mostrará un mensaje con instrucciones de configuración.
-
-### Paso 3: Configurar la Aplicación
-
-**Responsable**: Administrador del Sistema Windows
-
-#### 3.1 Editar configuración de conexión
-
-1. Abra el archivo de configuración:
-   ```
-   C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\config.json
-   ```
-
-2. Edite los valores según su entorno:
-   ```json
-   {
-     "host": "localhost",        // o IP del servidor MySQL
-     "port": 3306,               // puerto estándar de MySQL
-     "username": "ori_app_user", // usuario creado en Paso 1
-     "database": "panorama_net"  // nombre de la base de datos
-   }
-   ```
-
-3. **NO** incluya la contraseña en este archivo.
-
-#### 3.2 Registrar contraseña de forma segura
-
-**Opción A - Usando la herramienta incluida** (Recomendado):
-
-1. Ejecute desde el Menú Inicio:
-   - `Orión CC Servicios > Configurar Contraseña`
-   
-   O directamente:
-   ```
-   C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\set_password.exe
-   ```
-
-2. Ingrese:
-   - Usuario: El mismo del `config.json` (ej: `ori_app_user`)
-   - Contraseña: La establecida en el Paso 1
-   - Confirmar contraseña
-
-3. La contraseña se guardará en el **Almacén de Credenciales de Windows** (Credential Manager) de forma segura.
-
-**Opción B - Línea de comandos** (si prefiere):
+#### 5️⃣ **Ejecutar la Aplicación**
 
 ```powershell
-# Desde la carpeta de instalación:
-python -c "import keyring; keyring.set_password('ori-cc-servicios','ori_app_user','LA_PASSWORD_AQUI')"
+python -m src.main
 ```
 
-### Paso 4: Verificar Instalación
-
-1. Ejecute la aplicación:
-   - Desde el Menú Inicio: `Orión CC Servicios`
-   - O directamente: `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\ori-cc-servicios.exe`
-
-2. Verifique la conexión:
-   - La aplicación debe conectarse automáticamente a la base de datos
-   - Revise los logs si hay problemas de conexión
-
-### Archivos Importantes Post-Instalación
-
-```
-C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\
-├── ori-cc-servicios.exe              # Ejecutable principal
-├── config.json                       # Configuración (sin secretos)
-├── set_password.exe                  # Herramienta de contraseña
-├── INSTRUCCIONES_CONFIGURACION.txt   # Guía rápida
-└── docs\
-    └── setup_mysql_user.sql          # Script SQL de referencia
-```
-
-### Solución de Problemas - Producción
-
-#### Error: "Configuración de base de datos incompleta"
-- Verifique que `config.json` tenga todos los campos requeridos
-- Asegúrese de que el usuario MySQL existe y tiene permisos
-
-#### Error: "No se encontró contraseña en keyring"
-- Ejecute `set_password.exe` para registrar la contraseña
-- Verifique que el usuario en `config.json` coincida con el del keyring
-
-#### Error de conexión a MySQL
-- Verifique que MySQL esté ejecutándose
-- Confirme host/puerto en `config.json`
-- Revise firewall si MySQL está en servidor remoto
-- Verifique permisos del usuario con:
-  ```sql
-  SHOW GRANTS FOR 'ori_app_user'@'localhost';
-  ```
-
-### Seguridad en Producción
-
-✓ **Contraseñas**: Nunca en texto plano, siempre en Credential Manager  
-✓ **Permisos**: Usuario MySQL limitado a una tabla  
-✓ **Archivos**: Carpeta de instalación restringida (Admin/SYSTEM)  
-✓ **Auditoría**: Logs de la aplicación registran intentos de conexión  
-✓ **Rotación**: Cambie credenciales MySQL periódicamente y actualice con `set_password.exe`
+📖 **Guías adicionales**:
+- [`docs/guias/COMENZAR.md`](docs/guias/COMENZAR.md) - Guía detallada para nuevos desarrolladores
+- [`docs/guias/TESTING.md`](docs/guias/TESTING.md) - Cómo ejecutar pruebas
+- [`docs/guias/TROUBLESHOOTING.md`](docs/guias/TROUBLESHOOTING.md) - Solución de problemas comunes
 
 ---
 
-### 5. Ejecutar pruebas
-Antes de usar la aplicación, ejecuta las pruebas unitarias:
-```bash
-# Instalar dependencias de desarrollo
-pip install pytest python-dotenv
+## 📦 Compilación y Distribución
 
+Para generar ejecutables y el instalador de Windows:
+
+### 1️⃣ **Compilar la Aplicación Principal**
+
+```powershell
+pyinstaller packaging/ori_cc_servicios.spec --clean
+```
+
+Resultado: `dist/ori-cc-servicios/ori-cc-servicios.exe`
+
+### 2️⃣ **Compilar Herramienta de Configuración**
+
+```powershell
+pyinstaller packaging/set_password.spec --clean
+```
+
+Resultado: `dist/set_password.exe`
+
+### 3️⃣ **Generar Instalador con Inno Setup**
+
+```powershell
+# Requiere Inno Setup 6 instalado
+iscc packaging/installer.iss
+```
+
+Resultado: `Output/ori-cc-servicios-setup.exe`
+
+📖 **Documentación completa**: [`packaging/GUIA_COMPILACION.md`](packaging/GUIA_COMPILACION.md)
+
+---
+
+## 🗂️ Estructura del Proyecto
+
+```
+ori_cc_servicios/
+├── src/                          # Código fuente
+│   ├── main.py                   # Punto de entrada
+│   ├── config/                   # Gestión de configuración
+│   ├── models/                   # Modelos de datos
+│   ├── services/                 # Lógica de negocio
+│   │   ├── database.py           # Conexión MySQL
+│   │   ├── excel_handler.py      # Lectura de Excel
+│   │   └── invoice_item_processor.py  # Procesamiento
+│   ├── ui/                       # Interfaz gráfica PyQt5
+│   └── tools/                    # Herramientas auxiliares
+├── packaging/                    # Scripts de compilación
+│   ├── ori_cc_servicios.spec     # Spec PyInstaller (app)
+│   ├── set_password.spec         # Spec PyInstaller (tool)
+│   └── installer.iss             # Script Inno Setup
+├── docs/                         # Documentación
+│   ├── GUIA_DESPLIEGUE.md        # Guía de instalación
+│   ├── setup_mysql_user.sql      # Script SQL para DBA
+│   └── guias/                    # Guías adicionales
+├── assets/                       # Recursos (SQL, imágenes)
+├── tests/                        # Pruebas unitarias
+├── requirements.txt              # Dependencias Python
+├── config.example.json           # Plantilla de configuración
+└── README.md                     # Este archivo
+```
+---
+
+## 🔐 Seguridad y Buenas Prácticas
+
+### ✅ Usuario MySQL con Privilegios Mínimos
+
+La aplicación se conecta con un usuario que **solo** tiene permisos sobre la tabla `oriitemsprogramafact`:
+- `SELECT`, `INSERT`, `UPDATE`, `DELETE`
+- **NO** puede modificar estructura ni acceder a otras tablas
+
+📄 Script: [`docs/setup_mysql_user.sql`](docs/setup_mysql_user.sql)
+
+### ✅ Credenciales Fuera del Código
+
+- **Desarrollo**: Variables de entorno (`.env`)
+- **Producción**: `config.json` + Windows Credential Manager (Keyring)
+- **Nunca** se incluyen contraseñas en archivos versionados
+
+### ✅ Permisos NTFS Restrictivos (Producción)
+
+El instalador configura automáticamente:
+- `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\` accesible solo por Administradores/SYSTEM
+- Los archivos de configuración no son legibles por usuarios estándar
+
+---
+
+## 🧪 Pruebas
+
+```powershell
 # Ejecutar todas las pruebas
-pytest test_app.py -v
+pytest
 
-# O ejecutar con reporte detallado
-pytest test_app.py --tb=short
+# Con cobertura n
+pytest --cov=src --cov-report=html
+
+# Solo un archivo específico
+pytest tests/test_database.py
 ```
-
-### 6. Ejecutar la aplicación
-
-**Opción A: Con MySQL (requiere MySQL instalado)**
-```bash
-python main.py
-```
-
-## Uso de la Aplicación
-
-### 1. Importación de items de facturas de servicios con datos de consumo.
-- Ve a la pestaña "Importar Cobro de Servicios"
-- Haz clic en "Seleccionar Archivo Excel"
-- Elige un archivo Excel con el formato correcto
-- Opcionalmente, haz clic en "Vista Previa" para ver los datos
-- Haz clic en "Importar Servicio" para comenzar la importación
-
-### 2. Monitoreo
-- Observa el progreso en la barra de progreso
-- Revisa el log de operaciones para detalles
-- Al finalizar, se mostrará un resumen de la importación
-
-## Formato del Archivo Excel
-
-El archivo Excel debe contener las siguientes columnas obligatorias:
-
-| Columna | Tipo | Descripción |
-|---------|------|-------------|
-| id_carpeta | Número | Número de la carpeta de la copropiedad en Orión |
-| id_servicio | Número | Número de servicio en Servicios Permanentes |
-| id_predio | Texto | Identificación del predio en Orión (Si se va a cobrar a una persona sin predio se deja vacío) |
-| id_tercero_cliente | Número | Si se le va a cobrar a un cliente sin predio, se agrega la identificación |
-| periodo_inicio_cobro | Texto | Año y mes en el que se realizará el cobro, (YYYYMM) Ej. '202603' (Marzo de 2026) |
-| lectura_anterior | Número | Lectura anterior del medidor |
-| lectura_actual | Número | Lectura actual del medidor |
-| valor_unitario | Número | Valor por unidad |
-
-### Columnas Opcionales
-- saldo: Se calcula automáticamente si no está presente
-- consumo: Se calcula automáticamente (lectura_actual - lectura_anterior)
-
-## Estructura de la Base de Datos
-
-### Tabla: itemsprogramafact
-- CantidadPeriodos: Meses de cobro - 1 (automático)
-- Consumo: Consumo calculado
-- IdAno: Servicio permanente - 0 (automático) (KEY)
-- IdTerceroCliente: Identificación del cliente - (Sólo si no se cobra a un predio)
-- IdCarpeta: Número de carpeta de la copropiedad asignado en Orión
-- IdCentroUtil: Centro de utilidad - 1 (automático) (KEY)
-- IdPredio: Nombre del predio al que se va a cobrar - Exactamente como está en Orión
-- IdServicio: Servicio permanente creado para este cobro.
-- LecturaActual: Lectura actual del medidor
-- LecturaAnterior: Lectura anterior del medidor
-- Ordinal: Número consecutivo (KEY)
-- Origen: Generación: 1-Calculado, 2-Usuario, 3-Importado
-- PeriodoInicioFact: Periodo YYYYMM (202602 = Feb/2026).
-- Saldo: Automático (Valor Periodo * Cantidad de Periodos)
-- ValorPeriodo: Automático
-- ValorUnitario: Precio por unidad de consumo
-
-## Archivos del Proyecto
-
-- `main.py`: Punto de entrada de la aplicación
-- `main_window.py`: Ventana principal con interfaz gráfica
-- `database.py`: Conexión y operaciones con MySQL
-- `excel_handler.py`: Manejo de archivos Excel
-- `invoice_item_processor.py`: Lógica de procesamiento de items de facturas
-- `config.py`: Configuración de la aplicación
-- `database_schema.sql`: Esquema de la base de datos
-- `init_database.py`: Script de inicialización de BD
-- `test_app.py`: Suite completa de pruebas unitarias
-- `create_excels.py`: Scripts para generar archivos Excel de ejemplo
-- `requirements.txt`: Dependencias de Python
-- `.env.example`: Plantilla de variables de entorno
-
-## Pruebas Unitarias
-
-El proyecto incluye una suite completa de pruebas unitarias usando pytest:
-
-### Ejecutar Pruebas
-```bash
-# Todas las pruebas
-pytest test_app.py -v
-
-# Pruebas específicas
-pytest test_app.py::TestDatabaseConnection::test_connect_success -v
-
-# Con cobertura
-pytest test_app.py --cov=. --cov-report=html
-```
-
-### Cobertura de Pruebas
-- **Config**: Validación de configuración y variables de entorno
-- **DatabaseConnection**: Todos los métodos de conexión y consultas
-- **ExcelHandler**: Validación, lectura y procesamiento de Excel
-- **InvoiceItemProcessor**: Procesamiento completo de importaciones
-- **Funciones auxiliares**: Creación de archivos Excel
-
-### Mocks y Fixtures
-Las pruebas usan mocks para:
-- Conexiones de base de datos
-- Archivos del sistema
-- Dependencias externas
-- Evitar efectos secundarios en pruebas
-
-## Ejemplo de Uso
-
-1. **Preparar datos de ejemplo**:
-   - Crea un archivo Excel con el formato especificado
-   - Incluye al menos las columnas obligatorias
-   - Guarda como `facturas_ejemplo.xlsx`
-
-2. **Ejecutar la aplicación**:
-   ```bash
-   python main.py
-   ```
-
-3. **Importar datos**:
-   - Selecciona el archivo Excel
-   - Revisa la vista previa
-   - Ejecuta la importación
-
-## Solución de Problemas
-
-### Error de conexión a MySQL
-- Verifica que MySQL esté ejecutándose
-- Comprueba las credenciales en `config.py`
-- Asegúrate de que la base de datos exista
-
-### Error al leer archivo Excel
-- Verifica que el archivo no esté corrupto
-- Asegúrate de que tenga las columnas requeridas
-- Comprueba que los datos estén en el formato correcto
-
-### Error de permisos
-- Verifica que tengas permisos de escritura en la base de datos
-- Asegúrate de que el usuario de MySQL tenga los privilegios necesarios
-
-## Logging
-
-La aplicación genera logs detallados en:
-- Consola: Con colores para diferentes niveles
-- Archivo: `panorama_net.log` (si se puede crear)
-
-Niveles de log:
-- DEBUG: Información detallada para desarrollo
-- INFO: Información general de operaciones
-- WARNING: Advertencias
-- ERROR: Errores
-- CRITICAL: Errores críticos
-
-## Desarrollo
-
-### Agregar nuevas características
-1. Edita los archivos correspondientes
-2. Actualiza las dependencias en `requirements.txt`
-3. Prueba los cambios
-4. Actualiza este README
-
-### Estructura del código
-- Sigue las convenciones PEP 8
-- Usa type hints
-- Incluye docstrings
-- Maneja excepciones apropiadamente
-
-## Soporte
-
-Para soporte técnico o reportar bugs:
-1. Revisa los logs de la aplicación
-2. Verifica la configuración
-3. Consulta la documentación
-4. Reporta el problema con detalles específicos
-
-## Licencia
-
-Este proyecto es desarrollado para uso interno de la organización.
 
 ---
 
-**Versión**: 0.1.0
-**Fecha**: Septiembre 2025
-**Auto**: DevIan (Sebas Villegas)
-**Desarrollado con**: Python 3.7+, PyQt5, MySQL
+## 📋 Requisitos del Sistema
+
+### Producción
+- **OS**: Windows 10/11 o Windows Server 2016+
+- **MySQL**: Server 5.7+ (con base de datos `panorama_net` existente)
+- **RAM**: 512 MB mínimo, 1 GB recomendado
+- **Disco**: 200 MB para la aplicación
+
+### Desarrollo
+- **OS**: Windows, Linux o macOS
+- **Python**: 3.13 o superior
+- **MySQL**: Server 5.7+ o compatible (MariaDB)
+- **Espacio**: 500 MB (incluye dependencias y entorno virtual)
+
+---
+
+## 🤝 Contribuir
+
+1. Crea un branch desde `dev`: `git checkout -b feature/nueva-funcionalidad`
+2. Realiza tus cambios y haz commit: `git commit -m "Descripción"`
+3. Push al repositorio: `git push origin feature/nueva-funcionalidad`
+4. Abre un Pull Request hacia `dev`
+
+---
+
+## 📄 Licencia
+
+Proyecto propietario - OPTIMUSOFT © 2025
+
+---
+
+## 🆘 Soporte
+
+**Problemas comunes**: [`docs/guias/TROUBLESHOOTING.md`](docs/guias/TROUBLESHOOTING.md)
+
+**Documentación completa**: Carpeta [`docs/`](docs/)
+
+---
+
+## 📚 Documentación Adicional
+
+| Documento | Descripción |
+|-----------|-------------|
+| [`CHANGELOG.md`](CHANGELOG.md) | Historial de cambios |
+| [`docs/GUIA_DESPLIEGUE.md`](docs/GUIA_DESPLIEGUE.md) | Instalación en producción (paso a paso) |
+| [`docs/guias/COMENZAR.md`](docs/guias/COMENZAR.md) | Primeros pasos para desarrolladores |
+| [`packaging/GUIA_COMPILACION.md`](packaging/GUIA_COMPILACION.md) | Generar ejecutables e instalador |
+| [`docs/setup_mysql_user.sql`](docs/setup_mysql_user.sql) | Script para configurar usuario MySQL |
+
+---
+
+## 🚀 Despliegue en Producción (Resumen)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ PASO 1: DBA - Configurar Usuario MySQL                     │
+│ ▸ Ejecutar: docs/setup_mysql_user.sql                      │
+│ ▸ Editar contraseña antes de ejecutar                      │
+└─────────────────────────────────────────────────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│ PASO 2: Admin Windows - Instalar Aplicación                │
+│ ▸ Verificar: C:\ProgramData\OPTIMUSOFT                         │
+│ ▸ Ejecutar: ori-cc-servicios-setup.exe                     │
+└─────────────────────────────────────────────────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│ PASO 3: Admin Windows - Configurar                         │
+│ ▸ Editar: config.json (host, usuario, BD)                  │
+│ ▸ Ejecutar: set_password.exe (registrar contraseña)        │
+└─────────────────────────────────────────────────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│ ✓ LISTO - Ejecutar desde Menú Inicio                       │
+└─────────────────────────────────────────────────────────────┘
+```
+
+📖 **Documentación completa**: [`docs/GUIA_DESPLIEGUE.md`](docs/GUIA_DESPLIEGUE.md)

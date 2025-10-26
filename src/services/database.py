@@ -29,14 +29,23 @@ class DatabaseConnection:
             # Resolver contraseña: ENV primero; si no, intentar keyring
             password = Config.DB_PASSWORD
             if not password:
+                # Asegurar que los identificadores no tengan espacios accidentales
+                service = (Config.KEYRING_SERVICE or '').strip()
+                username = (Config.DB_USERNAME or '').strip()
                 try:
                     import keyring  # type: ignore
-                    password = keyring.get_password(Config.KEYRING_SERVICE, Config.DB_USER) or ''
+                    # Log de depuración para facilitar diagnóstico en campo
+                    logger.debug(
+                        "Buscando credencial en keyring servicio='%s' usuario='%s'",
+                        service,
+                        username,
+                    )
+                    password = keyring.get_password(service, username) or ''
                     if not password:
                         logger.error(
                             "No se encontró contraseña en keyring (servicio=%s, usuario=%s).",
-                            Config.KEYRING_SERVICE,
-                            Config.DB_USER,
+                            service,
+                            username,
                         )
                         self.connection = None
                         return False
@@ -49,7 +58,7 @@ class DatabaseConnection:
             self.connection = mysql.connector.connect(
                 host=Config.DB_HOST,
                 port=Config.DB_PORT,
-                user=Config.DB_USER,
+                username=Config.DB_USERNAME,
                 password=password,
                 database=Config.DB_NAME,
                 use_pure=True

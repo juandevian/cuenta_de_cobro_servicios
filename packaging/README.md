@@ -135,7 +135,7 @@ Después de compilar, prueba los ejecutables:
 Una vez compilados los ejecutables, genera el instalador con Inno Setup:
 
 ```powershell
-iscc installer.iss
+iscc .\packaging\installer.iss
 ```
 
 El instalador se generará en: `installer/ori-cc-servicios-setup.exe`
@@ -166,5 +166,5 @@ El instalador se generará en: `installer/ori-cc-servicios-setup.exe`
 ## 📚 Referencias
 
 - [Documentación de PyInstaller](https://pyinstaller.org/en/stable/)
-- [Guía de Despliegue](../docs/GUIA_DESPLIEGUE.md)
-- [Checklist de Validación](../docs/CHECKLIST_VALIDACION.md)
+- [Guía de Despliegue](../docs/referencia/GUIA_DESPLIEGUE.md)
+- [Checklist de Validación](../docs/referencia/CHECKLIST_VALIDACION.md)

@@ -9,21 +9,45 @@ Compilar desde la raíz del proyecto:
 Salida:
     dist/ori-cc-servicios/ (carpeta con ejecutable y dependencias)
 """
+import os
+import sys
+
+# Detectar ruta de mysql.connector dinámicamente
+try:
+    import mysql.connector
+    mysql_base_path = os.path.dirname(mysql.connector.__file__)
+    mysql_locales_src = os.path.join(mysql_base_path, 'locales')
+    mysql_locales_exists = os.path.isdir(mysql_locales_src)
+except ImportError:
+    mysql_locales_exists = False
+    mysql_locales_src = None
 
 block_cipher = None
+
+# Preparar datas dinámicamente
+datas_list = [
+    ('../assets/database_schema.sql', 'assets'),
+]
+
+# Incluir archivos de localización de MySQL si existen
+if mysql_locales_exists:
+    datas_list.append((mysql_locales_src, 'mysql/connector/locales'))
 
 a = Analysis(
     ['../src/main.py'],
     pathex=[],
     binaries=[],
-    datas=[
-        ('../assets/database_schema.sql', 'assets'),
-    ],
+    datas=datas_list,
     hiddenimports=[
         'PyQt5.QtCore',
         'PyQt5.QtGui',
         'PyQt5.QtWidgets',
         'mysql.connector',
+        'mysql.connector.locales.eng',
+        'mysql.connector.plugins',
+        'mysql.connector.plugins.mysql_native_password',
+        'mysql.connector.plugins.caching_sha2_password',
+        'mysql.connector.plugins.sha256_password',
         'pandas',
         'openpyxl',
         'pydantic',

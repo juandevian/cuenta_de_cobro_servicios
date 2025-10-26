@@ -9,7 +9,6 @@ env/
 .env.*
 *.env
 config.json
-setup_mysql_user.sql
 
 # Archivos de desarrollo local
 *.log

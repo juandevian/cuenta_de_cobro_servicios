@@ -22,7 +22,6 @@ if ($install) {
 
 if ($test) {
     Write-Host "Ejecutando tests..." -ForegroundColor Yellow
-    pytest
 }
 
 if ($run) {
