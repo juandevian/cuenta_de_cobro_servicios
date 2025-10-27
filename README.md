@@ -1,36 +1,83 @@
 # 🧾 Orión CC Servicios
 
-> **Sistema de importación de facturas de servicios con consumos desde Excel a Orión Plus**
+**Sistema de importación de servicios de facturación desde Excel hacia Orión Plus** - Módulo complementario que permite importar masivamente ítems de cobro por consumo desde archivos Excel a la base de datos de Panorama_net (Orión Plus).
 
-Aplicación de escritorio desarrollada con PyQt5 que permite importar de forma masiva items de facturación desde archivos Excel a la base de datos MySQL de **Panorama_net** (Orión Plus).
+---
+
+## 📥 Descarga e Instalación Rápida
+
+### ⬇️ Descargar Instalador
+
+<div align="center">
+
+**[📦 Descargar ori-cc-servicios-setup.exe v0.1.0 (Beta)](https://github.com/juandevian/cuenta_de_cobro_servicios/releases/latest/download/ori-cc-servicios-setup.exe)**
+
+*Windows 10/11 (64-bit) | ~50 MB*
+
+</div>
+
+### � Instalación en 3 Pasos
+
+1. **Descarga** el instalador desde el botón de arriba.
+2. **Ejecuta** `ori-cc-servicios-setup.exe` como **Administrador** (clic derecho > Ejecutar como administrador).
+3. **Sigue** las instrucciones del asistente y espera confirmación.
+4. **Contacta** a soporte técnico de Orión Plus para:
+   - Crear tu usuario en la base de datos MySQL.
+   - Configurar el archivo `config.json` con los datos de conexión.
+
+### ✅ Verificación de Instalación
+
+1. Abre **Orión Plus** con tu usuario y contraseña.
+2. Navega a: **Cobranza** > **Cobranza Automática** > **Programación de cobros automáticos** > **Importar Cobros por Consumo**.
+3. Al abrir el módulo, debe aparecer un **mensaje de conexión exitosa** en el histórico de operaciones.
+
+### ⚠️ Problema Común: SmartScreen de Windows
+
+**Al descargar**, Windows SmartScreen puede mostrar una advertencia como "ori-cc-servicios-setup.exe no se descarga habitualmente" o "Editor desconocido". Esto es normal en aplicaciones sin firma digital (certificado de código).
+
+**Solución rápida**:
+- Haz clic en **"Más información"** o **"..."** en la advertencia.
+- Selecciona **"Conservar de todos modos"** o **"Ejecutar de todos modos"**.
+- Confirma que confías en el archivo.
+
+� **Guía detallada**: [Solución a SmartScreen y VirusTotal](docs/guias/GUÍA_USUARIO_INSTALADOR.md#smartscreen)
+
+---
+
+## 📚 Documentación Adicional
+
+- 📖 **[Guía Completa de Usuario Final](docs/guias/GUÍA_USUARIO_INSTALADOR.md)** - Instrucciones detalladas de instalación, uso y solución de problemas.
+- 🛠️ **[Guía de Despliegue](docs/GUIA_DESPLIEGUE.md)** - Para administradores que configuran el entorno de producción.
+- 🐛 **[Solución de Problemas (Troubleshooting)](docs/guias/TROUBLESHOOTING.md)** - Errores comunes y cómo resolverlos.
+- 🔧 **[Guía para Desarrolladores](#-para-desarrolladores)** - Si quieres modificar o contribuir al código (ver más abajo).
+
+---
+
+## 🐛 Problemas Conocidos (v0.1.0 Beta)
+
+- **Versión Beta**: Esta es una versión de prueba y puede contener errores menores. Reporta cualquier problema en [Issues](https://github.com/juandevian/cuenta_de_cobro_servicios/issues).
+- **Permisos de Administrador**: Asegúrate de ejecutar el instalador como administrador para evitar problemas de permisos.
+- **SmartScreen/Antivirus**: Algunos antivirus pueden marcar el instalador como sospechoso (falso positivo). Ver [solución arriba](#️-problema-común-smartscreen-de-windows).
+- **Configuración MySQL**: El usuario de base de datos debe tener permisos sobre la tabla `oriitemsprogramafact`. Contacta a soporte técnico si hay errores de conexión.
 
 ---
 
 ## ✨ Características Principales
 
-- 🖥️ **Interfaz gráfica moderna** con PyQt5
-- 📊 **Importación masiva** desde archivos Excel (`.xlsx`, `.xls`)
-- 🔒 **Conexión segura** a MySQL con credenciales en Credential Manager
-- ✅ **Validación de datos** antes de la importación
-- ⚡ **Procesamiento en segundo plano** con barra de progreso
-- 📝 **Log detallado** de todas las operaciones
-- 👁️ **Vista previa** de archivos Excel antes de importar
-- 🛡️ **Manejo robusto de errores** y validaciones
+- 🖥️ **Interfaz gráfica integrada** con Orión Plus (PyQt5).
+- 📊 **Importación masiva** desde archivos Excel (`.xlsx`, `.xls`).
+- 🔒 **Conexión segura** a MySQL con credenciales en Windows Credential Manager.
+- ✅ **Validación automática** de datos antes de la importación.
+- � **Histórico de operaciones** con log detallado.
+- 👁️ **Vista previa** de archivos Excel antes de importar.
 
 ---
 
-## 🎯 Inicio Rápido
+## 👨‍💻 Para Desarrolladores
 
-### Para Usuarios Finales (Producción)
+## 👨‍💻 Para Desarrolladores
 
-Si solo necesitas **usar la aplicación** en un entorno de producción:
-
-1. **Solicita al Administrador de la Base de Datos (DBA)** que configure un usuario MySQL con permisos sobre la tabla `oriitemsprogramafact`
-2. **Ejecuta el instalador** `ori-cc-servicios-setup.exe` como Administrador
-3. **Configura la conexión** editando `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\config.json`
-4. **Registra la contraseña** con la herramienta `Configurar Contraseña` del Menú Inicio
-
-📖 **Guía completa**: [`docs/GUIA_DESPLIEGUE.md`](docs/GUIA_DESPLIEGUE.md)
+Si quieres **desarrollar, modificar o contribuir** al código fuente:
 
 ### Para Desarrolladores (Entorno Local)
 
