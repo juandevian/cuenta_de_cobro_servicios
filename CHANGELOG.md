@@ -9,6 +9,31 @@ El formato sigue: https://keepachangelog.com/es/1.0.0/
 
 Nada por ahora.
 
+## [0.1.0-beta] - 2025-10-26
+
+### Added
+
+- Publicación de release en GitHub con instalador para Windows (EXE) y notas de versión profesionales (Markdown con secciones claras y emojis).
+- Enlace de descarga destacado en `README.md` apuntando a `releases/latest` para facilitar acceso a usuarios finales.
+
+### Changed
+
+- `README.md` reescrito y orientado al usuario final:
+  - Primer bloque con qué es la app y botón de descarga visible.
+  - Guía rápida de instalación en 3 pasos y verificación con la ruta dentro de Orión Plus.
+  - Solución rápida al problema de SmartScreen en las primeras líneas.
+  - Referencias cruzadas a documentación detallada (Despliegue, Troubleshooting y Guía de Usuario).
+
+### Documentation
+
+- `docs/guias/GUÍA_USUARIO_INSTALADOR.md` ampliada con sección detallada de SmartScreen (paso a paso) y verificación via SHA256/VirusTotal.
+- Creada carpeta `docs/screenshots/` con espacios y nombres estándar para 6 capturas del flujo de SmartScreen.
+- `docs/screenshots/README.md` añadido con especificaciones de cada captura (qué mostrar y cuándo tomarla).
+
+### Notes
+
+- SmartScreen puede advertir al descargar/ejecutar el instalador por carecer de firma digital; se documenta solución segura y validación opcional del hash.
+
 ## [0.1.0] - 2025-10-22
 
 ### Added
