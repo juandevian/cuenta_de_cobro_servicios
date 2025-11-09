@@ -81,7 +81,7 @@ class ExcelHandler:
                 df['consumo'] = df['lectura_actual'] - df['lectura_anterior']
                 
             if 'valor_periodo' not in df.columns:
-                df['valor_periodo'] = df['valor_unitario'] * df['consumo']
+                df['valor_periodo'] = round(df['valor_unitario'] * df['consumo'])
 
             if 'saldo' not in df.columns:
                 df['saldo'] = df['valor_periodo']

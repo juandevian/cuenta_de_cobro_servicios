@@ -6,8 +6,6 @@ Programa de escritorio multiplataforma para importar items a cobrar desde Excel 
 import os
 import sys
 import logging
-#import faulthandler
-#faulthandler.enable()
 from PyQt5.QtWidgets import QApplication, QMessageBox
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QIcon
@@ -44,7 +42,7 @@ def setup_logging():
 
     # Handler para archivo (Archivo de Log)
     try:
-        file_handler = logging.FileHandler('panorama_net.log', encoding='utf-8')
+        file_handler = logging.FileHandler('ori_cc_servicios.log', encoding='utf-8')
         file_format = logging.Formatter(Config.LOG_FORMAT)
         file_handler.setFormatter(file_format)
         logger.addHandler(file_handler)
@@ -53,10 +51,11 @@ def setup_logging():
 
 def check_requirements():
     """Verifica que todas las dependencias estén instaladas"""
-    required_modules = [
+    required_modules = [    
         'colorlog',
         'dateutil',
         'dotenv',
+        'keyring',
         'mysql.connector',
         'openpyxl',
         'pandas',
@@ -96,6 +95,7 @@ def create_database_schema():
             
         if not db.connection.is_connected():
             logging.warning("Conexión a BD no está activa")
+            logging.info("La aplicación no se iniciará")
             return False
 
         # Leer archivo SQL (opcional)
@@ -105,15 +105,15 @@ def create_database_schema():
             logging.info("Archivo de esquema SQL no encontrado, omitiendo verificación")
             db.disconnect()
             return True
-            
+                   
         with open(schema_file, 'r', encoding='utf-8') as f:
-            sql_script = f.read()
-
-        # Ejecutar script SQL
-        cursor = db.connection.cursor()
+            sql_script = f.read()      
 
         # Dividir el script en comandos individuales
         commands = [cmd.strip() for cmd in sql_script.split(';') if cmd.strip()]
+
+        # Disponer cursor para ejecutar comandos
+        cursor = db.connection.cursor()
 
         for command in commands:
             if command:
@@ -134,6 +134,36 @@ def create_database_schema():
         logging.error(f"Error creando esquema de base de datos: {e}")
         return False
 
+def validate_database_schema():
+    """Valida que el esquema de la base de datos sea correcto"""
+    try:
+        logging.info("Validando esquema de base de datos...")
+
+        db = DatabaseConnection()
+
+        if not db.connection:
+            logging.warning("No se pudo conectar a la base de datos")
+            return False
+            
+        if not db.connection.is_connected():
+            logging.warning("Conexión a BD no está activa")
+            return False
+
+        is_valid = db.validate_database_schema()
+
+        db.disconnect()
+
+        if is_valid:
+            logging.info("Esquema de base de datos es válido")
+        else:
+            logging.warning("Esquema de base de datos no es válido")
+
+        return is_valid
+
+    except Exception as e:
+        logging.error(f"Error validando esquema de base de datos: {e}")
+        return False
+
 def main():
     """Función principal de la aplicación"""
     # Configurar logging
@@ -143,17 +173,18 @@ def main():
 
     # Verificar dependencias
     if not check_requirements():
-        QMessageBox.critical(
-            None,
-            "Error de Dependencias",
-            "Faltan dependencias requeridas. Instale con: pip install -r requirements.txt"
-        )
+        logging.critical("Error de Dependencias: Faltan dependencias requeridas. Instale con: pip install -r requirements.txt")
         sys.exit(1)
 
     # Crear esquema de base de datos
     if not create_database_schema():
         logging.warning("No se pudo verificar/crear el esquema de base de datos")
         logging.warning("Asegúrese de que la base de datos esté configurada correctamente")
+
+    if not validate_database_schema():
+        logging.critical("El esquema de la base de datos no es válido")
+        logging.warning("Error de Base de Datos\nVerifique la versión de Orión Plus, recuerde que debe ser V17.383.419 o superior.")
+        sys.exit(1)
 
     # Crear aplicación Qt
     app = QApplication(sys.argv)

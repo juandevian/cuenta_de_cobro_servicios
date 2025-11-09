@@ -92,13 +92,13 @@ class Config:
 
     # Configuración de la aplicación
     APP_NAME: str = "Importación de Facturas de servicios con consumos"
-    APP_VERSION: str = "0.1.0"
+    APP_VERSION: str = "0.1.1"
     WINDOW_WIDTH: int = 800
     WINDOW_HEIGHT: int = 600
 
     # Configuración de archivos
     SUPPORTED_EXCEL_FORMATS: tuple = ('.xlsx', '.xls')
-    MAX_FILE_SIZE_MB: int = 50
+    MAX_FILE_SIZE_MB: int = 2
 
     # Configuración de logging
     LOG_LEVEL: str = os.getenv('LOG_LEVEL', 'INFO')

@@ -182,3 +182,67 @@ class DatabaseConnection:
         """
         params = (IdCarpeta, IdServicio)
         return self.execute_update(query, params)
+
+    def validate_database_schema(self) -> bool:
+        """Valida que la tabla y los argumentos necesarios existan en la base de datos"""
+        required_table = ['oriitemsprogramafact']
+        try:
+            existing_tables = self.execute_query("SHOW TABLES")
+            if existing_tables is None:
+                return False
+            existing_table_names = {list(row.values())[0] for row in existing_tables}
+            for table in required_table:
+                if table not in existing_table_names:
+                    logger.error(f"Tabla requerida '{table}' no existe en la base de datos.")
+                    return False
+                elif table in existing_table_names:
+                    if not self.validate_schema_arguments(table):
+                        logger.error(f"Faltan campos en la tabla '{table}'.")
+                        return False
+            
+            logger.info("Todas las tablas y campos requeridas existen.")
+            return True
+           
+
+            
+        except Exception as e:
+            logger.error(f"Error validando esquema de base de datos: {e}")
+            return False
+        
+    def validate_schema_arguments(self, table_name: str) -> bool:
+        """Valida que los argumentos necesarios existan en la tabla"""
+        schema_required = {
+            'CantidadPeriodos': 'SMALLINT(6)',
+            'Consumo': 'DOUBLE',
+            'IdAno': 'SMALLINT(6)',
+            'IdCarpeta': 'SMALLINT(6)',
+            'IdCentroUtil': 'SMALLINT(6)',
+            'IdPredio': 'CHAR(20)',
+            'IdServicio': 'SMALLINT(6)',
+            'IdTerceroCliente': 'DECIMAL(12,2)',
+            'LecturaActual': 'DECIMAL(12,2)',
+            'LecturaAnterior': 'DECIMAL(12,2)',
+            'Ordinal': 'INT(11)',
+            'Origen': 'TINYINT(4)',
+            'PeriodoInicioFact': 'CHAR(6)',
+            'Saldo': 'DECIMAL(12,2)',
+            'ValorPeriodo': 'DECIMAL(12,2)',
+            'ValorUnitario': 'DECIMAL(12,2)',
+        }
+        try:
+            existing_columns = self.execute_query(f"SHOW COLUMNS FROM {table_name}")
+            if existing_columns is None:
+                return False
+            existing_column_dict = {row['Field']: row['Type'] for row in existing_columns}
+            for column, col_type in schema_required.items():
+                if column not in existing_column_dict:
+                    logger.error(f"No existe la columna '{column}' requerida en la tabla {table_name}.")
+                    return False
+                ### IAN 2024-06-12: Pendiente de validar tipos de datos con mayor precisión
+                # if existing_column_dict[column] != col_type:
+            logger.info("Todas las columnas requeridas existen.")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error validando argumentos del esquema de base de datos: {e}")
+            return False

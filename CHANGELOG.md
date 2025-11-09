@@ -3,7 +3,7 @@
 
 > Todos los cambios importantes en este repositorio se documentan en este archivo.
 
-El formato sigue: https://keepachangelog.com/es/1.0.0/
+El formato sigue: https://keepachangelog.com/es/0.1.0/
 
 ## [Unreleased]
 
