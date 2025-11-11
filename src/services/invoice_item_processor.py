@@ -5,6 +5,7 @@ from typing import List, Dict, Any, Optional
 import logging
 from services.database import DatabaseConnection
 from services.excel_handler import ExcelHandler
+from services.database_validator import DatabaseValidator
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +43,16 @@ class InvoiceItemProcessor:
             if validation_errors:
                 result['message'] = 'Errores de validación en el archivo Excel'
                 result['errors'] = validation_errors
+                return result
+            
+            # Validar BD con DatabaseValidator
+            db_validator = DatabaseValidator()
+            db_errors = db_validator.validate_ids(df)
+            db_validator.close()  # Cerrar conexión
+            if db_errors:
+                result['message'] = 'Errores de validación en la base de datos'
+                result['errors'].extend(validation_errors)  # Incluir errores previos si los hay
+                result['errors'].extend(db_errors)
                 return result
 
             # Procesar datos
