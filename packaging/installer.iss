@@ -16,7 +16,7 @@
 #define MyAppExeName "ori-cc-servicios.exe"
 #define MyAppSetupName "ori-cc-servicios-setup.exe"
 #define MyAppGUID "{{A5B8C9D0-1234-5678-90AB-CDEF12345678}}"
-#define MyAppBaseDir "{autopf}\OPTIMUSOFT"
+#define MyAppBaseDir "C:\Program Files\OPTIMUSOFT"
 #define MyAppFolderName "ori-cc-servicios"
 #define MyAppInstallDir MyAppBaseDir + "\" + MyAppFolderName
 
@@ -144,7 +144,7 @@ Name: "{app}\docs"; Permissions: admins-full system-full; \
 // Constantes de configuración
 // ========================================================================
 const
-  REQUIRED_BASE_DIR = '{autopf}\OPTIMUSOFT';
+  REQUIRED_BASE_DIR = 'C:\Program Files\OPTIMUSOFT';
   CRLF = #13#10;
   INSTRUCTIONS_FILENAME = 'INSTRUCCIONES_CONFIGURACION.txt';
   CONFIG_FILENAME = 'config.json';
