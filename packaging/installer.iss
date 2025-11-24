@@ -16,7 +16,7 @@
 #define MyAppExeName "ori-cc-servicios.exe"
 #define MyAppSetupName "ori-cc-servicios-setup.exe"
 #define MyAppGUID "{{A5B8C9D0-1234-5678-90AB-CDEF12345678}}"
-#define MyAppBaseDir "C:\Program Files\OPTIMUSOFT"
+#define MyAppBaseDir "{pf}\OPTIMUSOFT"
 #define MyAppFolderName "ori-cc-servicios"
 #define MyAppInstallDir MyAppBaseDir + "\" + MyAppFolderName
 
@@ -144,7 +144,7 @@ Name: "{app}\docs"; Permissions: admins-full system-full; \
 // Constantes de configuración
 // ========================================================================
 const
-  REQUIRED_BASE_DIR = 'C:\Program Files\OPTIMUSOFT';
+  REQUIRED_BASE_DIR = '{pf}\OPTIMUSOFT';
   CRLF = #13#10;
   INSTRUCTIONS_FILENAME = 'INSTRUCCIONES_CONFIGURACION.txt';
   CONFIG_FILENAME = 'config.json';
@@ -221,6 +221,47 @@ begin
     '===============================================================' + CRLF +
     'Para soporte tecnico, contacte a OptimuSoft SAS' + CRLF +
     '===============================================================' + CRLF;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+var
+  PanoramaPath: string;
+  PlantillasPath: string;
+begin
+  if CurStep = ssPostInstall then
+  begin
+    // Verificar existencia de c:/Panorama.Net/Dat
+    PanoramaPath := 'c:\Panorama.Net\Dat';
+    PlantillasPath := PanoramaPath + '\PlantillasServiciosConsumo';
+    
+    if DirExists(PanoramaPath) then
+    begin
+      // Existe la estructura base: verificar/crear PlantillasServiciosConsumo
+      if not DirExists(PlantillasPath) then
+      begin
+        // Crear la carpeta si no existe
+        CreateDir(PlantillasPath);
+        // Nota: No verificamos si CreateDir falla, asumimos que si existe la base, podemos crear subcarpetas
+      end;
+      // Si ya existe, no hacer nada (OK)
+    end
+    else
+    begin
+      // No existe la estructura base: enviar mensaje de advertencia
+      MsgBox(
+        'Advertencia: Estructura de carpetas requerida' + #13#10#10 +
+        'La instalación se completó correctamente, pero no se encontró la estructura de carpetas requerida.' + #13#10#10 +
+        'Para un correcto funcionamiento del programa, debe crear manualmente la carpeta:' + #13#10 +
+        'c:\Panorama.Net\Dat\' + #13#10#10 +
+        'Esta carpeta es necesaria para almacenar las plantillas de servicios.',
+        mbInformation,
+        MB_OK
+      );
+    end;
+    
+    // Continuar con el post-install normal
+    DoPostInstall(ExpandConstant('{app}'));
+  end;
 end;
 
 procedure DoPostInstall(AppPath: string);
