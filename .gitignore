@@ -39,6 +39,7 @@ build/
 *-SHA256.txt
 RELEASE-*.txt
 RELEASE-NOTES-*.md
+# Permitimos versionar la plantilla en docs/release/
 
 # Archivos de sistema operativo
 .DS_Store
