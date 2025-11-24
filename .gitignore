@@ -34,6 +34,11 @@ build/
 # Archivos generados por PyInstaller
 # (Los .spec en packaging/ sí se versionan)
 
+# Archivos de release (hashes, notas temporales)
+*-SHA256.txt
+RELEASE-*.txt
+RELEASE-NOTES-*.md
+
 # Archivos de sistema operativo
 .DS_Store
 Thumbs.db 

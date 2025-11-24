@@ -504,18 +504,86 @@ if ($isAdmin) {
 
 ---
 
+## Generación de Hashes SHA256 para Release
+
+### Proceso Automático
+
+```powershell
+# Generar archivo de hashes (ejecutar desde raíz del proyecto)
+$version = "0.2.0"
+$outputDir = ".\build\release"
+
+# Crear directorio si no existe
+New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
+
+# Generar hashes
+$hashFile = "$outputDir\RELEASE-$version-SHA256.txt"
+@"
+# Hashes de artefactos release $version (SHA256)
+# Fecha: $(Get-Date -Format "yyyy-MM-dd")
+# Formato: <SHA256> <Ruta relativa>
+"@ | Out-File -FilePath $hashFile -Encoding utf8
+
+# Calcular hash del ejecutable principal
+if (Test-Path ".\dist\ori-cc-servicios\ori-cc-servicios.exe") {
+    $hash = (Get-FileHash -Algorithm SHA256 ".\dist\ori-cc-servicios\ori-cc-servicios.exe").Hash
+    "$hash dist/ori-cc-servicios/ori-cc-servicios.exe" | Out-File -FilePath $hashFile -Append -Encoding utf8
+}
+
+# Calcular hash del instalador
+if (Test-Path ".\installer\ori-cc-servicios-setup.exe") {
+    $hash = (Get-FileHash -Algorithm SHA256 ".\installer\ori-cc-servicios-setup.exe").Hash
+    "$hash installer/ori-cc-servicios-setup.exe" | Out-File -FilePath $hashFile -Append -Encoding utf8
+}
+
+Write-Host "✓ Archivo de hashes generado: $hashFile" -ForegroundColor Green
+Get-Content $hashFile
+```
+
+### Verificación de Hashes
+
+```powershell
+# Descargar y verificar con script incluido
+pwsh ./verify_release_hashes.ps1 -ReleaseVersion $version -HashFile "$outputDir\RELEASE-$version-SHA256.txt"
+```
+
+### Publicación en GitHub Release
+
+1. **Subir assets manualmente** (interfaz web):
+   - `installer\ori-cc-servicios-setup.exe`
+   - `build\release\RELEASE-0.2.0-SHA256.txt`
+
+2. **Subir con GitHub CLI** (automatizado):
+```powershell
+gh release upload v0.2.0 `
+  .\installer\ori-cc-servicios-setup.exe `
+  .\build\release\RELEASE-0.2.0-SHA256.txt
+```
+
+### Notas Importantes
+
+- ⚠️ **NO versionar** archivos `*-SHA256.txt` en Git (ya están en `.gitignore`)
+- ✅ **Generar bajo demanda** en `build/release/` antes de publicar
+- ✅ **Script de verificación** (`verify_release_hashes.ps1`) SÍ está versionado
+- ✅ **Archivo de hashes** solo existe como asset del release en GitHub
+
+---
+
 ## Checklist de Validación Final
 
 Antes de distribuir el instalador:
 
 ```
-[ ] Versión actualizada a 0.1.0 en todos los archivos
+[ ] Versión actualizada en todos los archivos (setup.py, config.py, installer.iss)
+[ ] CHANGELOG.md actualizado con nueva versión
 [ ] config.example.json existe y es válido
 [ ] setup_mysql_user.sql existe
 [ ] Ejecutables compilados con PyInstaller
 [ ] Directorio installer/ contiene ori-cc-servicios-setup.exe
-[ ] Tamaño del instalador es razonable (30-100 MB)
+[ ] Tamaño del instalador es razonable (50-100 MB)
 [ ] Installer.iss compila sin errores
+[ ] Archivo de hashes generado en build/release/
+[ ] Hashes verificados con verify_release_hashes.ps1
 [ ] Instalación en máquina limpia funciona
 [ ] Directorio C:\ProgramData\OPTIMUSOFT se valida correctamente
 [ ] config.json se crea desde plantilla
@@ -526,6 +594,8 @@ Antes de distribuir el instalador:
 [ ] Mensajes de error son claros y en español
 [ ] No hay accesos directos creados
 [ ] No se ejecuta aplicación automáticamente
+[ ] Tag creado y pusheado: git tag -a v0.X.X -m "Release 0.X.X"
+[ ] Release publicado en GitHub con assets (instalador + hashes)
 ```
 
 ---
@@ -535,6 +605,21 @@ Antes de distribuir el instalador:
 ```powershell
 # Compilar instalador
 & 'C:\Program Files (x86)\Inno Setup 6\iscc.exe' packaging\installer.iss
+
+# Generar hashes para release
+$version = "0.2.0"
+New-Item -ItemType Directory -Force -Path ".\build\release" | Out-Null
+$hashFile = ".\build\release\RELEASE-$version-SHA256.txt"
+@"
+# Hashes release $version (SHA256)
+# Fecha: $(Get-Date -Format "yyyy-MM-dd")
+"@ | Out-File -FilePath $hashFile -Encoding utf8
+(Get-FileHash -Algorithm SHA256 ".\dist\ori-cc-servicios\ori-cc-servicios.exe").Hash + " dist/ori-cc-servicios/ori-cc-servicios.exe" | Out-File -Append $hashFile -Encoding utf8
+(Get-FileHash -Algorithm SHA256 ".\installer\ori-cc-servicios-setup.exe").Hash + " installer/ori-cc-servicios-setup.exe" | Out-File -Append $hashFile -Encoding utf8
+Write-Host "✓ Hashes: $hashFile"
+
+# Verificar hashes
+pwsh ./verify_release_hashes.ps1 -ReleaseVersion $version -HashFile $hashFile
 
 # Crear directorio base
 New-Item -ItemType Directory -Path "C:\ProgramData\OPTIMUSOFT" -Force
@@ -551,10 +636,11 @@ Test-Path "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\ori-cc-servicios.exe"
 # Limpiar compilaciones anteriores
 Remove-Item -Recurse -Force "dist\ori-cc-servicios"
 Remove-Item -Recurse -Force "installer\ori-cc-servicios-setup.exe"
+Remove-Item -Recurse -Force "build\release"
 ```
 
 ---
 
-**Última actualización**: Octubre 2025
-**Versión del instalador**: 0.1.0
+**Última actualización**: Noviembre 2025
+**Versión del instalador**: 0.2.0
 **Inno Setup requerido**: 6.0 o superior
