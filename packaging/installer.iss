@@ -16,7 +16,7 @@
 #define MyAppExeName "ori-cc-servicios.exe"
 #define MyAppSetupName "ori-cc-servicios-setup.exe"
 #define MyAppGUID "{{A5B8C9D0-1234-5678-90AB-CDEF12345678}}"
-#define MyAppBaseDir "C:\ProgramData\OPTIMUSOFT"
+#define MyAppBaseDir "C:\Program Files\OPTIMUSOFT"
 #define MyAppFolderName "ori-cc-servicios"
 #define MyAppInstallDir MyAppBaseDir + "\" + MyAppFolderName
 
@@ -64,7 +64,7 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 ; DIRECTORIOS
 ; ============================================================================
 ; La carpeta {app} se expande a {#MyAppInstallDir}
-;   Estructura final: C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\
+;   Estructura final: C:\Program Files\OPTIMUSOFT\ori-cc-servicios\
 
 ; ============================================================================
 ; SECCIÓN [Files] - ARCHIVOS A INSTALAR
@@ -144,7 +144,7 @@ Name: "{app}\docs"; Permissions: admins-full system-full; \
 // Constantes de configuración
 // ========================================================================
 const
-  REQUIRED_BASE_DIR = 'C:\ProgramData\OPTIMUSOFT';
+  REQUIRED_BASE_DIR = 'C:\Program Files\OPTIMUSOFT';
   CRLF = #13#10;
   INSTRUCTIONS_FILENAME = 'INSTRUCCIONES_CONFIGURACION.txt';
   CONFIG_FILENAME = 'config.json';
@@ -266,14 +266,12 @@ begin
     MsgBox('ADVERTENCIA: Faltan archivos criticos para la instalacion:' + CRLF + CRLF +
            MissingFiles + CRLF +
            'La aplicacion no funcionara correctamente hasta que estos archivos esten presentes.' + CRLF + CRLF +
-           'Consulte las instrucciones en: ' + INSTRUCTIONS_FILENAME,
+           'Consulte a soporte técnico de OptimuSoft SAS,
            mbError, MB_OK);
   end
   else
   begin
-    MsgBox('Instalacion completada correctamente.' + CRLF + CRLF +
-           'Consulte las instrucciones de configuracion en:' + CRLF +
-           INSTRUCTIONS_FILENAME,
+    MsgBox('Instalacion completada correctamente.',
            mbInformation, MB_OK);
   end;
 end;
