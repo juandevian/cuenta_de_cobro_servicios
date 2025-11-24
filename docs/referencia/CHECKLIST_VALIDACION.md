@@ -73,7 +73,7 @@ New-Item -Path "C:\ProgramData\OPTIMUSOFT" -ItemType Directory -Force
 - Ejecutar `installer/ori-cc-servicios-setup.exe` como Administrador
 
 **Verificar**:
-- [ ] Instalación exitosa en `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\`
+- [ ] Instalación exitosa en `C:\Program Files\OPTIMUSOFT\orion-cc-servicios\`
 - [ ] Archivos copiados:
   - [ ] `ori-cc-servicios.exe`
   - [ ] `set_password.exe`
@@ -93,7 +93,7 @@ New-Item -Path "C:\ProgramData\OPTIMUSOFT" -ItemType Directory -Force
 **Como DBA**:
 ```sql
 -- Editar y ejecutar
-mysql -u root -p < "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\docs\setup_mysql_user.sql"
+mysql -u root -p < "C:\Program Files\OPTIMUSOFT\orion-cc-servicios\docs\setup_mysql_user.sql"
 
 -- Verificar usuario creado
 SHOW GRANTS FOR 'ori_app_user'@'localhost';
@@ -118,7 +118,7 @@ SHOW GRANTS FOR 'ori_app_user'@'localhost';
 **Registrar contraseña**:
 ```powershell
 # Ejecutar desde instalación
-C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\set_password.exe
+C:\Program Files\OPTIMUSOFT\orion-cc-servicios\set_password.exe
 
 # O desde Menú Inicio:
 # Orión CC Servicios > Configurar Contraseña
@@ -131,7 +131,7 @@ C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\set_password.exe
 ### 6. Ejecutar Aplicación
 
 ```powershell
-C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\ori-cc-servicios.exe
+C:\Program Files\OPTIMUSOFT\orion-cc-servicios\ori-cc-servicios.exe
 ```
 
 **Resultado esperado**:
@@ -160,7 +160,7 @@ SHOW GRANTS FOR 'ori_app_user'@'localhost';
 ### Permisos Windows
 ```powershell
 # Verificar ACLs de la carpeta
-icacls "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios"
+icacls "C:\Program Files\OPTIMUSOFT\orion-cc-servicios"
 
 # Debe mostrar solo Admin y SYSTEM con acceso completo
 ```

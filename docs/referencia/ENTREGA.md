@@ -59,11 +59,13 @@
 - [ ] **Instalación Limpia**
   - [ ] Se ejecuta sin errores
   - [ ] Se muestra en español
-  - [ ] Crea directorio `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios`
+  - [ ] Crea directorio `C:\Program Files\OPTIMUSOFT\orion-cc-servicios\`
   - [ ] Copia todos los archivos
   - [ ] Crea atajo en Menú Inicio
   - [ ] Genera `INSTRUCCIONES_CONFIGURACION.txt`
   - [ ] Abre notas post-instalación automáticamente
+    - [ ] (Opcional) Si existe `c:\Panorama.Net\Dat\` verificar que se haya creado `PlantillasServiciosConsumo`. (Advertir si falta)
+
 
 - [ ] **Archivos Criticos**
   - [ ] `ori-cc-servicios.exe` presente
@@ -159,7 +161,7 @@
   - [ ] `config.example.json`
 
 - [ ] **Control de Versión**
-  - [ ] Version tag creado (v0.2.0)
+  - [ ] Version tag creado (v0.2.1)
   - [ ] CHANGELOG.md actualizado
   - [ ] Git repository actualizado
   - [ ] Release notes preparadas
@@ -227,13 +229,13 @@
 
 Antes de ejecutar en producción o distribuir internamente validar que los artefactos no fueron alterados.
 
-1. Descargar `ori-cc-servicios-setup.exe` y `RELEASE-0.2.0-SHA256.txt` desde la página de Releases.
+1. Descargar `ori-cc-servicios-setup.exe` y `RELEASE-0.2.1-SHA256.txt` desde la página de Releases.
 2. Ubicar ambos archivos en la misma carpeta.
 3. Ejecutar verificación automática o manual.
 
 ### Método Automático (PowerShell)
 ```powershell
-pwsh ./verify_release_hashes.ps1 -ReleaseVersion 0.2.0 -HashFile RELEASE-0.2.0-SHA256.txt
+pwsh ./verify_release_hashes.ps1 -ReleaseVersion 0.2.1 -HashFile RELEASE-0.2.1-SHA256.txt
 ```
 Código de salida: 0 (ok), 1 (mismatch), 2 (archivo de hashes no encontrado).
 
@@ -252,7 +254,7 @@ sha256sum installer/ori-cc-servicios-setup.exe
 
 ### Script rápido (Linux/macOS)
 ```bash
-grep -v '^#' RELEASE-0.2.0-SHA256.txt | while read hash path; do \
+grep -v '^#' RELEASE-0.2.1-SHA256.txt | while read hash path; do \
   calc=$(sha256sum "$path" | awk '{print $1}'); \
   [ "$calc" = "$hash" ] && echo "OK  $path" || echo "FAIL $path"; \
 done
@@ -278,7 +280,8 @@ Objetivo: asegurar que un entorno Windows sin configuraciones previas instala y 
 1. Descargar instalador y archivo de hashes desde Releases.
 2. Verificar hashes (sección anterior).
 3. Ejecutar instalador como Administrador.
-4. Comprobar creación de `C:\\ProgramData\\OPTIMUSOFT\\ori-cc-servicios\\`.
+4. Comprobar creación de `C:\Program Files\OPTIMUSOFT\orion-cc-servicios\`.
+  - Si existe `c:\Panorama.Net\Dat\` validar creación de `PlantillasServiciosConsumo`.
 5. Abrir archivo `INSTRUCCIONES_CONFIGURACION.txt` generado.
 6. Copiar/editar `config.json` con parámetros de prueba (host accesible desde VM).
 7. Ejecutar `set_password.exe` y registrar contraseña (Credential Manager).
@@ -290,7 +293,8 @@ Objetivo: asegurar que un entorno Windows sin configuraciones previas instala y 
 ### Evidencias a Capturar
 - Pantalla verificación de hashes (OK).
 - Instalador completado.
-- Estructura de carpeta ProgramData.
+- Estructura de carpeta instalación en `C:\Program Files\OPTIMUSOFT\orion-cc-servicios\`.
+- (Opcional) `c:\Panorama.Net\Dat\PlantillasServiciosConsumo` creada.
 - Ejecución de `set_password.exe` (confirmación).
 - Ventana principal de la aplicación (versión visible si aplica).
 - Resultado de importación (antes/después en DB).
@@ -368,4 +372,4 @@ Objetivo: asegurar que un entorno Windows sin configuraciones previas instala y 
 
 ---
 
-**Versión**: 0.1.0 | **Fecha**: Oct 2025 | **Estado**: Consolidado
+**Versión**: 0.2.1 | **Fecha**: Nov 2025 | **Estado**: Consolidado

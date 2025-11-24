@@ -127,7 +127,7 @@ El script `Build-Installer.ps1` valida:
 ✓ Ejecutables compilados existen
 ✓ installer.iss es script válido
 ✓ Versiones consistentes (0.1.0)
-✓ Directorio base C:\ProgramData\OPTIMUSOFT
+✓ Ruta destino estándar: C:\Program Files\OPTIMUSOFT\orion-cc-servicios\
 ✓ Archivo instalador generado correctamente
 ✓ Tamaño del instalador (compresión activa)
 ```
@@ -143,7 +143,7 @@ Usuario ejecuta setup
         ↓
 InitializeSetup()
 ├─ TPrerequisiteValidator.ValidateAll()
-└─ Verifica C:\ProgramData\OPTIMUSOFT
+└─ Verifica existencia opcional de c:\Panorama.Net\Dat\ (para crear subcarpeta de plantillas)
         ↓
     ¿Existe?
     /     \
@@ -211,10 +211,10 @@ Generate()
 
 ### Máquina Destino
 - Windows 7/10/11 (32 o 64-bit)
-- Directorio `C:\ProgramData\OPTIMUSOFT` (debe crearse)
 - Permisos de administrador
 - .NET Framework
 - MySQL Server (local o remoto)
+- (Opcional) Estructura: `c:\Panorama.Net\Dat\` para autogenerar `PlantillasServiciosConsumo`
 
 ---
 
@@ -233,7 +233,7 @@ installer/ori-cc-servicios-setup.exe
 ### Estructura Post-Instalación
 
 ```
-C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\
+C:\Program Files\OPTIMUSOFT\orion-cc-servicios\
 ├── ori-cc-servicios.exe                  (ejecutable)
 ├── set_password.exe                      (herramienta)
 ├── config.json                           (configuración)
@@ -266,7 +266,8 @@ C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\
 ### Testing Post-Instalación
 ```
 [ ] Instalación en máquina limpia funciona
-[ ] C:\ProgramData\OPTIMUSOFT se valida
+[ ] Instalación crea: C:\Program Files\OPTIMUSOFT\orion-cc-servicios\
+[ ] Si existe c:\Panorama.Net\Dat\ se crea subcarpeta PlantillasServiciosConsumo
 [ ] config.json se crea desde plantilla
 [ ] INSTRUCCIONES_CONFIGURACION.txt se genera
 [ ] Notepad abre automáticamente
@@ -286,7 +287,7 @@ C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\
 
 ### Permisos de Directorios
 ```
-C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\
+C:\Program Files\OPTIMUSOFT\orion-cc-servicios\
 ├─ Administradores: Control Total
 ├─ Sistema: Control Total
 └─ Usuarios: Lectura + Ejecución (sin escritura)

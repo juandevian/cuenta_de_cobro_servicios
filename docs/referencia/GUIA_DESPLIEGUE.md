@@ -13,7 +13,6 @@
                           ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ PASO 2: Admin Windows - Instalar Aplicación                │
-│ ▸ Crear: C:\ProgramData\OPTIMUSOFT                         │
 │ ▸ Ejecutar: ori-cc-servicios-setup.exe                     │
 │ ▸ Copia archivos y establece permisos                      │
 └─────────────────────────────────────────────────────────────┘
@@ -21,7 +20,7 @@
                           ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ PASO 3A: Admin Windows - Editar config.json                │
-│ ▸ Ubicación: C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\   │
+│ ▸ Ubicación: C:\Program Files\OPTIMUSOFT\orion-cc-servicios\ │
 │ ▸ Valores: host, port, username, database                  │
 │ ▸ NO incluir contraseña aquí                               │
 └─────────────────────────────────────────────────────────────┘
@@ -53,8 +52,8 @@
 - `installer.iss` - Script de Inno Setup actualizado
 
 ### Generados por el Instalador
-- `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\config.json` - Configuración (sin secretos)
-- `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\INSTRUCCIONES_CONFIGURACION.txt` - Guía automática
+- `C:\Program Files\OPTIMUSOFT\orion-cc-servicios\config.json` - Configuración (sin secretos)
+- `C:\Program Files\OPTIMUSOFT\orion-cc-servicios\INSTRUCCIONES_CONFIGURACION.txt` - Guía automática
 
 ## Comandos Rápidos
 

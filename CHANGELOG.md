@@ -7,7 +7,29 @@ El formato sigue: https://keepachangelog.com/es/0.1.0/
 
 ## [Unreleased]
 
-Nada por ahora.
+## [0.2.1 Beta] - 2025-11-24
+
+### Added
+- ✨ **Lógica de integración opcional con Panorama.Net**: El instalador verifica automáticamente la existencia de `c:\Panorama.Net\Dat\` y crea la subcarpeta `PlantillasServiciosConsumo` si la estructura base está presente.
+- 📄 **Archivo de instrucciones post-instalación**: Se genera automáticamente `INSTRUCCIONES.txt` en la carpeta de instalación con guía de ubicación de plantillas Excel.
+- ⚠️ **Advertencias informativas**: Mensaje amigable durante la instalación si la estructura Panorama.Net no existe, con indicaciones para crearla manualmente si se requiere.
+
+### Changed
+- 📂 **Nueva ruta de instalación estándar**: Cambio de `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\` a `C:\Program Files\OPTIMUSOFT\orion-cc-servicios\` siguiendo convenciones de aplicaciones Windows.
+- 🔧 **Script de instalador mejorado**: Uso de `{autopf}` en lugar de `{pf}` para selección automática de carpeta Program Files según arquitectura 32/64 bits, eliminando warnings de compilación.
+
+### Fixed
+- 🐛 **Corrección de caracteres especiales**: Normalización de texto en mensajes del instalador para evitar problemas de codificación con acentos.
+
+### Documentation
+- 📚 **Documentación completamente actualizada**: 
+  - Todas las guías, referencias y documentos técnicos reflejan la nueva ruta de instalación `C:\Program Files\OPTIMUSOFT\orion-cc-servicios\`
+  - Actualización de `packaging/GUIA_COMPILACION.md`, `packaging/INSTALADOR_INNOSETUP.md`, y múltiples archivos en `docs/`
+  - Clarificación del comportamiento opcional de creación de carpeta Panorama.Net en guías de instalación
+
+### Technical
+- 🏗️ **Mejoras en script de compilación**: Actualización de validaciones en `packaging/Build-Installer.ps1` para verificar la nueva ruta de Program Files
+- 🎯 **Instalador Inno Setup optimizado**: Eliminación de procedimientos duplicados y mejora en manejo de errores post-instalación
 
 ## [0.2.0] - 2025-11-23
 

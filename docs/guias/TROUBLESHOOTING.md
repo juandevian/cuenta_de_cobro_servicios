@@ -417,4 +417,4 @@ Si el problema persiste, recopilar:
 
 ---
 
-**Versión**: 0.2.0 | **Última actualización**: Nov 2025
+**Versión**: 0.2.1 | **Última actualización**: Nov 2025

@@ -11,12 +11,12 @@
 ; ============================================================================
 
 #define MyAppName "Orion CC Servicios"
-#define MyAppVersion "0.2.0"
+#define MyAppVersion "0.2.1"
 #define MyAppPublisher "OptimuSoft SAS"
 #define MyAppExeName "ori-cc-servicios.exe"
 #define MyAppSetupName "ori-cc-servicios-setup.exe"
 #define MyAppGUID "{{A5B8C9D0-1234-5678-90AB-CDEF12345678}}"
-#define MyAppBaseDir "{pf}\OPTIMUSOFT"
+#define MyAppBaseDir "{autopf}\OPTIMUSOFT"
 #define MyAppFolderName "ori-cc-servicios"
 #define MyAppInstallDir MyAppBaseDir + "\" + MyAppFolderName
 
@@ -144,7 +144,7 @@ Name: "{app}\docs"; Permissions: admins-full system-full; \
 // Constantes de configuración
 // ========================================================================
 const
-  REQUIRED_BASE_DIR = '{pf}\OPTIMUSOFT';
+  REQUIRED_BASE_DIR = '{autopf}\OPTIMUSOFT';
   CRLF = #13#10;
   INSTRUCTIONS_FILENAME = 'INSTRUCCIONES_CONFIGURACION.txt';
   CONFIG_FILENAME = 'config.json';
@@ -258,9 +258,6 @@ begin
         MB_OK
       );
     end;
-    
-    // Continuar con el post-install normal
-    DoPostInstall(ExpandConstant('{app}'));
   end;
 end;
 
@@ -307,7 +304,7 @@ begin
     MsgBox('ADVERTENCIA: Faltan archivos criticos para la instalacion:' + CRLF + CRLF +
            MissingFiles + CRLF +
            'La aplicacion no funcionara correctamente hasta que estos archivos esten presentes.' + CRLF + CRLF +
-           'Consulte a soporte técnico de OptimuSoft SAS,
+           'Consulte a soporte tecnico de OptimuSoft SAS.',
            mbError, MB_OK);
   end
   else
@@ -330,20 +327,6 @@ end;
 function InitializeSetup: Boolean;
 begin
   Result := ValidatePrerequisites(REQUIRED_BASE_DIR);
-end;
-
-{
-  Función: CurStepChanged
-  Propósito: Ejecutar lógica personalizada en diferentes etapas
-  Parámetro: CurStep indica en qué etapa estamos
-  Responsabilidad: Orquestar tareas post-instalación
-}
-procedure CurStepChanged(CurStep: TSetupStep);
-begin
-  if CurStep = ssPostInstall then
-  begin
-    DoPostInstall(ExpandConstant('{app}'));
-  end;
 end;
 
 // ========================================================================

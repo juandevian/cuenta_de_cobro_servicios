@@ -10,7 +10,7 @@
 
 <div align="center">
 
-**[📦 Descargar ori-cc-servicios-setup.exe v0.2.0](https://github.com/juandevian/cuenta_de_cobro_servicios/releases/latest/download/ori-cc-servicios-setup.exe)**
+**[📦 Descargar ori-cc-servicios-setup.exe v0.2.1](https://github.com/juandevian/cuenta_de_cobro_servicios/releases/latest/download/ori-cc-servicios-setup.exe)**
 
 *Windows 10/11 (64-bit) | ~50 MB*
 
@@ -53,7 +53,7 @@
 
 ---
 
-## 🐛 Problemas Conocidos (v0.2.0 Beta)
+## 🐛 Problemas Conocidos (v0.2.1 Beta)
 
 - **SmartScreen/Antivirus**: Algunos antivirus pueden marcar el instalador como sospechoso (falso positivo). Ver [solución arriba](#️-problema-común-smartscreen-de-windows).
 - **Configuración MySQL**: El usuario de base de datos debe tener permisos sobre la tabla `oriitemsprogramafact`. Contacta a soporte técnico si hay errores de conexión.
@@ -247,7 +247,7 @@ Se incluye el script `verify_release_hashes.ps1` que compara los hashes calculad
 
 ```powershell
 # En la raíz del proyecto (o carpeta donde estén artefactos y archivo de hashes)
-pwsh ./verify_release_hashes.ps1 -ReleaseVersion 0.2.0 -HashFile RELEASE-0.2.0-SHA256.txt
+pwsh ./verify_release_hashes.ps1 -ReleaseVersion 0.2.1 -HashFile RELEASE-0.2.1-SHA256.txt
 ```
 
 Salida esperada:
@@ -255,7 +255,7 @@ Salida esperada:
 OK  dist/ori-cc-servicios/ori-cc-servicios.exe
 OK  installer/ori-cc-servicios-setup.exe
 
-Todos los hashes coinciden para release v0.2.0.
+Todos los hashes coinciden para release v0.2.1.
 ```
 
 Código de salida:
@@ -269,7 +269,7 @@ Código de salida:
 Get-FileHash -Algorithm SHA256 dist\ori-cc-servicios\ori-cc-servicios.exe
 Get-FileHash -Algorithm SHA256 installer\ori-cc-servicios-setup.exe
 ```
-Comparar las columnas `Hash` con el contenido de `RELEASE-0.2.0-SHA256.txt`.
+Comparar las columnas `Hash` con el contenido de `RELEASE-0.2.1-SHA256.txt`.
 
 ### 🐧 Verificación en Linux / macOS
 
@@ -281,7 +281,7 @@ sha256sum installer/ori-cc-servicios-setup.exe
 ```
 Si se quiere automatizar:
 ```bash
-grep -v '^#' RELEASE-0.2.0-SHA256.txt | while read hash path; do \
+grep -v '^#' RELEASE-0.2.1-SHA256.txt | while read hash path; do \
   calc=$(sha256sum "$path" | awk '{print $1}'); \
   [ "$calc" = "$hash" ] && echo "OK  $path" || echo "FAIL $path"; \
 done
@@ -350,7 +350,9 @@ La aplicación se conecta con un usuario que **solo** tiene permisos sobre la ta
 ### ✅ Permisos NTFS Restrictivos (Producción)
 
 El instalador configura automáticamente:
-- `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\` accesible solo por Administradores/SYSTEM
+- `C:\Program Files\OPTIMUSOFT\orion-cc-servicios\` (ruta estándar de aplicaciones)
+- Crea (si existe la estructura base) `c:\Panorama.Net\Dat\PlantillasServiciosConsumo` al finalizar la instalación
+- Muestra advertencia si falta `c:\Panorama.Net\Dat\` indicando que debe crearse manualmente
 - Los archivos de configuración no son legibles por usuarios estándar
 
 ---
@@ -433,8 +435,10 @@ Proyecto propietario - OPTIMUSOFT © 2025
                           ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ PASO 2: Admin Windows - Instalar Aplicación                │
-│ ▸ Verificar: C:\ProgramData\OPTIMUSOFT                         │
+│ ▸ (Opcional) Verificar: c:\Panorama.Net\Dat\               │
 │ ▸ Ejecutar: ori-cc-servicios-setup.exe                     │
+│ ▸ Instalación en: C:\Program Files\OPTIMUSOFT\orion-cc-servicios\ |
+│ ▸ Si falta c:\Panorama.Net\Dat\ se mostrará advertencia    │
 └─────────────────────────────────────────────────────────────┘
                           │
                           ▼

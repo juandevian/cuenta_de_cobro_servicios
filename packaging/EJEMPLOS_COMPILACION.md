@@ -28,7 +28,7 @@ Modo recomendado para compilaciones de producción. Ejecuta todas las validacion
 2. ✅ Spanish.isl disponible
 3. ✅ Archivos requeridos presentes
 4. ✅ JSON válido en config.example.json
-5. ✅ Versiones consistentes (0.2.0)
+5. ✅ Versiones consistentes (0.2.1)
 6. ✅ Integridad de archivos
 7. ✅ Directorio base existe
 8. ✅ Compilación exitosa
@@ -37,7 +37,7 @@ Modo recomendado para compilaciones de producción. Ejecuta todas las validacion
 ```
 ════════════════════════════════════════════════════════════════════
   Build-Installer.ps1 - Orión CC Servicios
-                        v0.2.0
+                        v0.2.1
 ════════════════════════════════════════════════════════════════════
 
 ℹ Modo: Full
@@ -71,16 +71,16 @@ Modo recomendado para compilaciones de producción. Ejecuta todas las validacion
 ✓ Sección [Languages] encontrada
 
 ══════════════════════════════════════════════════════════════════════════
-  Validando Directorio Base ProgramData
+  Validando Ruta de Instalación
 ══════════════════════════════════════════════════════════════════════════
-✓ Directorio base existe: C:\ProgramData\OPTIMUSOFT
-✓ Permisos verificados
+✓ Ruta destino definida: C:\Program Files\OPTIMUSOFT\orion-cc-servicios\
+ℹ Se validará creación durante instalación
 
 ══════════════════════════════════════════════════════════════════════════
   Validando Consistencia de Versiones
 ══════════════════════════════════════════════════════════════════════════
-✓ setup.py: 0.2.0
-✓ installer.iss: 0.2.0
+✓ setup.py: 0.2.1
+✓ installer.iss: 0.2.1
 
 ══════════════════════════════════════════════════════════════════════════
   Limpiando Archivos Anteriores
@@ -133,7 +133,7 @@ Modo para verificar que todo está listo ANTES de compilar. Útil para CI/CD pip
 ```
 ════════════════════════════════════════════════════════════════════
   Build-Installer.ps1 - Orión CC Servicios
-                        v0.2.0
+                        v0.2.1
 ════════════════════════════════════════════════════════════════════
 
 ℹ Modo: Validate
@@ -187,7 +187,7 @@ Modo para desarrollo iterativo. Omite validaciones para compilar más rápido.
 ```
 ════════════════════════════════════════════════════════════════════
   Build-Installer.ps1 - Orión CC Servicios
-                        v0.2.0
+                        v0.2.1
 ════════════════════════════════════════════════════════════════════
 
 ℹ Modo: QuickBuild
@@ -245,7 +245,7 @@ Modo para hacer limpieza profunda y reconstruir desde cero.
 ```
 ════════════════════════════════════════════════════════════════════
   Build-Installer.ps1 - Orión CC Servicios
-                        v0.2.0
+                        v0.2.1
 ════════════════════════════════════════════════════════════════════
 
 ℹ Modo: Clean
@@ -342,7 +342,7 @@ if (Test-Path $isccExe) {
 
 ```powershell
 # Error
-Access denied: C:\ProgramData\OPTIMUSOFT
+Access denied: C:\Program Files\OPTIMUSOFT\orion-cc-servicios\
 
 # Solución: Ejecutar como administrador
 # PowerShell > Menú Inicio > Click derecho > "Ejecutar como administrador"
@@ -513,7 +513,7 @@ Start-Process $InstallerPath
 Start-Sleep -Seconds 30
 
 # 5. Validar instalación
-$appDir = "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios"
+$appDir = "C:\Program Files\OPTIMUSOFT\orion-cc-servicios"
 if (Test-Path $appDir) {
     Write-Host "✓ Instalación exitosa"
     Write-Host "  Directorio: $appDir"
@@ -542,5 +542,5 @@ cd packaging; iscc.exe installer.iss               # Evitar rutas hardcodeadas
 
 ---
 
-**Versión**: 0.2.0  
+**Versión**: 0.2.1  
 **Actualizado**: Noviembre 2025

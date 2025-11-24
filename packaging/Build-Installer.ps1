@@ -134,10 +134,10 @@ function Test-RequiredFiles {
     return $allValid
 }
 
-function Test-ProgramDataDirectory {
-    Write-Header "Validando Directorio Base ProgramData"
+function Test-InstallationDirectory {
+    Write-Header "Validando Directorio Base Program Files"
     
-    $baseDir = "C:\ProgramData\OPTIMUSOFT"
+    $baseDir = "C:\Program Files\OPTIMUSOFT"
     
     if (Test-Path $baseDir) {
         Write-Success "Directorio base existe: $baseDir"
@@ -152,10 +152,9 @@ function Test-ProgramDataDirectory {
             return $false
         }
     } else {
-        Write-Warning "Directorio base NO existe: $baseDir"
+        Write-Info "Directorio base NO existe: $baseDir"
         Write-Info "Se creará automáticamente durante la instalación"
-        Write-Warning "Debe existir ANTES de ejecutar el instalador final"
-        return $false
+        return $true
     }
 }
 
@@ -168,7 +167,7 @@ function Test-VersionConsistency {
     # Verificar en setup.py
     try {
         $setupContent = Get-Content (Join-Path $projectRoot "setup.py") -Raw
-        if ($setupContent -match 'version\s*=\s*["\']([^"\']+)["\']') {
+        if ($setupContent -match "version\s*=\s*[`"']([^`"']+)[`"']") {
             $setupVersion = $matches[1]
             if ($setupVersion -eq $versionExpected) {
                 Write-Success "setup.py: $setupVersion"
@@ -317,7 +316,7 @@ function Start-FullBuild {
     }
     
     # Paso 4: Validar directorio base
-    Test-ProgramDataDirectory | Out-Null
+    Test-InstallationDirectory | Out-Null
     
     # Paso 5: Validar versiones
     if (-not (Test-VersionConsistency)) {
@@ -348,7 +347,7 @@ function Start-ValidationOnly {
         (Test-InnoSetupInstallation),
         (Test-RequiredFiles),
         (Test-FileIntegrity),
-        (Test-ProgramDataDirectory),
+        (Test-InstallationDirectory),
         (Test-VersionConsistency)
     )
     
@@ -411,41 +410,36 @@ function Start-QuickBuild {
 # ============================================================================
 
 function Main {
-    Write-Host "`n"
-    Write-Host "╔════════════════════════════════════════════════════════════════════╗"
-    Write-Host "║          Build-Installer.ps1 - Orión CC Servicios                ║"
-    Write-Host "║                        v0.1.0                                     ║"
-    Write-Host "╚════════════════════════════════════════════════════════════════════╝"
-    
+    Write-Host ""
+    Write-Host "====================================" -ForegroundColor Cyan
+    Write-Host " Build-Installer.ps1 - Orion CC Servicios" -ForegroundColor Cyan
+    Write-Host " Version: 0.1.0" -ForegroundColor Cyan
+    Write-Host "====================================" -ForegroundColor Cyan
+
     Write-Info "Modo: $BuildMode"
     Write-Info "Directorio: $projectRoot"
     Write-Info "Perfil: $([Security.Principal.WindowsIdentity]::GetCurrent().Name)"
-    
-    # Verificar permisos de administrador
-    $isAdmin = [Security.Principal.WindowsIdentity]::GetCurrent() | 
-        ForEach-Object { (New-Object Security.Principal.WindowsPrincipal $_).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator) }
-    
+
+    $isAdmin = [Security.Principal.WindowsIdentity]::GetCurrent() |
+        ForEach-Object {
+            (New-Object Security.Principal.WindowsPrincipal $_).IsInRole(
+                [Security.Principal.WindowsBuiltInRole]::Administrator
+            )
+        }
+
     if (-not $isAdmin) {
-        Write-Warning "Este script funciona mejor ejecutado como administrador"
+        Write-Warning "Se recomienda ejecutar como administrador"
     }
-    
-    # Ejecutar según modo
+
     $result = switch ($BuildMode) {
         "Full" { Start-FullBuild }
         "Validate" { Start-ValidationOnly }
-        "Clean" { Start-CleanBuild; return $true }
+        "Clean" { Start-CleanBuild; $true }
         "QuickBuild" { Start-QuickBuild }
-        default { Write-Error "Modo desconocido: $BuildMode"; return $false }
+        default { Write-Error "Modo desconocido: $BuildMode"; $false }
     }
-    
-    Write-Host "`n"
-    
-    # Retornar código de salida
-    if ($result) {
-        exit 0
-    } else {
-        exit 1
-    }
+
+    if ($result) { exit 0 } else { exit 1 }
 }
 
 # Ejecutar main

@@ -85,9 +85,10 @@ ContentGenerator := TInstructionContentGenerator.Create(FAppPath, MyAppExeName);
 ```
 
 **Flujo**:
-1. Verifica si `C:\ProgramData\OPTIMUSOFT` existe
-2. Si no existe, muestra error y retorna `False`
-3. Si existe, retorna `True` y continúa instalación
+1. Verifica instalación destino (`C:\Program Files\OPTIMUSOFT\orion-cc-servicios\`)
+2. Verifica opcionalmente si existe `c:\Panorama.Net\Dat\` para crear `PlantillasServiciosConsumo`
+3. Si falta la estructura Panorama.Net muestra advertencia (no bloquea instalación)
+4. Continúa instalación
 
 ### `TInstructionContentGenerator`
 
@@ -147,7 +148,7 @@ ContentGenerator := TInstructionContentGenerator.Create(FAppPath, MyAppExeName);
 ┌──────────────────────────────────┐
 │ InitializeSetup()                │
 │ ├─ TPrerequisiteValidator        │
-│ └─ Valida C:\ProgramData\OPTIMUSOFT
+│ └─ Valida estructura opcional c:\Panorama.Net\Dat\ (para carpeta de plantillas)
 └────────────┬─────────────────────┘
              │
         ¿Válido?
@@ -212,9 +213,9 @@ Las clases se instancian con parámetros específicos que definen su comportamie
 ## Manejo de Errores y Validación
 
 ### Validaciones Pre-Instalación
-- ✅ Verificar existencia de directorio base `C:\ProgramData\OPTIMUSOFT`
-- ✅ Mostrar mensaje de error claro si no existe
-- ✅ Cancelar instalación automáticamente
+- ✅ Directorio destino se crea en `C:\Program Files\OPTIMUSOFT\orion-cc-servicios\`
+- ✅ Si existe `c:\Panorama.Net\Dat\` se genera subcarpeta `PlantillasServiciosConsumo`
+- ✅ Si NO existe `c:\Panorama.Net\Dat\` se muestra advertencia (instalación no se cancela)
 
 ### Errores Post-Instalación
 - ✅ Manejo gracioso si no puede guardarse archivo de instrucciones
@@ -225,7 +226,7 @@ Las clases se instancian con parámetros específicos que definen su comportamie
 
 ### Permisos de Directorio
 ```
-C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\
+C:\Program Files\OPTIMUSOFT\orion-cc-servicios\
 ├─ Acceso Total: Administradores y Sistema
 ├─ Lectura/Ejecución: Usuarios regulares
 └─ Escritura: Solo binarios (protegidos)

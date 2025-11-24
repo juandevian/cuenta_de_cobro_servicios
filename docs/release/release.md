@@ -1,4 +1,4 @@
-# 🧾 Orión CC Servicios v0.2.0
+# 🧾 Orión CC Servicios v0.2.1
 
 **Sistema de importación de servicios de facturación desde Excel hacia Orión Plus**
 
@@ -10,7 +10,7 @@ Módulo que permite importar masivamente ítems de cobro por consumo desde archi
 
 <div align="center">
 
-### [📦 Descargar ori-cc-servicios-setup.exe](https://github.com/juandevian/cuenta_de_cobro_servicios/releases/download/v0.2.0/ori-cc-servicios-setup.exe)
+### [📦 Descargar ori-cc-servicios-setup.exe](https://github.com/juandevian/cuenta_de_cobro_servicios/releases/download/v0.2.1/ori-cc-servicios-setup.exe)
 
 **Windows 10/11 (64-bit) | ~70 MB**
 
@@ -28,7 +28,9 @@ Módulo que permite importar masivamente ítems de cobro por consumo desde archi
 
 1. **Descarga** el instalador usando el botón de arriba
 2. **Ejecuta como Administrador** (clic derecho > Ejecutar como administrador)
-3. **Sigue el asistente** de instalación (se instala en `C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\`)
+3. **Sigue el asistente** de instalación (se instala en `C:\Program Files\OPTIMUSOFT\orion-cc-servicios\`)
+   - Si existe `c:\Panorama.Net\Dat\` se crea `PlantillasServiciosConsumo` automáticamente
+   - Si NO existe esa estructura se mostrará una advertencia (puede crearla manualmente después)
 4. **Configura la conexión:**
    - Edita `config.json` con los datos de tu servidor MySQL
    - Ejecuta `set_password.exe` para registrar la contraseña de forma segura (Windows Credential Manager)
@@ -60,7 +62,7 @@ Debe coincidir con: `4A7DDBC8CB90ACD7AF723627EB79D3009F2EEE36D8A168317F0835BEDE2
 
 ---
 
-## 🆕 Novedades v0.2.0
+## 🆕 Novedades v0.2.1
 
 **Fecha:** 2025-11-23
 

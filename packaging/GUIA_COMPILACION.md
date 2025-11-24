@@ -25,7 +25,8 @@
 ### Requisitos del Sistema Destino
 - Windows 7, 10, u 11 (32 o 64-bit)
 - Privilegios de administrador
-- Directorio `C:\ProgramData\OPTIMUSOFT` (debe crearse previamente)
+- (Instalación) Directorio destino: `C:\Program Files\OPTIMUSOFT\orion-cc-servicios\` (creado por el instalador)
+- Estructura opcional externa requerida por operación: `c:\Panorama.Net\Dat\` (si existe se crea subcarpeta `PlantillasServiciosConsumo`)
 - MySQL Server accesible (local o remoto)
 
 ---
@@ -66,7 +67,7 @@ if (Test-Path "$innoPath\Languages\Spanish.isl") {
 
 ```powershell
 # En máquina destino, ejecutar como administrador
-$baseDir = "C:\ProgramData\OPTIMUSOFT"
+$baseDir = "C:\Program Files\OPTIMUSOFT\orion-cc-servicios"
 if (-not (Test-Path $baseDir)) {
     New-Item -ItemType Directory -Path $baseDir -Force
     Write-Host "✓ Directorio creado: $baseDir"
@@ -111,9 +112,9 @@ pyinstaller packaging/ori_cc_servicios.spec --clean
 
 ### Versionado
 ```
-[ ] CHANGELOG.md                                 (actualizado a v0.2.0)
-[ ] Version en setup.py                          (0.2.0)
-[ ] Version en installer.iss                     ({#MyAppVersion = "0.2.0"})
+[ ] CHANGELOG.md                                 (actualizado a v0.2.1)
+[ ] Version en setup.py                          (0.2.1)
+[ ] Version en installer.iss                     ({#MyAppVersion = "0.2.1"})
 ```
 
 **Verificación de versiones**:
@@ -257,7 +258,7 @@ if ($signature -like "*Inno Setup*") {
 1. **Crear Directorio Base**
 ```powershell
 # En máquina destino, como administrador
-$baseDir = "C:\ProgramData\OPTIMUSOFT"
+$baseDir = "C:\Program Files\OPTIMUSOFT\orion-cc-servicios"
 New-Item -ItemType Directory -Path $baseDir -Force
 Write-Host "✓ Directorio creado: $baseDir"
 ```
@@ -288,7 +289,7 @@ C:\temp\ori-cc-servicios-setup.exe
 ### Validaciones Post-Instalación
 
 ```powershell
-$appDir = "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios"
+$appDir = "C:\Program Files\OPTIMUSOFT\orion-cc-servicios"
 
 # Verificar archivos instalados
 $requiredFiles = @(
@@ -318,7 +319,7 @@ $acl.Access | ForEach-Object {
 
 # Verificar contenido de config.json
 Write-Host "`nValidando config.json:"
-$configPath = Join-Path $appDir "config.json"
+$configPath = "C:\Program Files\OPTIMUSOFT\orion-cc-servicios\config.json"
 $config = Get-Content $configPath | ConvertFrom-Json
 Write-Host "  - Host: $($config.host)"
 Write-Host "  - Puerto: $($config.port)"
@@ -349,7 +350,7 @@ C:\temp\ori-cc-servicios-setup.exe
 
 # 5. Verificar que config.json se preservó
 Write-Host "Verificando preservación de configuración:"
-$configPath = "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\config.json"
+$configPath = "C:\Program Files\OPTIMUSOFT\orion-cc-servicios\config.json"
 $config = Get-Content $configPath | ConvertFrom-Json
 Write-Host "✓ Configuración preservada" 
 Write-Host "  Usuario: $($config.username)"
@@ -364,11 +365,11 @@ Write-Host "  Usuario: $($config.username)"
 # Buscar "Orion CC Servicios" y desinstalar
 
 # Opción 2: Desde línea de comandos
-& 'C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\unins000.exe'
+& 'C:\Program Files\OPTIMUSOFT\orion-cc-servicios\unins000.exe'
 
 # Verificar que se desinstaló (excepto config.json)
 Write-Host "Verificando desinstalación:"
-$appDir = "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios"
+$appDir = "C:\Program Files\OPTIMUSOFT\orion-cc-servicios"
 if (-not (Test-Path "$appDir\ori-cc-servicios.exe")) {
     Write-Host "✓ Ejecutable removido"
 } else {
@@ -386,14 +387,14 @@ if (Test-Path "$appDir\config.json") {
 
 ## Solución de Problemas
 
-### Problema: "Directorio C:\ProgramData\OPTIMUSOFT no encontrado"
+### Problema: "Directorio C:\Program Files\OPTIMUSOFT no encontrado"
 
 **Síntoma**: El instalador muestra error y cancela.
 
 **Solución**:
 ```powershell
 # Crear directorio como administrador
-$baseDir = "C:\ProgramData\OPTIMUSOFT"
+$baseDir = "C:\Program Files\OPTIMUSOFT"
 New-Item -ItemType Directory -Path $baseDir -Force
 
 # Verificar permisos
@@ -415,7 +416,7 @@ Write-Host $acl
 **Solución**:
 ```powershell
 # Verificar permisos en directorio de instalación
-$appDir = "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios"
+$appDir = "C:\Program Files\OPTIMUSOFT\orion-cc-servicios"
 $acl = Get-Acl $appDir
 $acl | Format-List
 
@@ -464,7 +465,7 @@ if (Test-Path $spanishFile) {
 **Solución**:
 ```powershell
 # Verificar que PyInstaller compiló correctamente
-$exePath = "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\ori-cc-servicios.exe"
+$exePath = "C:\Program Files\OPTIMUSOFT\orion-cc-servicios\ori-cc-servicios.exe"
 
 # Ejecutar con error output
 try {
@@ -510,7 +511,7 @@ if ($isAdmin) {
 
 ```powershell
 # Generar archivo de hashes (ejecutar desde raíz del proyecto)
-$version = "0.2.0"
+$version = "0.2.1"
 $outputDir = ".\build\release"
 
 # Crear directorio si no existe
@@ -551,13 +552,13 @@ pwsh ./verify_release_hashes.ps1 -ReleaseVersion $version -HashFile "$outputDir\
 
 1. **Subir assets manualmente** (interfaz web):
    - `installer\ori-cc-servicios-setup.exe`
-   - `build\release\RELEASE-0.2.0-SHA256.txt`
+   - `build\release\RELEASE-0.2.1-SHA256.txt`
 
 2. **Subir con GitHub CLI** (automatizado):
 ```powershell
-gh release upload v0.2.0 `
+gh release upload v0.2.1 `
   .\installer\ori-cc-servicios-setup.exe `
-  .\build\release\RELEASE-0.2.0-SHA256.txt
+  .\build\release\RELEASE-0.2.1-SHA256.txt
 ```
 
 ### Notas Importantes
@@ -607,7 +608,7 @@ Antes de distribuir el instalador:
 & 'C:\Program Files (x86)\Inno Setup 6\iscc.exe' packaging\installer.iss
 
 # Generar hashes para release
-$version = "0.2.0"
+$version = "0.2.1"
 New-Item -ItemType Directory -Force -Path ".\build\release" | Out-Null
 $hashFile = ".\build\release\RELEASE-$version-SHA256.txt"
 @"
@@ -622,16 +623,16 @@ Write-Host "✓ Hashes: $hashFile"
 pwsh ./verify_release_hashes.ps1 -ReleaseVersion $version -HashFile $hashFile
 
 # Crear directorio base
-New-Item -ItemType Directory -Path "C:\ProgramData\OPTIMUSOFT" -Force
+New-Item -ItemType Directory -Path "C:\Program Files\OPTIMUSOFT" -Force
 
 # Ejecutar instalador como administrador
 Start-Process "installer\ori-cc-servicios-setup.exe" -Verb RunAs
 
 # Verificar instalación
-Test-Path "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\ori-cc-servicios.exe"
+Test-Path "C:\Program Files\OPTIMUSOFT\orion-cc-servicios\ori-cc-servicios.exe"
 
 # Desinstalar
-& 'C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\unins000.exe'
+& 'C:\Program Files\OPTIMUSOFT\orion-cc-servicios\unins000.exe'
 
 # Limpiar compilaciones anteriores
 Remove-Item -Recurse -Force "dist\ori-cc-servicios"
@@ -642,5 +643,5 @@ Remove-Item -Recurse -Force "build\release"
 ---
 
 **Última actualización**: Noviembre 2025
-**Versión del instalador**: 0.2.0
+**Versión del instalador**: 0.2.1
 **Inno Setup requerido**: 6.0 o superior

@@ -368,7 +368,7 @@ Start-Process "installer\ori-cc-servicios-setup.exe" -Verb RunAs
 3. **Verificar instalación**:
 ```powershell
 # Verificar archivos instalados
-ls "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\"
+ls "C:\Program Files\OPTIMUSOFT\orion-cc-servicios\"
 
 # Debería mostrar:
 # - ori-cc-servicios.exe
@@ -383,25 +383,25 @@ ls "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\"
    a. Configurar usuario MySQL (como DBA):
    ```powershell
    # Editar script SQL
-   notepad "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\docs\setup_mysql_user.sql"
+   notepad "C:\Program Files\OPTIMUSOFT\orion-cc-servicios\docs\setup_mysql_user.sql"
    
    # Ejecutar en MySQL
-   mysql -u root -p < "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\docs\setup_mysql_user.sql"
+   mysql -u root -p < "C:\Program Files\OPTIMUSOFT\orion-cc-servicios\docs\setup_mysql_user.sql"
    ```
 
    b. Editar config.json:
    ```powershell
-   notepad "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\config.json"
+   notepad "C:\Program Files\OPTIMUSOFT\orion-cc-servicios\config.json"
    ```
 
    c. Registrar contraseña:
    ```powershell
-   & "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\set_password.exe"
+   & "C:\Program Files\OPTIMUSOFT\orion-cc-servicios\set_password.exe"
    ```
 
 5. **Ejecutar aplicación**:
 ```powershell
-& "C:\ProgramData\OPTIMUSOFT\ori-cc-servicios\ori-cc-servicios.exe"
+& "C:\Program Files\OPTIMUSOFT\orion-cc-servicios\ori-cc-servicios.exe"
 ```
 
 6. **Verificar conexión**:
@@ -554,7 +554,7 @@ git push
 
 ```powershell
 # 1. Actualizar versión en installer.iss
-#    Cambiar: #define MyAppVersion "0.2.0"
+#    Cambiar: #define MyAppVersion "0.2.1"
 
 # 2. Actualizar CHANGELOG.md
 notepad CHANGELOG.md
@@ -570,7 +570,7 @@ iscc installer.iss
 Start-Process "installer\ori-cc-servicios-setup.exe" -Verb RunAs
 
 # 6. Etiquetar versión en Git
-git tag v0.2.0
+git tag v0.2.1
 git push --tags
 ```
 
