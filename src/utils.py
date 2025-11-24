@@ -3,7 +3,7 @@
 Utilidades varias para la aplicación
 """
 import os
-import sys
+import sys  
 
 def resource_path(relative_path: str) -> str:
     """Devuelve la ruta absoluta al recurso, funciona para desarrollo y para PyInstaller."""
@@ -14,3 +14,4 @@ def resource_path(relative_path: str) -> str:
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, relative_path)
+

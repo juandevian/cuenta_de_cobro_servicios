@@ -3,6 +3,7 @@ Ventana principal de la aplicación de importación de facturas
 """
 import pathlib
 import logging
+import os
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
                              QPushButton, QFileDialog, QLabel, QTextEdit, QProgressBar,
                              QMessageBox, QGroupBox, QTabWidget,
@@ -280,11 +281,28 @@ class MainWindow(QMainWindow):
 
     def select_file(self):
         """Abre diálogo para seleccionar archivo Excel"""
+
+        # Definir directorio inicial
+        initial_dir = os.path.expanduser("c:/Panorama.Net/Dat/PlantillasServiciosConsumo")
+        
+        # Alternativas de rutas por defecto (en orden de prioridad)
+        possible_paths = [
+            os.path.expanduser("c:/Panorama.Net/Dat/PlantillasServiciosConsumo"), 
+            os.path.join(os.getcwd(), "c:/Panorama.Net/Dat"),
+            os.path.expanduser("~/Documents"),           # Documentos del usuario
+    ]
+
+        # Buscar la primera ruta existente
+        for path in possible_paths:
+            if os.path.exists(path):
+                initial_dir = path
+                break
+
         file_dialog = QFileDialog()
         file_path, _ = file_dialog.getOpenFileName(
             self,
             "Seleccionar Archivo Excel",
-            "",
+            initial_dir,
             f"Archivos Excel (*.xlsx *.xls);;Todos los archivos (*)"
         )
 
