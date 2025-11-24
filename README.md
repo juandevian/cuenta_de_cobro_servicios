@@ -232,6 +232,75 @@ Resultado: `Output/ori-cc-servicios-setup.exe`
 
 ---
 
+## 🔐 Verificación de Integridad (Hashes SHA256)
+
+Cada release publica el archivo `RELEASE-<version>-SHA256.txt` con los hashes de los artefactos principales:
+
+```
+<SHA256> dist/ori-cc-servicios/ori-cc-servicios.exe
+<SHA256> installer/ori-cc-servicios-setup.exe
+```
+
+### ✅ Verificación Automática (Windows PowerShell)
+
+Se incluye el script `verify_release_hashes.ps1` que compara los hashes calculados con el archivo publicado.
+
+```powershell
+# En la raíz del proyecto (o carpeta donde estén artefactos y archivo de hashes)
+pwsh ./verify_release_hashes.ps1 -ReleaseVersion 0.2.0 -HashFile RELEASE-0.2.0-SHA256.txt
+```
+
+Salida esperada:
+```
+OK  dist/ori-cc-servicios/ori-cc-servicios.exe
+OK  installer/ori-cc-servicios-setup.exe
+
+Todos los hashes coinciden para release v0.2.0.
+```
+
+Código de salida:
+- `0`: Todo coincide
+- `1`: Algún hash no coincide / falta archivo
+- `2`: No se encontró el archivo de hashes
+
+### 🔍 Verificación Manual (Windows sin script)
+
+```powershell
+Get-FileHash -Algorithm SHA256 dist\ori-cc-servicios\ori-cc-servicios.exe
+Get-FileHash -Algorithm SHA256 installer\ori-cc-servicios-setup.exe
+```
+Comparar las columnas `Hash` con el contenido de `RELEASE-0.2.0-SHA256.txt`.
+
+### 🐧 Verificación en Linux / macOS
+
+Copiar (SCP / descarga) los artefactos y el archivo de hashes, luego:
+
+```bash
+sha256sum dist/ori-cc-servicios/ori-cc-servicios.exe
+sha256sum installer/ori-cc-servicios-setup.exe
+```
+Si se quiere automatizar:
+```bash
+grep -v '^#' RELEASE-0.2.0-SHA256.txt | while read hash path; do \
+  calc=$(sha256sum "$path" | awk '{print $1}'); \
+  [ "$calc" = "$hash" ] && echo "OK  $path" || echo "FAIL $path"; \
+done
+```
+
+### 🌐 Validación en Equipo Remoto (Buenas Prácticas)
+1. Descargar ejecutable e instalador desde la página de releases.
+2. Descargar también el archivo de hashes correspondiente.
+3. Verificar integridad con uno de los métodos anteriores antes de ejecutar.
+4. Conservar el archivo de hashes junto al instalador para auditoría futura.
+
+### 🛡️ ¿Por qué Verificar?
+Garantiza que:
+- No hubo corrupción de descarga.
+- No hubo modificación maliciosa intermedia.
+- El artefacto corresponde exactamente al release etiquetado.
+
+---
+
 ## 🗂️ Estructura del Proyecto
 
 ```
