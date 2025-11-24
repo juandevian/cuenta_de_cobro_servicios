@@ -223,6 +223,91 @@
 
 ---
 
+## 🔐 Verificación de Integridad (Hashes SHA256)
+
+Antes de ejecutar en producción o distribuir internamente validar que los artefactos no fueron alterados.
+
+1. Descargar `ori-cc-servicios-setup.exe` y `RELEASE-0.2.0-SHA256.txt` desde la página de Releases.
+2. Ubicar ambos archivos en la misma carpeta.
+3. Ejecutar verificación automática o manual.
+
+### Método Automático (PowerShell)
+```powershell
+pwsh ./verify_release_hashes.ps1 -ReleaseVersion 0.2.0 -HashFile RELEASE-0.2.0-SHA256.txt
+```
+Código de salida: 0 (ok), 1 (mismatch), 2 (archivo de hashes no encontrado).
+
+### Método Manual (Windows)
+```powershell
+Get-FileHash -Algorithm SHA256 dist\ori-cc-servicios\ori-cc-servicios.exe
+Get-FileHash -Algorithm SHA256 installer\ori-cc-servicios-setup.exe
+```
+Comparar valores con el archivo de hashes.
+
+### Método Manual (Linux/macOS)
+```bash
+sha256sum dist/ori-cc-servicios/ori-cc-servicios.exe
+sha256sum installer/ori-cc-servicios-setup.exe
+```
+
+### Script rápido (Linux/macOS)
+```bash
+grep -v '^#' RELEASE-0.2.0-SHA256.txt | while read hash path; do \
+  calc=$(sha256sum "$path" | awk '{print $1}'); \
+  [ "$calc" = "$hash" ] && echo "OK  $path" || echo "FAIL $path"; \
+done
+```
+
+### Buenas Prácticas
+- Validar siempre antes de primera instalación en entorno crítico.
+- Guardar el archivo de hashes junto al instalador para auditoría.
+- Si hay discrepancia: volver a descargar y NO instalar.
+
+---
+
+## 🧪 Validación en VM Limpia (Smoke Test)
+
+Objetivo: asegurar que un entorno Windows sin configuraciones previas instala y ejecuta la aplicación correctamente.
+
+### Preparación de VM
+1. Crear VM Windows 11 / Windows Server 2022 con último patch.
+2. Deshabilitar temporalmente políticas corporativas que puedan bloquear ejecutables no firmados (solo para prueba controlada).
+3. No instalar Python (comprobar que ejecutables funcionan standalone).
+
+### Pasos
+1. Descargar instalador y archivo de hashes desde Releases.
+2. Verificar hashes (sección anterior).
+3. Ejecutar instalador como Administrador.
+4. Comprobar creación de `C:\\ProgramData\\OPTIMUSOFT\\ori-cc-servicios\\`.
+5. Abrir archivo `INSTRUCCIONES_CONFIGURACION.txt` generado.
+6. Copiar/editar `config.json` con parámetros de prueba (host accesible desde VM).
+7. Ejecutar `set_password.exe` y registrar contraseña (Credential Manager).
+8. Lanzar la aplicación (flujo integrado) y verificar mensaje de conexión.
+9. Importar Excel de prueba pequeño y confirmar inserción en tabla destino.
+10. Revisar log para ausencia de credenciales en texto plano.
+11. Desinstalar y verificar limpieza (excepto `config.json` si comportamiento esperado).
+
+### Evidencias a Capturar
+- Pantalla verificación de hashes (OK).
+- Instalador completado.
+- Estructura de carpeta ProgramData.
+- Ejecución de `set_password.exe` (confirmación).
+- Ventana principal de la aplicación (versión visible si aplica).
+- Resultado de importación (antes/después en DB).
+- Log sin credenciales.
+- Desinstalación exitosa.
+
+### Criterios de Aprobación
+- Todos los pasos completados sin error.
+- Hashes válidos.
+- Conexión MySQL estable.
+- Validaciones del Excel funcionando (errores se muestran correctamente).
+- Desinstalación limpia.
+
+---
+
+---
+
 ## 🔄 Procedimiento Post-Entrega
 
 ### Cliente/Usuario
