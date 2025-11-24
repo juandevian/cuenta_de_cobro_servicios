@@ -11,7 +11,7 @@
 ; ============================================================================
 
 #define MyAppName "Orion CC Servicios"
-#define MyAppVersion "0.1.0"
+#define MyAppVersion "0.2.0"
 #define MyAppPublisher "OptimuSoft SAS"
 #define MyAppExeName "ori-cc-servicios.exe"
 #define MyAppSetupName "ori-cc-servicios-setup.exe"

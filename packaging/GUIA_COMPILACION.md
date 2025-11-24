@@ -111,22 +111,22 @@ pyinstaller packaging/ori_cc_servicios.spec --clean
 
 ### Versionado
 ```
-[ ] CHANGELOG.md                                 (actualizado a v0.1.0)
-[ ] Version en setup.py                          (0.1.0)
-[ ] Version en installer.iss                     ({#MyAppVersion = "0.1.0"})
+[ ] CHANGELOG.md                                 (actualizado a v0.2.0)
+[ ] Version en setup.py                          (0.2.0)
+[ ] Version en installer.iss                     ({#MyAppVersion = "0.2.0"})
 ```
 
 **Verificación de versiones**:
 ```powershell
 # Verificar setup.py
 $setupContent = Get-Content "setup.py" -Raw
-if ($setupContent -match 'version\s*=\s*["\']0\.1\.0["\']') {
+if ($setupContent -match 'version\s*=\s*["\']0\.2\.0["\']') {
     Write-Host "✓ Versión correcta en setup.py"
 }
 
 # Verificar installer.iss
 $issContent = Get-Content "packaging\installer.iss" -Raw
-if ($issContent -match '#define MyAppVersion "0\.1\.0"') {
+if ($issContent -match '#define MyAppVersion "0\.2\.0"') {
     Write-Host "✓ Versión correcta en installer.iss"
 }
 ```

@@ -1,0 +1,5 @@
+# Hashes de artefactos release 0.2.0 (SHA256)
+# Fecha: 2025-11-23
+# Formato: <SHA256> <Ruta relativa>
+D148CA67DCE7AF702C5EB94EC16D6650C5B8585CCD0B5AA571168D896CEA0492 dist/ori-cc-servicios/ori-cc-servicios.exe
+4A7DDBC8CB90ACD7AF723627EB79D3009F2EEE36D8A168317F0835BEDE2852C6 installer/ori-cc-servicios-setup.exe

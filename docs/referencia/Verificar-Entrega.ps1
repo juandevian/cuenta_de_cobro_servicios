@@ -7,7 +7,7 @@
 Write-Host ""
 Write-Host "======================================================================"
 Write-Host "      VERIFICACION DE ENTREGA - INSTALADOR INNO SETUP               "
-Write-Host "                  Oriòn CC Servicios v1.0.0                          "
+Write-Host "                  Oriòn CC Servicios v0.2.0                          "
 Write-Host "                 Estado: POST-REORGANIZACION                         "
 Write-Host "======================================================================"
 Write-Host ""

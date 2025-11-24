@@ -354,6 +354,27 @@ class MainWindow(QMainWindow):
         if not self.current_file_path:
             return
 
+        # Primero validar
+        validation_result = self.processor.validate_excel_only(str(self.current_file_path))
+        
+        if not validation_result['valid']:
+            error_message = "Errores de validación encontrados:\n" + "\n".join(validation_result['errors'])
+            QMessageBox.critical(self, "Errores de Validación", error_message)
+            return
+        
+        # Si hay advertencias, mostrarlas y pedir confirmación
+        if validation_result['warnings']:
+            warning_message = "Advertencias encontradas:\n" + "\n".join(validation_result['warnings']) + "\n\n¿Desea continuar con la importación?"
+            reply = QMessageBox.question(
+                self,
+                'Advertencias de Validación',
+                warning_message,
+                QMessageBox.Yes | QMessageBox.No,
+                QMessageBox.No
+            )
+            if reply == QMessageBox.No:
+                return
+
         # Confirmar importación
         reply = QMessageBox.question(
             self,

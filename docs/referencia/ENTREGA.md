@@ -159,7 +159,7 @@
   - [ ] `config.example.json`
 
 - [ ] **Control de Versión**
-  - [ ] Version tag creado (v0.1.0)
+  - [ ] Version tag creado (v0.2.0)
   - [ ] CHANGELOG.md actualizado
   - [ ] Git repository actualizado
   - [ ] Release notes preparadas

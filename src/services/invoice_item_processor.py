@@ -6,6 +6,7 @@ import logging
 from services.database import DatabaseConnection
 from services.excel_handler import ExcelHandler
 from services.database_validator import DatabaseValidator
+from services.excel_data_validator import ExcelValidator as ExcelDataValidator
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +16,52 @@ class InvoiceItemProcessor:
     def __init__(self):
         self.db = DatabaseConnection()
         self.excel_handler = ExcelHandler()
+
+    def validate_excel_only(self, file_path: str) -> Dict[str, Any]:
+        """Valida el archivo Excel sin importar"""
+        result = {
+            'valid': False,
+            'errors': [],
+            'warnings': []
+        }
+
+        try:
+            # Validar conexión a base de datos
+            if not self.db.connection or not self.db.connection.is_connected():
+                result['errors'] = ['Error de conexión a la base de datos']
+                return result
+
+            # Leer archivo Excel
+            df = self.excel_handler.read_excel_file(file_path)
+            if df is None:
+                result['errors'] = ['Error al leer el archivo Excel']
+                return result
+            
+            # Validar estructura del Excel
+            required_columns = [
+                'id_carpeta', 'id_servicio', 'id_predio', 'id_tercero_cliente', 'periodo_inicio_cobro',
+                'lectura_anterior', 'lectura_actual', 'valor_unitario'
+            ]
+            validation_result = ExcelDataValidator.validate_excel_structure(df, required_columns)
+            result['errors'] = validation_result['errors']
+            result['warnings'] = validation_result['warnings']
+            
+            if not result['errors']:
+                result['valid'] = True
+            
+            # Validar BD con DatabaseValidator
+            db_validator = DatabaseValidator()
+            db_errors = db_validator.validate_ids(df)
+            db_validator.close()  # Cerrar conexión
+            if db_errors:
+                result['errors'].extend(db_errors)
+                result['valid'] = False
+
+            return result
+
+        except Exception as e:
+            result['errors'] = [f'Error de validación: {str(e)}']
+            return result
 
     def process_excel_import(self, file_path: str) -> Dict[str, Any]:
         """Procesa la importación completa de un archivo Excel"""
@@ -37,12 +84,17 @@ class InvoiceItemProcessor:
             if df is None:
                 result['message'] = 'Error al leer el archivo Excel'
                 return result
-
+            
             # Validar estructura del Excel
-            validation_errors = self.excel_handler.validate_excel_structure(df)
-            if validation_errors:
+            required_columns = [
+                'id_carpeta', 'id_servicio', 'id_predio', 'id_tercero_cliente', 'periodo_inicio_cobro',
+                'lectura_anterior', 'lectura_actual', 'valor_unitario'
+            ]
+            validation_result = ExcelDataValidator.validate_excel_structure(df, required_columns)
+            if validation_result['errors']:
                 result['message'] = 'Errores de validación en el archivo Excel'
-                result['errors'] = validation_errors
+                result['errors'] = validation_result['errors']
+                result['warnings'] = validation_result['warnings']
                 return result
             
             # Validar BD con DatabaseValidator
@@ -51,8 +103,7 @@ class InvoiceItemProcessor:
             db_validator.close()  # Cerrar conexión
             if db_errors:
                 result['message'] = 'Errores de validación en la base de datos'
-                result['errors'].extend(validation_errors)  # Incluir errores previos si los hay
-                result['errors'].extend(db_errors)
+                result['errors'] = db_errors
                 return result
 
             # Procesar datos

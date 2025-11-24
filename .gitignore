@@ -43,3 +43,11 @@ docs/_build/
 
 # carpeta de instaladores
 installer/
+
+# Archivos de pruebas y cobertura
+.coverage
+.pytest_cache/
+tests/__pycache__/
+
+# Archivos temporales de pruebas (generados dinámicamente)
+tests/test_data/*.xlsx

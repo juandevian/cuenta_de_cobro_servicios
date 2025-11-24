@@ -28,7 +28,7 @@ Modo recomendado para compilaciones de producción. Ejecuta todas las validacion
 2. ✅ Spanish.isl disponible
 3. ✅ Archivos requeridos presentes
 4. ✅ JSON válido en config.example.json
-5. ✅ Versiones consistentes (0.1.0)
+5. ✅ Versiones consistentes (0.2.0)
 6. ✅ Integridad de archivos
 7. ✅ Directorio base existe
 8. ✅ Compilación exitosa
@@ -37,7 +37,7 @@ Modo recomendado para compilaciones de producción. Ejecuta todas las validacion
 ```
 ════════════════════════════════════════════════════════════════════
   Build-Installer.ps1 - Orión CC Servicios
-                        v0.1.0
+                        v0.2.0
 ════════════════════════════════════════════════════════════════════
 
 ℹ Modo: Full
@@ -79,8 +79,8 @@ Modo recomendado para compilaciones de producción. Ejecuta todas las validacion
 ══════════════════════════════════════════════════════════════════════════
   Validando Consistencia de Versiones
 ══════════════════════════════════════════════════════════════════════════
-✓ setup.py: 0.1.0
-✓ installer.iss: 0.1.0
+✓ setup.py: 0.2.0
+✓ installer.iss: 0.2.0
 
 ══════════════════════════════════════════════════════════════════════════
   Limpiando Archivos Anteriores
@@ -133,7 +133,7 @@ Modo para verificar que todo está listo ANTES de compilar. Útil para CI/CD pip
 ```
 ════════════════════════════════════════════════════════════════════
   Build-Installer.ps1 - Orión CC Servicios
-                        v0.1.0
+                        v0.2.0
 ════════════════════════════════════════════════════════════════════
 
 ℹ Modo: Validate
@@ -187,7 +187,7 @@ Modo para desarrollo iterativo. Omite validaciones para compilar más rápido.
 ```
 ════════════════════════════════════════════════════════════════════
   Build-Installer.ps1 - Orión CC Servicios
-                        v0.1.0
+                        v0.2.0
 ════════════════════════════════════════════════════════════════════
 
 ℹ Modo: QuickBuild
@@ -245,7 +245,7 @@ Modo para hacer limpieza profunda y reconstruir desde cero.
 ```
 ════════════════════════════════════════════════════════════════════
   Build-Installer.ps1 - Orión CC Servicios
-                        v0.1.0
+                        v0.2.0
 ════════════════════════════════════════════════════════════════════
 
 ℹ Modo: Clean
@@ -542,5 +542,5 @@ cd packaging; iscc.exe installer.iss               # Evitar rutas hardcodeadas
 
 ---
 
-**Versión**: 0.1.0  
-**Actualizado**: Octubre 2025
+**Versión**: 0.2.0  
+**Actualizado**: Noviembre 2025

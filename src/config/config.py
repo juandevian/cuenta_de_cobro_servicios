@@ -92,7 +92,7 @@ class Config:
 
     # Configuración de la aplicación
     APP_NAME: str = "Importación de Facturas de servicios con consumos"
-    APP_VERSION: str = "0.1.1"
+    APP_VERSION: str = "0.2.0"
     WINDOW_WIDTH: int = 800
     WINDOW_HEIGHT: int = 600
 

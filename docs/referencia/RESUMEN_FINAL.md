@@ -1,7 +1,7 @@
 # 📊 Resumen Ejecutivo - Instalador Orión CC Servicios
 
 **Documento**: Resumen para Stakeholders  
-**Versión**: 1.0.0  
+**Versión**: 0.2.0  
 **Fecha**: Octubre 2025  
 **Audiencia**: Gerentes, Ejecutivos, PMs, QA
 
@@ -246,6 +246,6 @@ El **Instalador Automático para Orión CC Servicios** está **LISTO PARA ENTREG
 ---
 
 **Preparado por**: Equipo Técnico  
-**Versión**: 1.0.0  
+**Versión**: 0.2.0  
 **Última actualización**: Octubre 2025  
 **Confidencialidad**: Interno - Equipo

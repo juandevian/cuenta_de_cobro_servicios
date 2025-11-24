@@ -45,7 +45,7 @@ class DatabaseConnection:
                         logger.error(
                             "No se encontró contraseña en keyring (servicio=%s, usuario=%s).",
                             service,
-                            username,
+                            username
                         )
                         self.connection = None
                         return False
@@ -58,7 +58,7 @@ class DatabaseConnection:
             self.connection = mysql.connector.connect(
                 host=Config.DB_HOST,
                 port=Config.DB_PORT,
-                username=Config.DB_USERNAME,
+                user=Config.DB_USERNAME,
                 password=password,
                 database=Config.DB_NAME,
                 use_pure=True
@@ -69,7 +69,7 @@ class DatabaseConnection:
         except Error as e:
             logger.error(f"Error al conectar a MySQL: {e}")
             self.connection = None
-            return False
+            return False  
         except Exception as e:
             logger.error(f"Error inesperado al conectar a MySQL: {e}")
             self.connection = None

@@ -10,7 +10,7 @@
 
 <div align="center">
 
-**[📦 Descargar ori-cc-servicios-setup.exe v0.1.0 (Beta)](https://github.com/juandevian/cuenta_de_cobro_servicios/releases/latest/download/ori-cc-servicios-setup.exe)**
+**[📦 Descargar ori-cc-servicios-setup.exe v0.2.0](https://github.com/juandevian/cuenta_de_cobro_servicios/releases/latest/download/ori-cc-servicios-setup.exe)**
 
 *Windows 10/11 (64-bit) | ~50 MB*
 
@@ -53,10 +53,8 @@
 
 ---
 
-## 🐛 Problemas Conocidos (v0.1.0 Beta)
+## 🐛 Problemas Conocidos (v0.2.0 Beta)
 
-- **Versión Beta**: Esta es una versión de prueba y puede contener errores menores. Reporta cualquier problema en [Issues](https://github.com/juandevian/cuenta_de_cobro_servicios/issues).
-- **Permisos de Administrador**: Asegúrate de ejecutar el instalador como administrador para evitar problemas de permisos.
 - **SmartScreen/Antivirus**: Algunos antivirus pueden marcar el instalador como sospechoso (falso positivo). Ver [solución arriba](#️-problema-común-smartscreen-de-windows).
 - **Configuración MySQL**: El usuario de base de datos debe tener permisos sobre la tabla `oriitemsprogramafact`. Contacta a soporte técnico si hay errores de conexión.
 
@@ -67,21 +65,65 @@
 - 🖥️ **Interfaz gráfica integrada** con Orión Plus (PyQt5).
 - 📊 **Importación masiva** desde archivos Excel (`.xlsx`, `.xls`).
 - 🔒 **Conexión segura** a MySQL con credenciales en Windows Credential Manager.
-- ✅ **Validación automática** de datos antes de la importación.
+- ✅ **Validación automática completa** antes de la importación:
+  - 📁 **Validación de archivo**: existencia, formato, tamaño máximo 20MB
+  - 📋 **Validación de estructura**: columnas requeridas, datos no vacíos
+  - 🔢 **Validación de tipos de datos**: rangos específicos por campo
+  - 🔗 **Validación de consistencia**: campos que deben ser iguales en todas las filas
+  - 🗄️ **Validación de base de datos**: existencia de IDs en tablas de Orión Plus
+  - ⚡ **Validación de lógica**: consumo, lecturas, exclusividad mutua de IDs
 - � **Histórico de operaciones** con log detallado.
 - 👁️ **Vista previa** de archivos Excel antes de importar.
 
 ---
 
-## 👨‍💻 Para Desarrolladores
+## 🔍 Validaciones Implementadas
+
+La aplicación realiza **6 niveles de validación** antes de importar datos:
+
+### 📁 **1. Validación de Archivo**
+- ✅ Archivo existe y es accesible
+- ✅ Formato soportado: `.xlsx`, `.xls`, `.xlsm`
+- ✅ Tamaño máximo: 20MB
+- ✅ Archivo no está vacío
+
+### 📋 **2. Validación de Estructura**
+- ✅ Columnas requeridas presentes:
+  - `id_carpeta`, `id_servicio`, `id_predio`, `id_tercero_cliente`
+  - `periodo_inicio_cobro`, `lectura_anterior`, `lectura_actual`, `valor_unitario`
+- ✅ Archivo contiene datos (no solo encabezados)
+
+### 🔢 **3. Validación de Tipos de Datos**
+- ✅ **`id_carpeta`**: Entero entre 1-99
+- ✅ **`id_servicio`**: Entero entre 1-99
+- ✅ **`id_predio`**: Texto (varchar) - exclusivo con `id_tercero_cliente`
+- ✅ **`id_tercero_cliente`**: Entero - exclusivo con `id_predio`
+- ✅ **`periodo_inicio_cobro`**: Formato AAAAMM (año actual-1 a 2040, mes 01-12)
+- ✅ **`valor_unitario`**: Número entre 0-999999
+- ✅ **`lectura_anterior/actual`**: Números no negativos
+
+### 🔗 **4. Validación de Consistencia**
+- ✅ **`id_carpeta`**: Igual en todas las filas
+- ✅ **`id_servicio`**: Igual en todas las filas
+- ✅ **`periodo_inicio_cobro`**: Igual en todas las filas
+- ✅ **`valor_unitario`**: No nulo/vacío (puede variar)
+
+### 🗄️ **5. Validación de Base de Datos**
+- ✅ **`id_carpeta`**: Existe en tabla correspondiente
+- ✅ **`id_servicio`**: Existe en tabla correspondiente
+- ✅ **`id_predio/id_tercero_cliente`**: Existe en tabla correspondiente
+
+### ⚡ **6. Validación de Lógica de Negocio**
+- ✅ **Consumo**: `lectura_actual ≥ lectura_anterior`, máximo 999999
+- ✅ **Exclusividad mutua**: Solo uno de `id_predio` o `id_tercero_cliente` por fila
+- ✅ **Lecturas**: No negativas, `lectura_actual ≥ lectura_anterior`
+- ⚠️ **Advertencias**: Consumo alto (>10000), lectura_anterior = 0
+
+---
 
 ## 👨‍💻 Para Desarrolladores
 
 Si quieres **desarrollar, modificar o contribuir** al código fuente:
-
-### Para Desarrolladores (Entorno Local)
-
-Si quieres **desarrollar o modificar** la aplicación:
 
 #### 1️⃣ **Requisitos Previos**
 

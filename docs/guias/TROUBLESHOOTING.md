@@ -304,6 +304,109 @@ $VerbosePreference = "Continue"
 
 ---
 
+## 👤 Problemas Comunes - Usuario Final
+
+### Error: "Columnas faltantes"
+
+**Síntoma**: "Columnas faltantes: id_carpeta, id_servicio..."
+
+**Causa**: El archivo Excel no tiene la estructura requerida
+
+**Solución**:
+1. Usar la plantilla oficial (botón "Crear Plantilla de Importación")
+2. Verificar que todas las columnas requeridas estén presentes
+3. No modificar los nombres de las columnas
+
+### Error: "id_carpeta debe ser un entero entre 1 y 99"
+
+**Síntoma**: Error de validación en columna id_carpeta
+
+**Causa**: Valor fuera del rango permitido (1-99)
+
+**Solución**:
+- Verificar que id_carpeta sea un número entero
+- Confirmar que el valor esté entre 1 y 99
+- Revisar que no haya espacios o caracteres especiales
+
+### Error: "id_predio e id_tercero_cliente no pueden tener valores al mismo tiempo"
+
+**Síntoma**: Error de exclusividad mutua
+
+**Causa**: Ambas columnas tienen valores en la misma fila
+
+**Solución**:
+- Cada fila debe tener SOLO UNO de los dos identificadores
+- Usar `id_predio` para predios (texto) o `id_tercero_cliente` para clientes (número)
+- Dejar vacío el campo no utilizado
+
+### Error: "periodo_inicio_cobro debe ser una cadena de exactamente 6 dígitos"
+
+**Síntoma**: Error de formato en periodo
+
+**Causa**: Formato incorrecto (debe ser AAAAMM)
+
+**Solución**:
+- Formato: AAAAMM (ejemplo: 202411 para Noviembre 2024)
+- Año: entre año actual-1 y 2040
+- Mes: entre 01 y 12
+
+### Error: "valor_unitario debe ser un número entre 0 y 999999"
+
+**Síntoma**: Error de rango en valor unitario
+
+**Causa**: Valor fuera del rango permitido
+
+**Solución**:
+- Valor debe estar entre 0 y 999999
+- Puede incluir decimales
+- No puede ser negativo
+
+### Error: "lectura_actual debe ser mayor o igual a lectura_anterior"
+
+**Síntoma**: Error en lecturas del medidor
+
+**Causa**: Lectura actual menor que la anterior
+
+**Solución**:
+- Verificar que lectura_actual ≥ lectura_anterior
+- Ambas lecturas deben ser números no negativos
+- Consumos no pueden exceder 999999
+
+### Advertencia: "Consumo muy alto, revisar datos"
+
+**Síntoma**: Advertencia de consumo alto (>10000)
+
+**Causa**: Consumo calculado muy alto
+
+**Solución**:
+- Revisar las lecturas del medidor
+- Verificar que los valores sean correctos
+- Confirmar que no hay errores de tipeo
+
+### Error: "id_carpeta debe ser igual en todas las filas"
+
+**Síntoma**: Error de consistencia
+
+**Causa**: Valores diferentes de id_carpeta en el archivo
+
+**Solución**:
+- Todos los registros deben pertenecer a la misma carpeta
+- Verificar que id_carpeta sea igual en todas las filas
+- Lo mismo aplica para id_servicio y periodo_inicio_cobro
+
+### Error: "No se encontraron registros válidos para importar"
+
+**Síntoma**: Importación procesa 0 registros
+
+**Causa**: Todos los registros tienen errores de validación
+
+**Solución**:
+- Revisar el log de errores detallado
+- Corregir todos los errores de validación
+- Usar "Vista Previa" para verificar antes de importar
+
+---
+
 ## 📝 Reportar Problema
 
 Si el problema persiste, recopilar:
@@ -314,4 +417,4 @@ Si el problema persiste, recopilar:
 
 ---
 
-**Versión**: 0.1.0 | **Última actualización**: Oct 2025
+**Versión**: 0.2.0 | **Última actualización**: Nov 2025

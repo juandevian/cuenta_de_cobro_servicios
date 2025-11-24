@@ -74,20 +74,53 @@ El módulo de importación de servicios permite cargar masivamente servicios que
 
 ## Validaciones y Reglas
 
-### Validaciones Automáticas
-- ✓ Existencia de carpeta y servicio
-- ✓ Formato válido de periodo
-- ✓ Lecturas actuales mayores a anteriores
-- ✓ Valores unitarios positivos
-- ✓ Estructura correcta del archivo
+### 🔍 **6 Niveles de Validación Automática**
 
-### Reglas de Negocio
-1. La lectura actual debe ser mayor a la anterior
-2. El periodo debe ser válido y no estar cerrado
-3. Los identificadores deben existir en el sistema
-4. El valor unitario debe ser mayor a cero
+#### 📁 **1. Validación de Archivo**
+- ✅ Archivo existe y es accesible
+- ✅ Formato soportado: `.xlsx`, `.xls`, `.xlsm`
+- ✅ Tamaño máximo: 20MB
+- ✅ Archivo no está vacío
 
-## Solución de Problemas
+#### 📋 **2. Validación de Estructura**
+- ✅ Columnas requeridas presentes:
+  - `id_carpeta`, `id_servicio`, `id_predio`, `id_tercero_cliente`
+  - `periodo_inicio_cobro`, `lectura_anterior`, `lectura_actual`, `valor_unitario`
+- ✅ Archivo contiene datos (no solo encabezados)
+
+#### 🔢 **3. Validación de Tipos de Datos**
+- ✅ **`id_carpeta`**: Entero entre 1-99
+- ✅ **`id_servicio`**: Entero entre 1-99
+- ✅ **`id_predio`**: Texto (varchar) - exclusivo con `id_tercero_cliente`
+- ✅ **`id_tercero_cliente`**: Entero - exclusivo con `id_predio`
+- ✅ **`periodo_inicio_cobro`**: Formato AAAAMM (año actual-1 a 2040, mes 01-12)
+- ✅ **`valor_unitario`**: Número entre 0-999999
+- ✅ **`lectura_anterior/actual`**: Números no negativos
+
+#### 🔗 **4. Validación de Consistencia**
+- ✅ **`id_carpeta`**: Igual en todas las filas
+- ✅ **`id_servicio`**: Igual en todas las filas
+- ✅ **`periodo_inicio_cobro`**: Igual en todas las filas
+- ✅ **`valor_unitario`**: No nulo/vacío (puede variar)
+
+#### 🗄️ **5. Validación de Base de Datos**
+- ✅ **`id_carpeta`**: Existe en tabla correspondiente
+- ✅ **`id_servicio`**: Existe en tabla correspondiente
+- ✅ **`id_predio/id_tercero_cliente`**: Existe en tabla correspondiente
+
+#### ⚡ **6. Validación de Lógica de Negocio**
+- ✅ **Consumo**: `lectura_actual ≥ lectura_anterior`, máximo 999999
+- ✅ **Exclusividad mutua**: Solo uno de `id_predio` o `id_tercero_cliente` por fila
+- ✅ **Lecturas**: No negativas, `lectura_actual ≥ lectura_anterior`
+- ⚠️ **Advertencias**: Consumo alto (>10000), lectura_anterior = 0
+
+### 📋 **Reglas de Formato**
+- Números enteros sin decimales para IDs
+- Lecturas en números enteros
+- Valor unitario puede llevar decimales
+- No usar fórmulas en las celdas
+- No dejar celdas vacías
+- Solo un identificador por fila: `id_predio` O `id_tercero_cliente`
 
 ### Errores Comunes
 
@@ -120,4 +153,4 @@ Para asistencia adicional:
 - 🌐 Portal: soporte.orionplus.co
 
 ---
-*Última actualización: Enero 2026*
+*Última actualización: Noviembre 2025*

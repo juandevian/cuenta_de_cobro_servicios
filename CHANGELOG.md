@@ -9,6 +9,53 @@ El formato sigue: https://keepachangelog.com/es/0.1.0/
 
 Nada por ahora.
 
+## [0.2.0] - 2025-11-23
+
+### Added
+
+- ✅ **Validaciones completas de 6 niveles implementadas**:
+  - 📁 Validación de archivo (existencia, formato, tamaño máximo 20MB)
+  - 📋 Validación de estructura (columnas requeridas, datos no vacíos)
+  - 🔢 Validación de tipos de datos (rangos específicos por campo)
+  - 🔗 Validación de consistencia (campos que deben ser iguales en todas las filas)
+  - 🗄️ Validación de base de datos (existencia de IDs en tablas de Orión Plus)
+  - ⚡ Validación de lógica de negocio (consumo, lecturas, exclusividad mutua)
+
+- 🧪 **Suite completa de pruebas unitarias** (16 tests pasando):
+  - Tests de validación de Excel (estructura, tipos de datos, consistencia)
+  - Tests de validación de base de datos
+  - Tests de importación completa end-to-end
+  - Cobertura de casos normales y casos de error
+
+- 🔒 **Validación de exclusividad mutua**: Solo uno de `id_predio` o `id_tercero_cliente` por fila
+- ⚠️ **Sistema de advertencias**: Detección de consumo alto (>10000) y lecturas_anterior = 0
+- 📊 **Vista previa de datos**: Validación sin importar para revisar datos antes de procesar
+
+### Changed
+
+- 📚 **Documentación actualizada y completa**:
+  - `README.md` actualizado con detalle de todas las validaciones implementadas
+  - `docs/guia-importacion-servicios.md` ampliada con 6 niveles de validación
+  - Versión actualizada de 0.1.0-beta a 0.2.0 (Beta)
+
+- 🐛 **Corrección crítica en `process_excel_import`**: Método estaba mal formateado causando AttributeError
+- 🧪 **Tests corregidos**: Compatibilidad con pytest y validación de errores esperados
+
+### Fixed
+
+- **Error AttributeError**: `InvoiceItemProcessor object has no attribute process_excel_import` corregido
+- **Validación de consumo**: Límite máximo de 999999 implementado correctamente
+- **Validación de periodo**: Rango de años actual-1 a 2040 implementado
+- **Empaquetado PyInstaller (numpy)**: Se resolvió el error `you should not try to import numpy from its source directory` filtrando `_distributor_init.py` mediante `collect_all()` en el `.spec`.
+- **Instalador InnoSetup**: Alineado nombre y versión de ejecutable (`ori-cc-servicios.exe`) y limpieza de recursos redundantes.
+
+### Tested
+
+- ✅ **Pruebas manuales completadas exitosamente**
+- ✅ **Validación de escenarios normales y de error**
+- ✅ **Integración completa con interfaz gráfica**
+- ✅ **Compatibilidad con base de datos MySQL**
+
 ## [0.1.0-beta] - 2025-10-26
 
 ### Added

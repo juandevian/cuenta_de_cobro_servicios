@@ -554,7 +554,7 @@ git push
 
 ```powershell
 # 1. Actualizar versión en installer.iss
-#    Cambiar: #define MyAppVersion "0.1.0"
+#    Cambiar: #define MyAppVersion "0.2.0"
 
 # 2. Actualizar CHANGELOG.md
 notepad CHANGELOG.md
@@ -570,7 +570,7 @@ iscc installer.iss
 Start-Process "installer\ori-cc-servicios-setup.exe" -Verb RunAs
 
 # 6. Etiquetar versión en Git
-git tag v1.0.1
+git tag v0.2.0
 git push --tags
 ```
 

@@ -4,8 +4,8 @@ Módulo para manejar la importación de archivos Excel
 import pandas as pd
 from typing import List, Dict, Any, Optional
 import logging
+from .excel_data_validator import ExcelValidator
 from datetime import datetime
-import re
 import os
 
 logger = logging.getLogger(__name__)
@@ -14,171 +14,30 @@ class ExcelHandler:
     """Clase para manejar la importación y procesamiento de archivos Excel"""
 
     def __init__(self):
-        self.supported_extensions = ('.xlsx', '.xls')
-
-    def validate_file(self, file_path: str) -> bool:
-        """Valida si el archivo es un Excel válido"""
-        if not os.path.exists(file_path):
-            logger.error(f"Archivo no encontrado: {file_path}")
-            return False
-
-        if not file_path.lower().endswith(self.supported_extensions):
-            logger.error(f"Formato no soportado: {file_path}")
-            return False
-
-        # Verificar tamaño del archivo (máximo 20MB)
-        file_size = os.path.getsize(file_path) / (1024 * 1024)
-        if file_size > 20:
-            logger.error(f"Archivo demasiado grande: {file_size}MB")
-            return False
-
-        return True
+        self.clear = [
+            'id_carpeta', 'id_servicio', 'id_predio', 'id_tercero_cliente', 'periodo_inicio_cobro',
+            'lectura_anterior', 'lectura_actual', 'valor_unitario'
+        ]
+        
 
     def read_excel_file(self, file_path: str) -> Optional[pd.DataFrame]:
         """Lee el archivo Excel y retorna un DataFrame"""
         try:
-            if not self.validate_file(file_path):
+            if not ExcelValidator.validate_file(file_path):
                 return None
 
-            # Leer el archivo Excel
+            # Leer el archivo Excel 
             df = pd.read_excel(file_path, engine='openpyxl')
 
             # Limpiar nombres de columnas (quitar espacios y convertir a minúsculas)
             df.columns = df.columns.str.strip().str.lower()
 
-            logger.info(f"Archivo Excel leído exitosamente: {len(df)} filas")
+            logger.info(f"Archivo Excel leído exitosamente: {len (df)} filas")
             return df
 
         except Exception as e:
             logger.error(f"Error al leer archivo Excel: {e}")
-            return None
-        
-
-        """Valida los tipos de datos en las columnas requeridas"""
-        errors = []
-        
-        for idx, row in df.iterrows():
-            # Validar id_carpeta: Integer entre 1 y 99
-            try:
-                id_carpeta = int(row.get('id_carpeta', 0))
-                if not (1 <= id_carpeta <= 99):
-                    errors.append(f"Fila {idx + 1}: 'id_carpeta' debe ser un entero entre 1 y 99 (valor actual: {row.get('id_carpeta')})")
-            except (ValueError, TypeError):
-                errors.append(f"Fila {idx + 1}: 'id_carpeta' debe ser un número entero válido (valor actual: {row.get('id_carpeta')})")
-        
-        return errors
-
-    def validate_excel_structure(self, df: pd.DataFrame) -> List[str]:
-        """Valida que el Excel tenga la estructura requerida"""
-        errors = []
-        required_columns = [
-            'id_carpeta', 'id_servicio', 'id_predio', 'id_tercero_cliente', 'periodo_inicio_cobro',
-            'lectura_anterior', 'lectura_actual', 'valor_unitario'
-        ]
-
-        # Verificar columnas requeridas
-        missing_columns = [col for col in required_columns if col not in df.columns]
-        if missing_columns:
-            errors.append(f"Columnas faltantes: {', '.join(missing_columns)}")
-        
-        # Verificar que haya datos (vacío o solo encabezados)
-        if df.empty or df.dropna(how='all').empty:
-            errors.append("El documento seleccionado está vacío")
-
-        # Validar tipos de datos específicos
-        type_errors = self.validate_data_types(df)
-        errors.extend(type_errors)
-
-        # Validar consistencia de id_carpeta e id_servicio
-        consistency_errors = self.validate_consistency(df)
-        errors.extend(consistency_errors) 
-            
-        return errors
-
-    def validate_data_types(self, df: pd.DataFrame) -> List[str]:
-        """Valida los tipos de datos en las columnas requeridas"""
-        errors = []
-        
-        for idx, row in df.iterrows():
-            # Validar id_carpeta: Integer entre 1 y 99
-            try:
-                id_carpeta = int(row.get('id_carpeta', 0))
-                if not (1 <= id_carpeta <= 99):
-                    errors.append(f"Fila {idx + 1}: 'id_carpeta' debe ser un entero entre 1 y 99 (valor actual: {row.get('id_carpeta')})")
-            except (ValueError, TypeError):
-                errors.append(f"Fila {idx + 1}: 'id_carpeta' debe ser un número entero válido (valor actual: {row.get('id_carpeta')})")
-            
-            # Validar exclusividad mutua: id_predio (varchar) e id_tercero_cliente (integer)
-            id_predio = row.get('id_predio', '').strip() if row.get('id_predio') else ''
-            id_tercero_cliente = row.get('id_tercero_cliente', None)
-            
-            if id_predio and id_tercero_cliente is not None and str(id_tercero_cliente).strip():
-                errors.append(f"Fila {idx + 1}: 'id_predio' e 'id_tercero_cliente' no pueden tener valores al mismo tiempo")
-            elif not id_predio and (id_tercero_cliente is None or not str(id_tercero_cliente).strip()):
-                errors.append(f"Fila {idx + 1}: Debe haber un valor en 'id_predio' o 'id_tercero_cliente', pero no en ambos")
-            elif id_tercero_cliente is not None and str(id_tercero_cliente).strip():
-                try:
-                    int(id_tercero_cliente)  # Verificar que sea convertible a int
-                except (ValueError, TypeError):
-                    errors.append(f"Fila {idx + 1}: 'id_tercero_cliente' debe ser un número entero válido (valor actual: {id_tercero_cliente})")
-
-            # Validar periodo_inicio_cobro: String de 6 dígitos 'AAAAMM'
-            periodo = str(row.get('periodo_inicio_cobro', '')).strip()
-            if not re.match(r'^\d{6}$', periodo):
-                errors.append(f"Fila {idx + 1}: 'periodo_inicio_cobro' debe ser una cadena de exactamente 6 dígitos numéricos (valor actual: '{periodo}')")
-            else:
-                # Verificar formato AAAAMM (año >= 2025, mes 01-12)
-                year = int(periodo[:4])
-                month = int(periodo[4:])
-                if not (2025 <= year <= 2100) or not (1 <= month <= 12):
-                    errors.append(f"Fila {idx + 1}: 'periodo_inicio_cobro' debe tener un año válido (2025-2100) y mes (01-12) (valor actual: '{periodo}')")
-
-            # Validar valor_unitario: Float entre 1 y 999999
-            try:
-                valor_unitario = float(row.get('valor_unitario', 0))
-                if not (1 <= valor_unitario <= 999999):
-                    errors.append(f"Fila {idx + 1}: 'valor_unitario' debe ser un número entre 1 y 999999 (valor actual: {row.get('valor_unitario')})")
-            except (ValueError, TypeError):
-                errors.append(f"Fila {idx + 1}: 'valor_unitario' debe ser un número válido (valor actual: {row.get('valor_unitario')})")
-            
-        return errors
-
-    def validate_consistency(self, df: pd.DataFrame) -> List[str]:
-        """Valida consistencia de id_carpeta, id_servicio, periodo_inicio_cobro y valor_unitario (no null/vacío, y algunos deben ser iguales en todas las filas)"""
-        errors = []
-        
-        # Validar id_carpeta: No null/vacío y igual en todas las filas
-        id_carpeta_values = df['id_carpeta'].dropna()
-        if id_carpeta_values.empty:
-            errors.append("La columna 'id_carpeta' no puede estar vacía en todas las filas")
-        elif len(id_carpeta_values.unique()) > 1:
-            errors.append(f"'id_carpeta' debe ser igual en todas las filas (valores encontrados: {list(id_carpeta_values.unique())})")
-        elif pd.isna(df['id_carpeta']).any():
-            errors.append("'id_carpeta' no puede contener valores null o vacíos")
-        
-        # Validar id_servicio: No null/vacío y igual en todas las filas
-        id_servicio_values = df['id_servicio'].dropna()
-        if id_servicio_values.empty:
-            errors.append("La columna 'id_servicio' no puede estar vacía en todas las filas")
-        elif len(id_servicio_values.unique()) > 1:
-            errors.append(f"'id_servicio' debe ser igual en todas las filas (valores encontrados: {list(id_servicio_values.unique())})")
-        elif pd.isna(df['id_servicio']).any():
-            errors.append("'id_servicio' no puede contener valores null o vacíos")
-        
-        # Validar periodo_inicio_cobro: No null/vacío y igual en todas las filas
-        periodo_values = df['periodo_inicio_cobro'].dropna()
-        if periodo_values.empty:
-            errors.append("La columna 'periodo_inicio_cobro' no puede estar vacía en todas las filas")
-        elif len(periodo_values.unique()) > 1:
-            errors.append(f"'periodo_inicio_cobro' debe ser igual en todas las filas (valores encontrados: {list(periodo_values.unique())})")
-        elif pd.isna(df['periodo_inicio_cobro']).any():
-            errors.append("'periodo_inicio_cobro' no puede contener valores null o vacíos")
-        
-        # Validar valor_unitario: No null/vacío (puede variar entre filas)
-        if pd.isna(df['valor_unitario']).any():
-            errors.append("'valor_unitario' no puede contener valores null o vacíos")
-    
-        return errors
+            return None       
 
     def process_excel_data(self, df: pd.DataFrame) -> List[Dict[str, Any]]:
         """Procesa los datos del Excel y los prepara para insertar en la BD"""
@@ -202,12 +61,31 @@ class ExcelHandler:
 
             # Crear lista de diccionarios para cada fila
             for _, row in df.iterrows():
+                # Manejar valores que pueden ser NaN
+                id_carpeta_val = row.get('id_carpeta', 0)
+                if pd.isna(id_carpeta_val):
+                    id_carpeta_val = 0
+                else:
+                    id_carpeta_val = int(id_carpeta_val)
+                
+                id_servicio_val = row.get('id_servicio', 0)
+                if pd.isna(id_servicio_val):
+                    id_servicio_val = 0
+                else:
+                    id_servicio_val = int(id_servicio_val)
+                
+                id_tercero_cliente_val = row.get('id_tercero_cliente')
+                if pd.isna(id_tercero_cliente_val):
+                    id_tercero_cliente_val = 0  # Valor por defecto cuando no hay id_tercero_cliente
+                else:
+                    id_tercero_cliente_val = int(id_tercero_cliente_val)
+                
                 invoice_data = {
                     'consumo': float(row.get('consumo', 0)),
-                    'id_carpeta': int(row.get('id_carpeta', 0)),
-                    'id_servicio': int(row.get('id_servicio', 0)),
+                    'id_carpeta': id_carpeta_val,
+                    'id_servicio': id_servicio_val,
                     'id_predio': str(row.get('id_predio', '')),
-                    'id_tercero_cliente': int(row.get('id_tercero_cliente', 0)),
+                    'id_tercero_cliente': id_tercero_cliente_val,
                     'periodo_inicio_cobro': str(row.get('periodo_inicio_cobro', '')),
                     'lectura_anterior': float(row.get('lectura_anterior', 0)),
                     'lectura_actual': float(row.get('lectura_actual', 0)),
