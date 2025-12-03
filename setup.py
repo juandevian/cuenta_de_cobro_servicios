@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="ori_cc_servicios",
-    version="0.2.1",
+    version="0.2.2",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     python_requires=">=3.10",

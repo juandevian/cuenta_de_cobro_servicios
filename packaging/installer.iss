@@ -11,12 +11,12 @@
 ; ============================================================================
 
 #define MyAppName "Orion CC Servicios"
-#define MyAppVersion "0.2.1"
+#define MyAppVersion "0.2.2"
 #define MyAppPublisher "OptimuSoft SAS"
 #define MyAppExeName "ori-cc-servicios.exe"
 #define MyAppSetupName "ori-cc-servicios-setup.exe"
 #define MyAppGUID "{{A5B8C9D0-1234-5678-90AB-CDEF12345678}}"
-#define MyAppBaseDir "C:\Program Files\OPTIMUSOFT"
+#define MyAppBaseDir "{autopf}\OPTIMUSOFT"
 #define MyAppFolderName "ori-cc-servicios"
 #define MyAppInstallDir MyAppBaseDir + "\" + MyAppFolderName
 
@@ -33,6 +33,9 @@ AppSupportURL=https://optimusoft.com/support
 AppUpdatesURL=https://optimusoft.com/updates
 DefaultDirName={#MyAppInstallDir}
 DisableDirPage=yes
+UsePreviousAppDir=no
+ArchitecturesAllowed=x64compatible
+ArchitecturesInstallIn64BitMode=x64compatible
 DefaultGroupName={#MyAppFolderName}
 DisableProgramGroupPage=yes
 DisableFinishedPage=no
@@ -144,7 +147,6 @@ Name: "{app}\docs"; Permissions: admins-full system-full; \
 // Constantes de configuración
 // ========================================================================
 const
-  REQUIRED_BASE_DIR = 'C:\Program Files\OPTIMUSOFT';
   CRLF = #13#10;
   INSTRUCTIONS_FILENAME = 'INSTRUCCIONES_CONFIGURACION.txt';
   CONFIG_FILENAME = 'config.json';
@@ -153,19 +155,6 @@ const
 // ========================================================================
 // UTILIDADES Y POST-INSTALACIÓN (simplificado)
 // ========================================================================
-
-function ValidatePrerequisites(RequiredBaseDir: string): Boolean;
-begin
-  Result := DirExists(RequiredBaseDir);
-  if not Result then
-  begin
-    MsgBox('Error: No se encuentra el directorio requerido.' + CRLF +
-           'Ruta: ' + RequiredBaseDir + CRLF + CRLF +
-           'El sistema no tiene los recursos necesarios para generar la instalacion.' + CRLF +
-           'Por favor, contacte al administrador del sistema.',
-           mbError, MB_OK);
-  end;
-end;
 
 function GenerateInstructions(AppPath, ExecutableName: string): string;
 begin
@@ -316,19 +305,6 @@ end;
 
 // ========================================================================
 // FUNCIONES PRINCIPALES DEL INSTALADOR
-// ========================================================================
-
-{
-  Función: InitializeSetup
-  Propósito: Validar prerequisitos ANTES de comenzar la instalación
-  Retorno: False cancela la instalación, True continúa
-  Responsabilidad: Orquestar validaciones
-}
-function InitializeSetup: Boolean;
-begin
-  Result := ValidatePrerequisites(REQUIRED_BASE_DIR);
-end;
-
 // ========================================================================
 // FIN DEL CÓDIGO PASCAL
 // ========================================================================

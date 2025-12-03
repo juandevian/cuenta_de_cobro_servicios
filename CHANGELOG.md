@@ -7,6 +7,12 @@ El formato sigue: https://keepachangelog.com/es/0.1.0/
 
 ## [Unreleased]
 
+## [0.2.2 Beta] - 2025-12-02
+
+### Changed
+- 🏗️ **Arquitectura del instalador actualizada**: Migración de identificadores de arquitectura deprecados (`x64`) a los recomendados por Inno Setup (`x64compatible`), asegurando compatibilidad futura y eliminando warnings de compilación.
+- 🎯 **Mejora en detección de plataforma**: El instalador ahora utiliza `ArchitecturesAllowed=x64compatible` y `ArchitecturesInstallIn64BitMode=x64compatible` para una detección más robusta de sistemas de 64 bits.
+
 ## [0.2.1 Beta] - 2025-11-24
 
 ### Added
